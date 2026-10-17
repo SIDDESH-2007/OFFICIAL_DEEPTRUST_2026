@@ -1,0 +1,49 @@
+{
+  "upstream_downloads": {
+    "speaker.pt": {
+      "url": "https://raw.githubusercontent.com/resemble-ai/Resemblyzer/master/resemblyzer/pretrained.pt",
+      "sha256": "39373b86598fa3da9fcddee6142382efe09777e8d37dc9c0561f41f0070f134e"
+    },
+    "resemblyzer_encoder.py": {
+      "url": "https://raw.githubusercontent.com/resemble-ai/Resemblyzer/master/resemblyzer/voice_encoder.py",
+      "sha256": "1d9cb6e91e658fc18f2aee06d1e6929c5bd36b686a5185078f60c3faf1529642"
+    },
+    "resemblyzer_LICENSE": {
+      "url": "https://raw.githubusercontent.com/resemble-ai/Resemblyzer/master/LICENSE",
+      "sha256": "ec4426669c4e3e73157121200b772a68ff9c4c7af3feb298ea99b6411a119e05"
+    },
+    "pa_model.py": {
+      "url": "https://raw.githubusercontent.com/asvspoof-challenge/2021/main/PA/Baseline-LFCC-LCNN/project/baseline_PA/model.py",
+      "sha256": "c3526317125cfc13710afced148f4dc41ee57fab1b1869038664fad9a3fef330"
+    },
+    "pa_frontend.py": {
+      "url": "https://raw.githubusercontent.com/asvspoof-challenge/2021/main/LA/Baseline-LFCC-LCNN/sandbox/util_frontend.py",
+      "sha256": "4023179ee5060878552424367623dce5866f2ed35c73f62d932e1c0eb69156a7"
+    },
+    "pa_dsp.py": {
+      "url": "https://raw.githubusercontent.com/asvspoof-challenge/2021/main/LA/Baseline-LFCC-LCNN/sandbox/util_dsp.py",
+      "sha256": "01549bc0160fc37074403428909f01182d0c948da0b653931b36e673c5def73e"
+    },
+    "pa_nn.py": {
+      "url": "https://raw.githubusercontent.com/asvspoof-challenge/2021/main/LA/Baseline-LFCC-LCNN/sandbox/block_nn.py",
+      "sha256": "619a3ac548072a8849c88d16ede63fbed977f343b080c334f34241dd61084141"
+    },
+    "pa_LICENSE": {
+      "url": "https://raw.githubusercontent.com/asvspoof-challenge/2021/main/LA/Baseline-LFCC-LCNN/LICENSE",
+      "sha256": "206da0eb4717fe73436da8c5295e2d9cc5381c5f7845609b44379008d6414354"
+    },
+    "replay_pa.pt": {
+      "url": "https://www.asvspoof.org/asvspoof2021/pre_trained_PA_LFCC-LCNN.zip",
+      "sha256": "1c6d6f30ed1042e584508a9adecc0e514983fff64cdfb3ae3de848064b6e91e0"
+    }
+  },
+  "runtime_sha256": {
+    "pa_dsp.py": "7055f3a7d831e71126ad0818bbfe2b5aa2cc15dbdd0ce9af681d7e245a3daaf3",
+    "pa_frontend.py": "375340e3782b54ea998887c968ff383723b0242c492f41f70dee9312ee4c73b1",
+    "pa_model.py": "a1fe7bfb11162af266dccad581b9faf8297606aa98ff664c83cf399b2fc50299",
+    "pa_nn.py": "619a3ac548072a8849c88d16ede63fbed977f343b080c334f34241dd61084141",
+    "resemblyzer_encoder.py": "1d9cb6e91e658fc18f2aee06d1e6929c5bd36b686a5185078f60c3faf1529642",
+    "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "adaptations": "PyTorch complex STFT/FFT compatibility, package-relative imports, removal of unused torchaudio and protocol helpers; inference weights unchanged."
+}

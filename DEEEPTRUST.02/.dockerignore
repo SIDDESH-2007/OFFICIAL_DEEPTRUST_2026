@@ -1,0 +1,13 @@
+**
+!server/
+!server/**
+!client/
+!client/**
+!deployment/
+!deployment/**
+server/node_modules/
+**/__pycache__/
+server/ai_service/data/
+server/ai_service/voice_models/*.pt
+server/ai_service/voice_models/whisper/
+deployment/*.env

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Registration</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="auth-card">
+        <h1>DeepTrust AI</h1>
+        <p class="subtitle">AI-Based Identity Enrollment</p>
+
+        <form id="registerForm" class="form-grid" enctype="multipart/form-data">
+          <label>Full Name</label>
+          <input type="text" name="name" required />
+
+          <label>Email</label>
+          <input type="email" name="email" required />
+
+          <label>Password</label>
+          <input type="password" name="password" required minlength="8" />
+
+          <label>Upload Profile Photo</label>
+          <input type="file" name="profile_photo" accept="image/*" required />
+
+          <div class="camera-box">
+            <video id="cameraPreview" autoplay muted playsinline></video>
+            <div class="camera-actions">
+              <button type="button" id="startCameraBtn" class="btn">
+                Start Camera
+              </button>
+              <button
+                type="button"
+                id="recordVideoBtn"
+                class="btn btn-secondary"
+              >
+                Record 5s Live Video
+              </button>
+            </div>
+            <p id="recordStatus" class="hint">
+              Live verification video not recorded yet.
+            </p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Register with AI Verification
+          </button>
+        </form>
+
+        <div id="statusBox" class="status-box hidden"></div>
+
+        <p class="footer-text">
+          Already enrolled?
+          <a href="{{ url_for('login_page') }}">Go to Login</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+  </body>
+</html>

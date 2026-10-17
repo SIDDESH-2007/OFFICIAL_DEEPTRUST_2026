@@ -1,0 +1,163 @@
+/* Base styling with a dark minimal theme for security vibe */
+:root {
+  --dt-bg-primary: #171717;
+  --dt-bg-secondary: #262626;
+  --dt-surface: #262626;
+  --dt-sidebar: #121212;
+  --dt-topbar: #171717;
+  --dt-accent: #60A5FA;
+  --dt-accent-secondary: #2563EB;
+  --dt-text-primary: #F5F5F5;
+  --dt-text-secondary: #A3A3A3;
+  --dt-text-muted: #737373;
+  --dt-border: #404040;
+  --dt-hover: #333333;
+  --dt-selected: #132A27;
+  --dt-input: #1C1C1C;
+  --dt-focus: #60A5FA;
+  --dt-success: #10B981;
+  --dt-warning: #F59E0B;
+  --dt-danger: #EF4444;
+  --dt-critical: #B91C1C;
+
+    --bg-color: #050816;
+    --card-bg: rgba(15, 23, 42, 0.55);
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --accent: #6D3DF5;
+    --accent-blue: #1683FF;
+    --error: #EF4444;
+    --success: #22C55E;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container, .dashboard-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(139, 92, 246, 0.20);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: none;
+    width: 100%;
+    max-width: 400px;
+}
+
+.dashboard-container {
+    max-width: 1000px;
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid rgba(139, 92, 246, 0.20);
+    background-color: rgba(16, 21, 42, 0.70);
+    color: var(--text-primary);
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #A855F7;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+}
+
+button {
+    width: 100%;
+    padding: 0.875rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #1683FF, #6D3DF5);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #237BFF, #7C3AED);
+    box-shadow: 0 0 20px rgba(109, 61, 245, 0.40);
+}
+
+.stage-section {
+    margin-bottom: 1.5rem;
+}
+
+#webcamFeed {
+    width: 100%;
+    border-radius: 12px;
+    background-color: #000;
+    margin-bottom: 1rem;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid rgba(139, 92, 246, 0.30);
+}
+
+.status-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.status-message.error {
+    color: var(--error);
+}
+
+.status-message.success {
+    color: var(--success);
+}
+
+.captcha-box {
+    border: 1px solid rgba(139, 92, 246, 0.20);
+    border-radius: 10px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(11, 16, 34, 0.60);
+}
+
+.captcha-title {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.captcha-code {
+    background: rgba(16, 21, 42, 0.80);
+    border: 1px dashed rgba(139, 92, 246, 0.30);
+    border-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12rem;
+    padding: 0.5rem;
+    text-align: center;
+}

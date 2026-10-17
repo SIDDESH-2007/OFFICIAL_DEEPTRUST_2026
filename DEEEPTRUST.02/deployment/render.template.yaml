@@ -1,0 +1,38 @@
+# Copy to render.yaml only after reviewing paid service/disk choices.
+services:
+  - type: web
+    name: deeptrust-staging
+    runtime: docker
+    dockerfilePath: ./deployment/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/ready
+    numInstances: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ENABLE_DEMO_SEEDING
+        value: "false"
+      - key: AI_SERVICE_URL
+        value: http://127.0.0.1:8000
+      - key: JWT_SECRET
+        sync: false
+      - key: AUDIT_SIGNING_KEY
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DATABASE
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: FASTAPI_CORS_ORIGINS
+        sync: false
+      - key: AUDIT_CHECKPOINT_PATH
+        value: /var/lib/deeptrust/audit/checkpoint.json
+      - key: DEEPTRUST_MODEL_DIR
+        value: /var/lib/deeptrust/models
+      - key: DEEPTRUST_VOICE_MODEL_DIR
+        value: /var/lib/deeptrust/voice_models
+    disk:
+      name: deeptrust-runtime
+      mountPath: /var/lib/deeptrust
+      sizeGB: 5

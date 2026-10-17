@@ -1,0 +1,485 @@
+/* ============================================================
+   DEEPTRUST UI MOTION & ANIMATION SYSTEM
+   Extremely Strict Scope: Visual Effects ONLY. No Layout Changes.
+   ============================================================ */
+
+:root {
+  --dt-bg-primary: #171717;
+  --dt-bg-secondary: #262626;
+  --dt-surface: #262626;
+  --dt-sidebar: #121212;
+  --dt-topbar: #171717;
+  --dt-accent: #60A5FA;
+  --dt-accent-secondary: #2563EB;
+  --dt-text-primary: #F5F5F5;
+  --dt-text-secondary: #A3A3A3;
+  --dt-text-muted: #737373;
+  --dt-border: #404040;
+  --dt-hover: #333333;
+  --dt-selected: #132A27;
+  --dt-input: #1C1C1C;
+  --dt-focus: #60A5FA;
+  --dt-success: #10B981;
+  --dt-warning: #F59E0B;
+  --dt-danger: #EF4444;
+  --dt-critical: #B91C1C;
+
+  --motion-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-entrance: 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ------------------------------------------------------------
+   1. LOGIN PAGE & AUTHENTICATION (Initial Entrance)
+   ------------------------------------------------------------ */
+@keyframes loginEntrance {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.portal-access-card, .auth-card {
+  animation: loginEntrance var(--motion-entrance) forwards !important;
+}
+
+/* Subtle background ambient movement (if applicable) */
+@keyframes ambientGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+body[data-page="login"]::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.03) 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: ambientGlow 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Input Micro-interactions */
+input, select, textarea, .form-input {
+  transition: border-color var(--motion-fast), box-shadow var(--motion-fast), background-color var(--motion-fast) !important;
+}
+input:focus, select:focus, textarea:focus, .form-input:focus {
+  box-shadow: none;
+}
+
+/* Password Visibility Icon Hover */
+.password-toggle-icon, .toggle-password {
+  transition: color var(--motion-fast), transform var(--motion-fast) !important;
+}
+.password-toggle-icon:hover, .toggle-password:hover {
+  transform: scale(1.1) !important;
+  color: #f8fafc !important;
+}
+
+/* Buttons */
+button, .btn {
+  transition: transform var(--motion-fast), box-shadow var(--motion-fast), background-color var(--motion-fast) !important;
+}
+button:hover, .btn:hover {
+  transform: translateY(-1px) !important;
+}
+button:active, .btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+button:disabled, .btn:disabled {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ------------------------------------------------------------
+   2. AUTHENTICATION PAGE TRANSITIONS
+   ------------------------------------------------------------ */
+@keyframes stageFadeIn {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.auth-view.active, .view-section.active {
+  animation: stageFadeIn var(--motion-normal) forwards !important;
+}
+
+/* Progress Indicator Transitions */
+.auth-stage, .step-indicator {
+  transition: color var(--motion-normal), transform var(--motion-normal) !important;
+}
+.auth-stage.completed .stage-icon {
+  animation: checkmarkPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+@keyframes checkmarkPop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Face Verification Status Fade */
+.face-status-overlay {
+  transition: opacity var(--motion-normal), transform var(--motion-normal) !important;
+}
+
+/* MFA Shake on Error (Class triggered by JS if invalid) */
+@keyframes inputShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+.input-error-shake {
+  animation: inputShake 0.25s ease-in-out !important;
+}
+
+/* ------------------------------------------------------------
+   3. DASHBOARD INITIAL LOAD & LAYOUT
+   ------------------------------------------------------------ */
+@keyframes sidebarFadeIn {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes topbarFadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.sidebar {
+  animation: sidebarFadeIn var(--motion-entrance) forwards !important;
+}
+.topbar {
+  animation: topbarFadeIn var(--motion-entrance) forwards !important;
+}
+.content-area {
+  animation: stageFadeIn var(--motion-entrance) forwards !important;
+}
+
+/* Sidebar Hover / Active */
+.sidebar-nav .nav-item {
+  transition: background-color var(--motion-fast), color var(--motion-fast), padding-left var(--motion-fast) !important;
+}
+.sidebar-nav .nav-item:hover {
+  background-color: rgba(30, 41, 69, 0.6) !important;
+}
+.sidebar-nav .nav-item.active {
+  transition: background-color var(--motion-normal) !important;
+}
+
+/* ------------------------------------------------------------
+   4. DASHBOARD CARDS & DATA ELEMENTS
+   ------------------------------------------------------------ */
+.card, .metric-card, .dashboard-card {
+  transition: transform var(--motion-normal), box-shadow var(--motion-normal), border-color var(--motion-normal) !important;
+}
+.card:hover, .metric-card:hover, .dashboard-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: none;
+}
+
+/* Card Stagger Entrance */
+@keyframes cardStagger {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.metric-card, .dashboard-card, .event-row {
+  opacity: 0;
+  animation: cardStagger var(--motion-normal) forwards !important;
+}
+.metric-card:nth-child(1) { animation-delay: 0.05s !important; }
+.metric-card:nth-child(2) { animation-delay: 0.10s !important; }
+.metric-card:nth-child(3) { animation-delay: 0.15s !important; }
+.metric-card:nth-child(4) { animation-delay: 0.20s !important; }
+
+/* Table Rows */
+tr {
+  transition: background-color var(--motion-fast) !important;
+}
+tr:hover td {
+  background-color: rgba(30, 41, 69, 0.4) !important;
+}
+
+/* Profile Dropdown & Notifications */
+@keyframes dropdownEntrance {
+  0% { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.profile-dropdown.open, .dropdown-menu.show, .notification-panel.show {
+  animation: dropdownEntrance 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Modals */
+@keyframes modalBackdropFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes modalEntrance {
+  0% { opacity: 0; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.modal-backdrop, .modal-overlay {
+  animation: modalBackdropFade var(--motion-normal) forwards !important;
+}
+.modal-content {
+  animation: modalEntrance var(--motion-normal) forwards !important;
+}
+
+/* Status Badges */
+.badge, .status-badge, .status-pill, .check-card-status {
+  transition: background-color var(--motion-normal), color var(--motion-normal) !important;
+}
+
+/* System Health Pulse */
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.status-dot.pulsing, .status-dot.operational {
+  animation: pulseDot 2s infinite !important;
+}
+
+/* Filter Chips */
+.filter-btn {
+  transition: background-color var(--motion-fast), color var(--motion-fast), box-shadow var(--motion-fast) !important;
+}
+.filter-btn:hover {
+  background-color: rgba(148, 163, 184, 0.15) !important;
+}
+.filter-btn.active {
+  box-shadow: none;
+}
+
+/* AI Security Agent */
+.copilot-chip {
+  transition: transform var(--motion-fast), background-color var(--motion-fast) !important;
+}
+.copilot-chip:hover {
+  transform: translateY(-1px) !important;
+}
+.copilot-message {
+  opacity: 0;
+  animation: cardStagger var(--motion-normal) forwards !important;
+}
+
+/* Reduce Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   DEEPTRUST PROFESSIONAL MOTION SYSTEM
+   ============================================================ */
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 1. Login Button Transitions */
+.btn-primary {
+  transition: all 0.15s ease-in-out;
+}
+.btn-primary:active {
+  transform: scale(0.98);
+}
+.btn-primary.auth-pending {
+  background: var(--surface-hover);
+  color: var(--accent-cyan);
+  pointer-events: none;
+}
+.btn-primary.auth-success {
+  background: var(--success-emerald) !important;
+  color: #fff !important;
+  border-color: var(--success-emerald) !important;
+}
+
+/* 2. Page Transition into Auth */
+.auth-view {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.24s ease, transform 0.28s ease;
+}
+.auth-view.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4. Voice Verification Animation */
+.voice-waveform-container {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+.voice-analyzing-ring {
+  position: absolute;
+  inset: -8px;
+  border: 2px solid transparent;
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: scan-spin 1s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.voice-state-processing .voice-analyzing-ring {
+  opacity: 1;
+}
+.voice-state-processing .voice-waveform-container {
+  transform: scale(0.9);
+}
+.voice-state-success .voice-analyzing-ring {
+  display: none;
+}
+.voice-state-success .voice-waveform-container {
+  border-color: var(--success-emerald);
+  transform: scale(1);
+}
+.voice-state-success .waveform-bar {
+  background-color: var(--success-emerald) !important;
+}
+
+/* 5. MFA Micro-interaction */
+.otp-box {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.mfa-success .otp-box {
+  border-color: var(--success-emerald) !important;
+  color: var(--success-emerald) !important;
+}
+
+/* 6. Final Access Success */
+.final-access-shield {
+  transition: all 0.3s ease;
+}
+.final-access-success .final-access-shield {
+  color: var(--success-emerald);
+  transform: scale(1.1);
+}
+
+/* 7. Dashboard Entry */
+.dashboard-main-content {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: dashboard-enter 0.3s forwards ease-out;
+}
+@keyframes dashboard-enter {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 8. Dashboard Sidebar Hover & Click */
+.nav-item {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.nav-item i {
+  transition: transform 0.15s ease;
+}
+.nav-item:hover i {
+  transform: translateX(2px);
+}
+.nav-item:active {
+  background-color: var(--surface-hover);
+}
+
+/* 9. Dashboard Section Transition */
+.section-content {
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+.section-leave {
+  opacity: 0;
+  transform: translateX(-4px);
+}
+.section-enter {
+  opacity: 0;
+  transform: translateX(6px);
+}
+.section-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 10. Dashboard Button Micro-interactions */
+button:not(.btn-primary) {
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+button:not(.btn-primary):not(:disabled):hover {
+  transform: translateY(-1px);
+}
+button:not(.btn-primary):not(:disabled):active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* 11. Cards */
+.clickable-card {
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.clickable-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+
+/* 12. Tables */
+table tr {
+  transition: background-color 0.15s ease;
+}
+table tr:hover {
+  background-color: var(--surface-hover);
+}
+
+/* 16. Dropdowns */
+.dropdown-menu {
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* 17. Modals */
+.modal-backdrop {
+  transition: opacity 0.2s ease;
+}
+.modal-content {
+  transform: scale(0.98);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.modal.show .modal-content {
+  transform: scale(1);
+}
+
+/* 18. Notifications */
+.notification {
+  opacity: 0;
+  transform: translateY(-4px);
+  animation: notif-enter 0.2s forwards ease;
+}
+@keyframes notif-enter {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 14. Session Control */
+.session-status.active {
+  position: relative;
+}
+.session-status.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--success-emerald);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: pulse-active 2s infinite;
+}
+@keyframes pulse-active {
+  0% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { opacity: 0.5; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+  100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}

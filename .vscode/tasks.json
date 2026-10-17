@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "DeepTrust: Start",
+            "type": "shell",
+            "command": "${workspaceFolder}/START_DEEPTRUST.bat",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "DeepTrust: Stop",
+            "type": "shell",
+            "command": "${workspaceFolder}/STOP_DEEPTRUST.bat",
+            "problemMatcher": []
+        },
+        {
+            "label": "DeepTrust: Restart",
+            "type": "shell",
+            "command": "${workspaceFolder}/RESTART_DEEPTRUST.bat",
+            "problemMatcher": []
+        }
+    ]
+}

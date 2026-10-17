@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepTrust Platform - Audit Logs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/platform.css">
+</head>
+<body data-page="audit-logs" data-risk="46">
+<div class="platform-shell">
+<aside class="sidebar"><div class="brand"><h1>DeepTrust Platform</h1><p>Enterprise Security Console</p></div><nav class="nav-list"><a class="nav-link" data-page="dashboard" href="dashboard.html">📊 Dashboard</a><a class="nav-link" data-page="profile" href="profile.html">👤 Profile</a><a class="nav-link" data-page="settings" href="settings.html">⚙ Settings</a><a class="nav-link" data-page="settings-advanced" href="settings-advanced.html">🧠 Advanced Settings</a><a class="nav-link" data-page="security-lab" href="security-lab.html">🛡 Security Lab</a><a class="nav-link" data-page="voice-security" href="voice-security.html">🎙 Voice Security</a><a class="nav-link" data-page="audit-logs" href="audit-logs.html">📜 Audit Logs</a><a class="nav-link" data-page="api-keys" href="api-keys.html">🔑 API Keys</a><a class="nav-link" data-page="organization-settings" href="organization-settings.html">🏢 Organization</a></nav></aside>
+<section class="main-area">
+<header class="topbar"><input class="search" id="globalSearch" type="text" placeholder="Search logs by user, IP, action..."><span class="risk-pill" id="globalRiskBadge">Global Risk</span><button class="icon-btn" id="notifyBtn">🔔 Alerts</button><div class="theme-wrap"><button class="icon-btn" id="themeToggle">🌗 Theme</button><span class="theme-ripple" id="themeRipple"></span></div><button class="logout-btn" id="logoutBtn">Logout</button><div class="notify-panel" id="notifyPanel"><div class="notify-item">Audit retention policy updated to 365 days.</div></div></header>
+<main class="content"><div><h2 class="page-title">Audit Logs</h2><p class="page-subtitle" id="pageStatus">Immutable event trace for enterprise trust and compliance.</p></div>
+<article class="card"><h3>Event Stream</h3><table class="table"><thead><tr><th>Time</th><th>User</th><th>Event</th><th>IP</th><th>Status</th></tr></thead><tbody><tr><td>09:02:11</td><td>amorgan</td><td>Login Success</td><td>10.10.2.14</td><td>Passed</td></tr><tr><td>08:57:33</td><td>svc_bot</td><td>API Key Rotate</td><td>10.10.9.8</td><td>Approved</td></tr><tr><td>08:44:09</td><td>unknown</td><td>Geo-risk Denied</td><td>88.20.111.1</td><td>Blocked</td></tr><tr><td>08:30:20</td><td>sjain</td><td>Face Re-enroll</td><td>10.10.2.77</td><td>Passed</td></tr></tbody></table></article>
+</main>
+</section>
+</div>
+<script type="module" src="js/dashboardGuard.js"></script><script type="module" src="js/platform.js"></script>
+</body></html>

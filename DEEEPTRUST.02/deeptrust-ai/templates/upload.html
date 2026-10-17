@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Upload & Scan</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="auth-card">
+        <h1>Deepfake Detection Upload Lab</h1>
+        <p class="subtitle">
+          Upload image, video, or audio for AI authenticity analysis.
+        </p>
+
+        <form id="uploadForm" class="form-grid" enctype="multipart/form-data">
+          <label>Select Media File</label>
+          <input
+            type="file"
+            id="mediaFile"
+            name="media_file"
+            accept="image/*,video/*,audio/*"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Analyze Media</button>
+        </form>
+
+        <div id="uploadStatus" class="status-box hidden"></div>
+
+        <div id="resultCard" class="status-box hidden">
+          <h3>Detection Result</h3>
+          <p id="resultProbability"></p>
+          <p id="resultAuthenticity"></p>
+          <p id="resultRisk"></p>
+          <p id="resultConfidence"></p>
+          <p id="resultFrames"></p>
+        </div>
+
+        <div class="top-bar" style="margin-top: 12px">
+          <a class="btn btn-secondary" href="{{ url_for('dashboard') }}"
+            >Back to Dashboard</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+  </body>
+</html>

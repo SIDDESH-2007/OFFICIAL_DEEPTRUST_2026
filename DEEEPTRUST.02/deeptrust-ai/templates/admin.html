@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="dashboard-card">
+        <div class="top-bar">
+          <h2>Admin Security Dashboard</h2>
+          <div>
+            <a class="btn btn-secondary" href="{{ url_for('dashboard') }}"
+              >User Dashboard</a
+            >
+            <a class="btn btn-secondary" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h4>Total Users</h4>
+            <p class="metric">{{ total_users }}</p>
+          </div>
+          <div class="stat-box">
+            <h4>Total Auth Attempts</h4>
+            <p class="metric">{{ total_attempts }}</p>
+          </div>
+          <div class="stat-box">
+            <h4>High Risk Attempts</h4>
+            <p class="metric">{{ high_risk_count }}</p>
+          </div>
+          <div class="stat-box">
+            <h4>Total Media Scans</h4>
+            <p class="metric">{{ total_scans }}</p>
+          </div>
+        </div>
+
+        <h3>Recent Alerts</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Deepfake %</th>
+                <th>Risk</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for alert in recent_alerts %}
+              <tr>
+                <td>{{ alert['id'] }}</td>
+                <td>{{ alert['user_id'] if alert['user_id'] else 'N/A' }}</td>
+                <td>{{ alert['deepfake_probability'] }}</td>
+                <td>{{ alert['risk_score'] }}</td>
+                <td>{{ alert['status'] }}</td>
+                <td>{{ alert['timestamp'] }}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="6">No alerts yet.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Users & Account Controls</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Authenticity</th>
+                <th>Blocked</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td>{{ user['id'] }}</td>
+                <td>{{ user['name'] }}</td>
+                <td>{{ user['email'] }}</td>
+                <td>{{ user['authenticity_score'] }}</td>
+                <td>{{ 'Yes' if user['is_blocked'] else 'No' }}</td>
+                <td>
+                  <button
+                    class="btn btn-secondary block-user-btn"
+                    data-user-id="{{ user['id'] }}"
+                  >
+                    {{ 'Unblock' if user['is_blocked'] else 'Block' }}
+                  </button>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="6">No users found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Flagged Uploads</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>File</th>
+                <th>Type</th>
+                <th>Deepfake %</th>
+                <th>Risk</th>
+                <th>Status</th>
+                <th>Report</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in flagged_uploads %}
+              <tr>
+                <td>{{ item['id'] }}</td>
+                <td>{{ item['user_email'] or 'N/A' }}</td>
+                <td>{{ item['file_name'] }}</td>
+                <td>{{ item['media_type'] }}</td>
+                <td>{{ item['deepfake_probability'] }}</td>
+                <td>{{ item['risk_level'] }}</td>
+                <td>{{ item['status'] }}</td>
+                <td>
+                  <a
+                    class="btn btn-secondary"
+                    href="{{ url_for('export_report', scan_id=item['id']) }}"
+                    >PDF</a
+                  >
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="8">No flagged uploads yet.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelectorAll(".block-user-btn").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const userId = button.dataset.userId;
+          const response = await fetch(`/admin/block-user/${userId}`, {
+            method: "POST",
+          });
+          const result = await response.json();
+          if (result.ok) {
+            window.location.reload();
+          } else {
+            alert(result.message || "Failed to update account status");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

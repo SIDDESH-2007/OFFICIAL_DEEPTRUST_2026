@@ -1,0 +1,688 @@
+/* ============================================================
+   DEEPTRUST ENTERPRISE DESIGN SYSTEM & AUTHENTICATION STYLES
+   PREMIUM LIGHT CYBERSECURITY SAAS THEME
+   ============================================================ */
+
+:root {
+  --dt-bg-primary: #171717;
+  --dt-bg-secondary: #262626;
+  --dt-surface: #262626;
+  --dt-sidebar: #121212;
+  --dt-topbar: #171717;
+  --dt-accent: #60A5FA;
+  --dt-accent-secondary: #2563EB;
+  --dt-text-primary: #F5F5F5;
+  --dt-text-secondary: #A3A3A3;
+  --dt-text-muted: #737373;
+  --dt-border: #404040;
+  --dt-hover: #333333;
+  --dt-selected: #132A27;
+  --dt-input: #1C1C1C;
+  --dt-focus: #60A5FA;
+  --dt-success: #10B981;
+  --dt-warning: #F59E0B;
+  --dt-danger: #EF4444;
+  --dt-critical: #B91C1C;
+
+  /* Soft Neutral Enterprise Palette */
+  --bg-app: #F6F8FB;
+  --bg-primary: #F6F8FB;
+  --bg-secondary: #F8FAFC;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-glass: rgba(255, 255, 255, 0.95);
+  --surface-hover: #F1F5F9;
+
+  /* Typography Colors */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-subtle: #94A3B8;
+
+  /* DeepTrust Brand Colors */
+  --primary-brand: #2563EB;
+  --primary-indigo: #2563EB;
+  --primary-blue: #1D4ED8;
+  --primary-glow: rgba(37, 99, 235, 0.12);
+  --accent-cyan: #0EA5E9;
+  --accent-cyan-soft: rgba(14, 165, 233, 0.08);
+
+  /* Status Badges & Accents */
+  --success-bg: #DCFCE7;
+  --success-text: #15803D;
+  --success-border: #BBF7D0;
+
+  --warning-bg: #FEF3C7;
+  --warning-text: #B45309;
+  --warning-border: #FDE68A;
+
+  --danger-bg: #FEE2E2;
+  --danger-text: #B91C1C;
+  --danger-border: #FCA5A5;
+
+  /* Borders & Shadows */
+  --border-subtle: #E2E8F0;
+  --border-hover: #CBD5E1;
+  --border-focus: #2563EB;
+  --border-glow: rgba(37, 99, 235, 0.25);
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Subtle Mesh Glow */
+body::before { display: none; }
+
+/* ============================================================
+   1. BOOT EXPERIENCE OVERLAY
+   ============================================================ */
+.boot-screen,
+.boot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #0F172A;
+  color: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.boot-screen.hidden,
+.boot-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.boot-container {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+
+.boot-logo-wrap, .boot-shield-wrapper {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.boot-logo-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.boot-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #F8FAFC;
+  letter-spacing: -0.5px;
+}
+
+.boot-subtitle {
+  font-size: 13px;
+  color: #94A3B8;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+.boot-progress-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background-color: #334155;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.boot-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.boot-status-text {
+  font-size: 12px;
+  color: #CBD5E1;
+  font-weight: 600;
+}
+
+.boot-log-terminal {
+  margin-top: 16px;
+  background-color: #020617;
+  color: #94A3B8;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  max-height: 90px;
+  overflow-y: auto;
+  border: 1px solid #1E293B;
+}
+
+/* ============================================================
+   2. MAIN SPLIT-SCREEN LAYOUT (INDEX / LOGIN)
+   ============================================================ */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* LEFT BRAND PANEL (55%) */
+.brand-panel {
+  width: 52%;
+  background-color: #FFFFFF;
+  border-right: 1px solid var(--border-subtle);
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.brand-logo-badge {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.brand-header-text h1 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.4px;
+  line-height: 1.1;
+}
+
+.brand-header-text span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-brand);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Hero Section */
+.brand-hero {
+  margin-bottom: 32px;
+}
+
+.brand-hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.8px;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.text-gradient {
+  color: var(--primary-brand);
+}
+
+.brand-hero-desc {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.55;
+}
+
+/* 2x2 Capability Cards Grid */
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.capability-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: var(--transition-smooth);
+}
+
+.capability-card:hover {
+  background-color: #FFFFFF;
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.capability-icon-wrap {
+  width: 36px;
+  height: 36px;
+  background-color: #EFF6FF;
+  color: var(--primary-brand);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.capability-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.capability-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Verification Pipeline Stepper */
+.pipeline-container {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 32px;
+}
+
+.pipeline-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.pipeline-nodes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pipeline-node {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #FFFFFF;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.pipeline-node.active {
+  background-color: #EFF6FF;
+  color: var(--primary-brand);
+  border-color: #BFDBFE;
+  font-weight: 700;
+}
+
+.pipeline-arrow {
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+
+/* Footer Status Chips */
+.brand-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.status-indicator-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--success-text);
+  border-radius: 50%;
+}
+
+/* RIGHT AUTH PANEL (48%) */
+.auth-panel {
+  flex: 1;
+  background-color: var(--bg-app);
+  padding: 48px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-panel-inner {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Portal Access Card & Section Views */
+.auth-view {
+  display: none;
+}
+
+.auth-view.active {
+  display: block;
+  animation: auth-view-fade 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes auth-view-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.view-header {
+  margin-bottom: 24px;
+}
+
+.view-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.view-subtitle {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.portal-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Structured Workspace Cards */
+.portal-selectable-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.portal-selectable-card:hover {
+  border-color: var(--primary-brand);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.portal-card-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  background-color: #EFF6FF;
+  color: var(--primary-brand);
+  border: 1px solid #BFDBFE;
+  border-radius: var(--radius-xs);
+}
+
+.portal-icon-container {
+  width: 42px;
+  height: 42px;
+  background-color: #EFF6FF;
+  color: var(--primary-brand);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.portal-card-subtitle {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--primary-brand);
+}
+
+.portal-card-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.portal-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 4px;
+}
+
+.portal-domain-tag {
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
+}
+
+.portal-action-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary-brand);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition-fast);
+}
+
+.portal-selectable-card:hover .portal-action-link {
+  transform: translateX(4px);
+}
+
+/* Form Controls & Inputs */
+.auth-form-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 14px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  background-color: var(--primary-brand);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-blue);
+}
+
+/* Verification Step Media Viewports */
+.media-viewport-container {
+  width: 100%;
+  height: 240px;
+  background-color: #0F172A;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.media-viewport-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   3. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1024px) {
+  .app-shell {
+    flex-direction: column;
+  }
+  .brand-panel {
+    width: 100%;
+    min-height: auto;
+    padding: 32px 24px;
+  }
+  .auth-panel {
+    width: 100%;
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .capability-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

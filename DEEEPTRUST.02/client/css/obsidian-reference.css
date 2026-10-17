@@ -1,0 +1,185 @@
+/* DeepTrust Obsidian: visual layer only; the underlying app owns all state. */
+body.dt-studio.dt-obsidian {
+  --bg-app:#08090b; --bg-primary:#08090b; --bg-secondary:#0e0f12;
+  --bg-panel:#111215; --surface-card:#141518; --surface-elevated:#1b1c20;
+  --surface-hover:#24262a; --surface-border:#ffffff1b; --surface-border-hover:#ffffff48;
+  --primary-indigo:#ededec; --primary-blue:#d9d9d8; --accent-cyan:#d5d5d2;
+  --accent-cyan-soft:#ffffff12; --text-primary:#f2f3f2;
+  --text-secondary:#b1b3b6; --text-muted:#85888c; --text-subtle:#85888c;
+  --studio-ice:#e8e8e5; --studio-ink:#f2f3f2; --studio-blue:#f2f3f2;
+  color:#f2f3f2;
+  background:radial-gradient(ellipse 58% 40% at 52% -18%,#ffffff0e,transparent 78%),#08090b!important;
+}
+.dt-obsidian .app-shell { background:transparent; }
+.dt-obsidian button,.dt-obsidian input,.dt-obsidian select { font-family:inherit; }
+.dt-obsidian :is(button,a,input,select,textarea,[tabindex]):focus-visible { outline:2px solid #f5f5f3!important; outline-offset:3px; }
+/* Login: a monochrome editorial display and one focused workspace. */
+.dt-obsidian:not([data-page="dashboard"]) .brand-panel {
+  background:radial-gradient(ellipse 90% 52% at 50% 44%,#323337 0%,#17181b 42%,#0a0b0d 86%)!important;
+  color:#f5f5f3; border-right:1px solid #ffffff20;
+}
+.dt-obsidian .brand-panel::before { opacity:.10; filter:grayscale(1); mix-blend-mode:screen; }
+.dt-obsidian .brand-panel::after { border-color:#ffffff18; box-shadow:0 0 95px #ffffff08; }
+.dt-obsidian .brand-logo-badge,.dt-obsidian .brand-icon {
+  background:linear-gradient(145deg,#efefec,#9d9e9e)!important; color:#141516!important;
+  box-shadow:0 3px 20px #ffffff16!important;
+}
+.dt-obsidian .brand-header-text h1,.dt-obsidian .brand-hero-title,.dt-obsidian .brand-footer { color:#f5f5f3!important; }
+.dt-obsidian .brand-header-text span,.dt-obsidian .brand-hero-desc { color:#b9bbbd!important; }
+.dt-obsidian .brand-hero-title { font-size:clamp(36px,3.8vw,54px)!important; letter-spacing:-.07em; line-height:1.04; }
+.dt-obsidian .text-gradient { background:linear-gradient(100deg,#ffffff,#a5a7ab)!important; -webkit-background-clip:text!important; background-clip:text!important; -webkit-text-fill-color:transparent!important; color:transparent!important; }
+.dt-obsidian .brand-panel .brand-hero-title .text-gradient { background:none!important; -webkit-text-fill-color:#dededb!important; color:#dededb!important; }
+.dt-obsidian .studio-eyebrow,.dt-obsidian .studio-edition,.dt-obsidian .pipeline-label { color:#c4c6c7; letter-spacing:.16em; }
+.dt-obsidian .studio-sculpture { filter:grayscale(1) brightness(1.12) contrast(1.08) drop-shadow(0 16px 36px #0009); }
+.dt-obsidian .studio-scene-tag { background:#141518d9!important; border:1px solid #ffffff30!important; color:#e7e8e8!important; box-shadow:0 14px 32px #0006; backdrop-filter:blur(18px); }
+.dt-obsidian .studio-scene-tag svg,.dt-obsidian .pipeline-arrow { color:#b8babc; }
+.dt-obsidian .pipeline-container { background:linear-gradient(155deg,#242529ca,#101114c9)!important; border:1px solid #ffffff24!important; box-shadow:inset 0 1px #ffffff10,0 18px 35px #0005; backdrop-filter:blur(22px); }
+.dt-obsidian .pipeline-node { background:#ffffff0b!important; border-color:#ffffff24!important; color:#c8c9ca!important; }
+.dt-obsidian .pipeline-node.active,.dt-obsidian .pipeline-node.verified { background:#eeeeeb!important; border-color:#eeeeeb!important; color:#101113!important; }
+.dt-obsidian .brand-footer { border-top:1px solid #ffffff23; }
+.dt-obsidian .brand-footer .status-badge { background:#ffffff0b; border:1px solid #ffffff22; color:#c6c9c9; }
+.dt-obsidian .auth-panel { background:radial-gradient(ellipse 80% 55% at 50% 44%,#21222665,transparent 80%),#08090b!important; }
+.dt-obsidian .studio-auth-caption { color:#a4a6a9; }
+.dt-obsidian .studio-auth-caption span:last-child { color:#a4a6a9; }
+.dt-obsidian .studio-auth-footnote,.dt-obsidian .portal-domain-tag { color:#a7a9ab!important; }
+.dt-obsidian .auth-panel .portal-access-card {
+  background:linear-gradient(155deg,#191a1e,#101114 68%,#0c0d10)!important;
+  border:1px solid #ffffff27!important;
+  box-shadow:0 32px 90px #0009,inset 0 1px 0 #ffffff13,0 0 0 1px #0005!important;
+}
+.dt-obsidian .auth-panel .portal-access-card::before { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(ellipse 85% 38% at 50% -15%,#ffffff0c,transparent 72%); }
+.dt-obsidian .auth-panel .portal-access-card:focus-within { border-color:#ffffff55!important; box-shadow:0 32px 90px #0009,0 0 0 2px #ffffff10!important; }
+.dt-obsidian .auth-panel .portal-selectable-card,.dt-obsidian .auth-panel .voice-panel,.dt-obsidian .auth-panel .camera-container {
+  background:linear-gradient(145deg,#1c1d20,#111215)!important; border:1px solid #ffffff23!important;
+  box-shadow:inset 0 1px 0 #ffffff0c;
+}
+.dt-obsidian .auth-panel .portal-selectable-card:hover { border-color:#ffffff68!important; box-shadow:0 16px 40px #0008,inset 0 1px #ffffff17!important; }
+.dt-obsidian .portal-icon-container,.dt-obsidian .voice-orb-center { background:#ffffff12!important; border:1px solid #ffffff37!important; color:#ededed!important; }
+.dt-obsidian .voice-orb-wrap { filter:drop-shadow(0 0 17px #ffffff14)!important; }
+.dt-obsidian .auth-panel .view-title { color:#f6f6f4; letter-spacing:-.045em; }
+.dt-obsidian .auth-panel .view-subtitle,.dt-obsidian .portal-card-desc,.dt-obsidian .portal-card-subtitle { color:#abadb0!important; }
+.dt-obsidian .auth-panel :is(.voice-phrase-text,#voice-phrase-text) { background:#101114!important; border-color:#ffffff2a!important; color:#f4f4f1!important; }
+.dt-obsidian .auth-panel :is(.voice-phrase-label,#voice-status-badge) { color:#bebfc1!important; }
+.dt-obsidian .auth-panel :is(.form-input,.otp-box,input:not([type="checkbox"]),select) { background:#111215!important; color:#f4f4f3!important; border-color:#ffffff2c!important; }
+.dt-obsidian .auth-panel :is(.form-input,.otp-box,input:not([type="checkbox"]),select):focus { border-color:#e3e3e1!important; box-shadow:0 0 0 4px #ffffff13!important; }
+.dt-obsidian .auth-panel .btn-primary,.dt-obsidian .btn-primary {
+  background:linear-gradient(155deg,#f5f5f2,#cbcdcb)!important; color:#111215!important;
+  border:1px solid #ffffffad!important; box-shadow:0 9px 26px #ffffff12,inset 0 1px #fff!important;
+  font-weight:750;
+}
+.dt-obsidian .auth-panel .btn-primary:hover:not(:disabled),.dt-obsidian .btn-primary:hover:not(:disabled) { filter:brightness(1.12); box-shadow:0 10px 31px #ffffff29!important; }
+.dt-obsidian .btn-secondary,.dt-obsidian .filter-btn,.dt-obsidian .notify-trigger { background:#1a1b1f!important; color:#e4e5e4!important; border-color:#ffffff28!important; }
+.dt-obsidian .btn-secondary:hover,.dt-obsidian .filter-btn:hover,.dt-obsidian .notify-trigger:hover { border-color:#ffffff5c!important; background:#25262a!important; }
+.dt-obsidian .auth-panel .liveness-challenge-box,.dt-obsidian .auth-panel .verification-check-card { background:#1a1b1e!important; border-color:#ffffff23!important; }
+.dt-obsidian .auth-panel :is(.vstep-circle.active,.stepper-step.active .step-circle) { background:#e8e8e5!important; color:#17181b!important; border-color:#fff!important; box-shadow:0 0 0 5px #ffffff12,0 0 24px #ffffff22!important; }
+.dt-obsidian .auth-panel :is(.vstep-label.active,.stepper-step.active) { color:#f2f2f1!important; }
+.dt-obsidian .auth-panel :is(.vstep-line.done,.voice-stepper-row .done) { color:#b1b4b2; }
+/* Dashboard: compact control room hierarchy, calm graphite surfaces. */
+.dt-obsidian[data-page="dashboard"] .sidebar { background:linear-gradient(180deg,#0d0e10,#08090b)!important; border-right:1px solid #ffffff1a!important; }
+.dt-obsidian[data-page="dashboard"] .sidebar-header,.dt-obsidian[data-page="dashboard"] .sidebar-footer { border-color:#ffffff19; }
+.dt-obsidian[data-page="dashboard"] .sidebar .brand-title,.dt-obsidian[data-page="dashboard"] .sidebar .brand-title span { color:#f4f4f1!important; }
+.dt-obsidian[data-page="dashboard"] .sidebar .brand-context { color:#9e9fa3; }
+.dt-obsidian[data-page="dashboard"] .nav-section-label { color:#85888d; }
+.dt-obsidian[data-page="dashboard"] .nav-item { color:#aeb0b3; transition:background .25s,color .25s,transform .25s,border-color .25s; border:1px solid transparent; }
+.dt-obsidian[data-page="dashboard"] .nav-item:hover { background:#ffffff0b!important; color:#f2f2f0!important; }
+.dt-obsidian[data-page="dashboard"] .nav-item.active { background:linear-gradient(100deg,#292b30,#1b1c20)!important; border-color:#ffffff2a; color:#fff!important; box-shadow:inset 0 1px #ffffff13,0 8px 20px #0003; }
+.dt-obsidian[data-page="dashboard"] .topbar { background:#0d0e11ed!important; border-bottom:1px solid #ffffff21!important; box-shadow:0 13px 35px #0003; backdrop-filter:blur(22px); }
+.dt-obsidian[data-page="dashboard"] .topbar { display:grid!important; grid-template-columns:minmax(120px,1fr) auto minmax(220px,1fr); column-gap:clamp(12px,2vw,28px); align-items:center; }
+.dt-obsidian[data-page="dashboard"] .topbar-left { display:none; }
+.dt-obsidian[data-page="dashboard"] .obsidian-nav { grid-column:2; grid-row:1; }
+.dt-obsidian[data-page="dashboard"] .topbar-search { grid-column:1; grid-row:1; justify-self:start; width:100%; max-width:235px; min-width:0; }
+.dt-obsidian[data-page="dashboard"] .topbar-right { grid-column:3; grid-row:1; justify-self:end; min-width:0; }
+.dt-obsidian[data-page="dashboard"] .topbar-search,.dt-obsidian[data-page="dashboard"] .user-chip { background:#17181b!important; border:1px solid #ffffff27!important; color:#e7e7e6; }
+.dt-obsidian[data-page="dashboard"] .topbar-search:focus-within { border-color:#ffffff7a!important; box-shadow:0 0 0 3px #ffffff12; }
+.dt-obsidian[data-page="dashboard"] .user-avatar { background:#e7e8e5!important; color:#151619!important; }
+.dt-obsidian[data-page="dashboard"] .health-badge { background:#17211e!important; border-color:#698a7644!important; color:#bad8c3!important; }
+.dt-obsidian[data-page="dashboard"] .content-area { background:radial-gradient(ellipse 70% 35% at 50% -10%,#33343944,transparent 75%),#090a0c!important; }
+.dt-obsidian[data-page="dashboard"] :is(.card,.kpi-card,.portal-access-card) {
+  background:linear-gradient(150deg,#18191c,#111215 72%)!important;
+  border:1px solid #ffffff1e!important; border-radius:18px;
+  box-shadow:inset 0 1px #ffffff0c,0 11px 27px #0003;
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+.dt-obsidian[data-page="dashboard"] :is(.card,.kpi-card):hover { border-color:#ffffff48!important; box-shadow:inset 0 1px #ffffff16,0 17px 36px #0006; }
+.dt-obsidian[data-page="dashboard"] .kpi-card:hover { transform:translateY(-4px); }
+.dt-obsidian[data-page="dashboard"] .kpi-title { color:#aeb0b4; }
+.dt-obsidian[data-page="dashboard"] .kpi-value { color:#f4f4f2; }
+.dt-obsidian[data-page="dashboard"] .view-greeting { color:#f3f3f1; letter-spacing:-.045em; }
+.dt-obsidian[data-page="dashboard"] .view-subtitle { color:#a8aaad; }
+.dt-obsidian[data-page="dashboard"] :is(#view-admin-overview,#view-org-overview) > .view-header {
+  background:radial-gradient(ellipse at 82% -30%,#4f51552e,transparent 65%),linear-gradient(120deg,#27282c,#191a1e)!important;
+  border:1px solid #ffffff32!important; box-shadow:inset 0 1px #ffffff18,0 24px 50px #0005;
+}
+.dt-obsidian[data-page="dashboard"] :is(#view-admin-overview,#view-org-overview) > .view-header :is(.view-greeting,h1) { color:#f5f5f3; }
+.dt-obsidian[data-page="dashboard"] :is(#view-admin-overview,#view-org-overview) > .view-header .view-subtitle { color:#babcc0; }
+.dt-obsidian[data-page="dashboard"] :is(#view-admin-overview,#view-org-overview) > .view-header::after { filter:grayscale(1) brightness(1.5); opacity:.16; }
+.dt-obsidian[data-page="dashboard"] .studio-overline { color:#c0c0c0; }
+.dt-obsidian[data-page="dashboard"] .data-table th { background:#1b1c20; color:#b1b3b6; border-bottom:1px solid #ffffff20; }
+.dt-obsidian[data-page="dashboard"] .data-table td { border-bottom-color:#ffffff12; }
+.dt-obsidian[data-page="dashboard"] .data-table tbody tr:hover { background:#ffffff0b; }
+.dt-obsidian[data-page="dashboard"] .content-area :is(input,select,textarea) { background:#151619!important; color:#eeeef0!important; border-color:#ffffff2d!important; }
+.dt-obsidian[data-page="dashboard"] .content-area :is(input,select,textarea):focus { border-color:#ffffffa6!important; box-shadow:0 0 0 3px #ffffff10!important; }
+.dt-obsidian[data-page="dashboard"] .content-area :is(input,textarea)::placeholder { color:#85888c!important; }
+.dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)) auto auto; align-items:end; gap:10px; }
+.dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls label { min-width:0; }
+.dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls :is(input,select) { width:100%; min-width:0; }
+.dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls button { white-space:nowrap; min-height:38px; }
+.dt-obsidian[data-page="dashboard"] .modal-content,.dt-obsidian[data-page="dashboard"] :is(.investigation-drawer,.session-details-drawer) { background:#141518!important; border-color:#ffffff29!important; box-shadow:0 30px 90px #000a; }
+/* Centered pill navigation uses the existing dashboard routes. */
+.dt-obsidian .obsidian-nav {
+  position:relative; display:flex; align-items:center; justify-self:center; gap:3px; padding:4px;
+  min-width:0; max-width:100%; border:1px solid #ffffff2b; border-radius:999px;
+  background:linear-gradient(180deg,#202125,#131417); box-shadow:inset 0 1px #ffffff1c,0 11px 24px #0007;
+  overflow-x:auto; scrollbar-width:none;
+}
+.dt-obsidian .obsidian-nav::-webkit-scrollbar { display:none; }
+.dt-obsidian .obsidian-nav-indicator { position:absolute; z-index:0; top:4px; height:calc(100% - 8px); border-radius:999px; background:linear-gradient(155deg,#f4f4f0,#cecfcc); box-shadow:0 3px 13px #ffffff23,inset 0 1px #fff; transition:left .38s cubic-bezier(.2,.8,.2,1),width .38s cubic-bezier(.2,.8,.2,1); pointer-events:none; }
+.dt-obsidian .obsidian-nav button {
+  position:relative; z-index:1; flex:0 0 auto; appearance:none; border:0; border-radius:999px;
+  background:transparent; color:#a5a7aa; padding:9px 13px; min-height:34px;
+  font-size:11px; font-weight:650; white-space:nowrap; cursor:pointer;
+  transition:background .28s,color .28s,transform .28s,box-shadow .28s;
+}
+.dt-obsidian .obsidian-nav button:hover { background:#ffffff12; color:#f5f5f4; transform:translateY(-1px); }
+.dt-obsidian .obsidian-nav button[aria-current="page"] { background:transparent; color:#141518; }
+.dt-obsidian .obsidian-nav button[aria-current="page"]::after { content:""; position:absolute; inset:-3px; border:1px solid #ffffff2d; border-radius:999px; pointer-events:none; }
+.dt-obsidian .obsidian-nav button:active { transform:scale(.96); }
+@media(max-width:1380px) { .dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:1280px) { .dt-obsidian .obsidian-nav button { padding:8px 10px; font-size:10px; } .dt-obsidian[data-page="dashboard"] .topbar-search { max-width:165px; } }
+@media(max-width:1120px) { .dt-obsidian[data-page="dashboard"] .topbar { grid-template-columns:minmax(48px,1fr) auto minmax(82px,1fr); } .dt-obsidian[data-page="dashboard"] .topbar-search { max-width:125px; } .dt-obsidian[data-page="dashboard"] .health-badge,.dt-obsidian[data-page="dashboard"] .user-meta { display:none; } }
+@media(max-width:970px) { .dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls { grid-template-columns:repeat(2,minmax(0,1fr)); } .dt-obsidian[data-page="dashboard"] .topbar-search { display:none; } .dt-obsidian[data-page="dashboard"] .topbar { grid-template-columns:0 minmax(0,1fr) auto; } }
+@media(max-width:850px) { .dt-obsidian:not([data-page="dashboard"]) .brand-panel { background:#151619!important; } .dt-obsidian .obsidian-nav { width:100%; } .dt-obsidian .obsidian-nav button { padding:7px 10px; } }
+@media(max-width:610px) { .dt-obsidian[data-page="dashboard"] .dashboard-feature-panel .feature-controls { grid-template-columns:1fr; } }
+@media(max-height:650px) { .dt-obsidian .brand-hero-title { font-size:clamp(30px,3.4vw,46px)!important; } }
+@media(prefers-reduced-motion:reduce) { .dt-obsidian *, .dt-obsidian *::before,.dt-obsidian *::after { animation:none!important; transition:none!important; } .dt-obsidian .obsidian-nav button:hover,.dt-obsidian .obsidian-nav button:active,.dt-obsidian .kpi-card:hover { transform:none!important; } }
+
+/* Startup progress shares the same graphite and ivory palette as the login workspace. */
+body.dt-obsidian #dt-startup-intro {
+  background:radial-gradient(ellipse 55% 40% at 50% 35%,#242529 0%,#101114 58%,#08090b 100%)!important;
+}
+.dt-obsidian .dt-intro-shield-wrap {
+  background:linear-gradient(145deg,#f2f2ef,#aeb0b0)!important;
+  color:#151619!important;
+  box-shadow:0 12px 38px #ffffff17!important;
+}
+.dt-obsidian .dt-intro-brand,.dt-obsidian .dt-intro-tag1 { color:#f2f3f2!important; }
+.dt-obsidian .dt-intro-platform,.dt-obsidian .dt-intro-init-label,
+.dt-obsidian .dt-intro-progress-label,.dt-obsidian .dt-intro-stage-name {
+  color:#adafb2!important;
+}
+.dt-obsidian .dt-intro-tag2 {
+  background:linear-gradient(100deg,#f2f3f2,#9fa1a4)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+}
+.dt-obsidian .dt-intro-stage-dot { background:#ffffff0b!important; border-color:#ffffff2a!important; color:#aeb0b2!important; }
+.dt-obsidian .dt-intro-stage.lit .dt-intro-stage-dot {
+  background:#e7e8e5!important; border-color:#f5f5f2!important; color:#17181b!important;
+  box-shadow:0 0 0 4px #ffffff12!important;
+}
+.dt-obsidian .dt-intro-stage.lit .dt-intro-stage-name,
+.dt-obsidian .dt-intro-progress-pct,.dt-obsidian .dt-intro-ready { color:#e8e9e7!important; }
+.dt-obsidian .dt-intro-progress-track { background:#ffffff1a!important; border:1px solid #ffffff20; }
+.dt-obsidian .dt-intro-progress-fill { background:linear-gradient(90deg,#aeb0b0,#f3f3f0)!important; }
+.dt-obsidian .dt-intro-progress-fill::after { background:#fff!important; }

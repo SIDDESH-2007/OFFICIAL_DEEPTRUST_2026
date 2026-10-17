@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Login</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body class="login-cyber">
+    <div class="page-shell">
+      <div class="enterprise-wrap enterprise-dark">
+        <section class="hero-pane hero-dark">
+          <div>
+            <h1>DeepTrust AI</h1>
+            <p class="tagline">Verifying Digital Reality</p>
+            <p class="subtitle">
+              Protecting institutions from AI-generated misinformation.
+            </p>
+          </div>
+
+          <div class="impact-list">
+            <p>✔ Prevents deepfake fraud</p>
+            <p>✔ Protects digital identity</p>
+            <p>✔ Enables forensic authentication</p>
+            <p>✔ Supports judicial integrity</p>
+          </div>
+
+          <div class="mini-stats">
+            <div class="mini-stat">
+              <strong>12,540</strong><span>Media Files Verified</span>
+            </div>
+            <div class="mini-stat">
+              <strong>1,243</strong><span>Deepfakes Detected</span>
+            </div>
+            <div class="mini-stat">
+              <strong>96.4%</strong><span>Detection Accuracy</span>
+            </div>
+            <div class="mini-stat">
+              <strong>18</strong><span>Partner Institutions</span>
+            </div>
+          </div>
+
+          <div class="security-assurance">
+            <span>AES-256 Encryption</span>
+            <span>JWT Secure Authentication</span>
+            <span>Cloud Hosted</span>
+            <span>AI-Powered Detection</span>
+          </div>
+        </section>
+
+        <section class="auth-card enterprise-card login-card-dark">
+          <h2>Secure Account Access</h2>
+          <p class="subtitle">
+            Enter your credentials to access AI forensic dashboard.
+          </p>
+
+          <form id="loginForm" class="form-grid">
+            <label>Email Address</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              placeholder="you@institution.org"
+            />
+            <small id="emailValidation" class="hint"></small>
+
+            <label>Password</label>
+            <div class="password-row">
+              <input type="password" name="password" id="password" required />
+              <button
+                type="button"
+                id="togglePasswordBtn"
+                class="btn btn-secondary"
+              >
+                Show
+              </button>
+            </div>
+            <div class="strength-wrap">
+              <div id="strengthBar" class="strength-bar"></div>
+            </div>
+            <small id="strengthText" class="hint">Password strength: --</small>
+
+            <div class="utility-row">
+              <label class="check-row">
+                <input type="checkbox" id="rememberMe" />
+                Remember Me
+              </label>
+              <a href="#" class="tiny-link" aria-disabled="true"
+                >Forgot Password</a
+              >
+            </div>
+
+            <label>Role Selector</label>
+            <select id="roleSelector" name="role">
+              <option value="investigator">Investigator</option>
+              <option value="administrator">Administrator</option>
+              <option value="institutional_user" selected>
+                Institutional User
+              </option>
+            </select>
+
+            <small id="attemptCounter" class="hint"
+              >Login attempt counter: 0</small
+            >
+
+            <button
+              type="submit"
+              id="loginBtn"
+              class="btn btn-primary btn-glow"
+            >
+              Authenticate Securely
+            </button>
+
+            <div class="or-divider"><span>OR</span></div>
+            <a href="{{ url_for('face_auth_page') }}" class="btn btn-secondary"
+              >Proceed to Face Verification</a
+            >
+
+            <button type="button" class="btn btn-secondary" disabled>
+              Login with Government ID (Future Feature)
+            </button>
+
+            <p class="security-note">
+              This system uses AI-driven risk analysis to detect suspicious
+              login attempts.
+            </p>
+          </form>
+
+          <div id="loadingState" class="status-box status-orange hidden">
+            Authenticating securely...
+          </div>
+          <div id="statusBox" class="status-box hidden"></div>
+          <div id="warningBox" class="warning-box hidden"></div>
+
+          <p class="footer-text">
+            New user? <a href="{{ url_for('register_page') }}">Register here</a>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  </body>
+</html>

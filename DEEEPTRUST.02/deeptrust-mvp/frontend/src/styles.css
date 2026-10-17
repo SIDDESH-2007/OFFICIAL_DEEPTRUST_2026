@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#050B14] text-slate-100 antialiased font-sans;
+  }
+}
+
+.grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+.glass-panel {
+  @apply bg-[#0B1527]/80 backdrop-blur-md border border-cyan-500/20 shadow-xl shadow-cyan-900/20 rounded-xl;
+}
+
+.input-field {
+  @apply w-full bg-[#050B14] border border-cyan-900/50 rounded-lg px-4 py-2 text-cyan-100 placeholder:text-cyan-800/50 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors;
+}
+
+.btn-primary {
+  @apply w-full bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg px-4 py-2 transition-colors;
+}
+
+.btn-secondary {
+  @apply w-full bg-[#12233D] hover:bg-[#1A3258] border border-cyan-800/50 text-cyan-100 font-medium rounded-lg px-4 py-2 transition-colors;
+}

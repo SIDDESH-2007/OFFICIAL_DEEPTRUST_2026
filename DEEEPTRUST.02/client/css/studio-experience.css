@@ -1,0 +1,108 @@
+/* DeepTrust visual identity: original artwork, inspired by Slush's bold composition. */
+:root { --studio-ice:#d9edff; --studio-ink:#10264b; --studio-blue:#326af3; --studio-ease:cubic-bezier(.2,.75,.2,1); }
+body.dt-studio { background:#091222 !important; }
+.dt-studio button,.dt-studio a,.dt-studio input,.dt-studio select { -webkit-tap-highlight-color:transparent; }
+.dt-studio :is(button,a,input,select,textarea,[tabindex]):focus-visible { outline:2px solid #9bc8ff; outline-offset:4px; }
+.dt-studio .btn-primary { border-radius:14px; min-height:44px; background:linear-gradient(120deg,#326af3,#2357d4) !important; box-shadow:0 6px 20px #14336a55; transition:box-shadow .2s,transform .2s; }
+.dt-studio .btn-primary:hover:not(:disabled) { box-shadow:0 10px 24px #326af344; transform:translateY(-2px); }
+.dt-studio .btn-primary:active:not(:disabled) { transform:translateY(0) scale(.985); }
+.dt-studio :is(input,select,textarea).form-input { border-radius:12px; min-height:48px; border-color:#334561; }
+.dt-studio :is(input,select,textarea):focus { border-color:#75acff; box-shadow:0 0 0 4px #609fff15; }
+.dt-studio .otp-container { width:100%; gap:clamp(4px,1.5vw,9px); }
+.dt-studio .otp-box { flex:1 1 0; min-width:0; max-width:52px; border-radius:12px; }
+/* Login: expressive artwork on the left, a calm workspace on the right. */
+.dt-studio:not([data-page="dashboard"]) .app-shell { min-height:100svh; flex-direction:row; }
+.dt-studio .brand-panel { width:53%; min-height:100svh; padding:36px clamp(28px,4vw,72px) 28px; position:relative; isolation:isolate; background:radial-gradient(ellipse at 85% 10%,#f3fbff 0%,transparent 40%),radial-gradient(ellipse at 12% 70%,#a0c8ff 0%,transparent 57%),linear-gradient(155deg,#dcedff,#c6dfff 60%,#d7edff); border-right:0; color:var(--studio-ink); }
+.dt-studio .brand-panel::before { content:""; position:absolute; inset:0; z-index:-1; opacity:.18; background-image:url('../assets/studio-grain.svg'); pointer-events:none; }
+.dt-studio .brand-panel::after { content:""; position:absolute; width:80%; height:80%; top:-40%; right:-40%; border-radius:50%; border:1px solid #fff9; pointer-events:none; }
+.dt-studio .brand-header { margin-bottom:38px; justify-content:space-between; }
+.dt-studio .brand-header-text { margin-right:auto; }
+.dt-studio .brand-header-text h1 { color:#10264b; font-size:22px; letter-spacing:-.9px; }
+.dt-studio .brand-header-text span { color:#345680; font-size:9px; letter-spacing:1.6px; }
+.dt-studio .brand-logo-badge { background:#10264b; border-radius:13px; color:#d9edff; box-shadow:0 7px 14px #143c7219; }
+.studio-edition { position:absolute; top:48px; right:36px; font:500 9px var(--font-mono); color:#36547b; border:1px solid #6585b23b; border-radius:999px; padding:7px 10px; white-space:nowrap; }
+.studio-eyebrow { display:flex; align-items:center; gap:8px; font-size:10px; letter-spacing:1.8px; font-weight:700; text-transform:uppercase; color:#325382; }
+.studio-eyebrow::before { content:""; width:20px; height:1px; background:currentColor; }
+.dt-studio .brand-hero { margin-bottom:0; }
+.dt-studio .brand-hero-title { margin:16px 0; font-size:clamp(38px,4.3vw,76px); line-height:1.02; letter-spacing:-.055em; font-weight:800; color:#10264b; max-width:670px; }
+.dt-studio .brand-hero-title .text-gradient { color:#326af3; -webkit-text-fill-color:#326af3; background:none; }
+.dt-studio .brand-hero-desc { color:#36547b; font-size:14px; line-height:1.65; max-width:405px; margin:0; }
+.studio-scene { position:relative; margin:2px -20px 0; height:clamp(225px,24vw,370px); }
+.studio-sculpture { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 20px 22px #3065b412); animation:studio-float 8s ease-in-out infinite; }
+.studio-scene-tag { position:absolute; display:flex; align-items:center; gap:8px; background:#f4fbffd6; border:1px solid #fff; color:#17335d; border-radius:13px; padding:10px 13px; box-shadow:0 8px 24px #164b9310; font-size:11px; font-weight:650; backdrop-filter:blur(12px); }
+.studio-scene-tag svg { width:16px; height:16px; color:#326af3; }
+.studio-scene-tag.face { left:7%; top:25%; animation:studio-float 7s ease-in-out infinite reverse; }
+.studio-scene-tag.voice { right:3%; top:45%; animation:studio-float 9s ease-in-out infinite; }
+.studio-scene-tag.mfa { left:15%; bottom:9%; animation:studio-float 10s ease-in-out infinite; }
+.dt-studio .capability-grid { display:none; }
+.dt-studio .pipeline-container { background:#f4fbff5c; border:1px solid #fff8; border-radius:16px; padding:14px 16px; margin-top:8px; }
+.dt-studio .pipeline-label { font-size:9px; color:#36547b; letter-spacing:1.4px; margin-bottom:10px; }
+.dt-studio .pipeline-node { background:#bdd8f55c; border:1px solid #7399c82e; color:#284872; font-size:10px; padding:5px 9px; }
+.dt-studio .pipeline-node.active { background:#326af3; color:white; border-color:#326af3; }
+.dt-studio .pipeline-arrow { color:#55779f; }
+.dt-studio .brand-footer { border-color:#7496c34a; padding-top:18px; margin-top:24px; color:#36547b; font-size:10px; }
+.dt-studio .brand-footer .status-badge { background:#eef9ff7a; border-color:#9db6d147; color:#254e66; font-size:9px; }
+.dt-studio .auth-panel { width:auto; min-height:100svh; background:radial-gradient(ellipse at 90% 0%,#24427938,transparent 50%),#091222; padding:48px clamp(24px,4vw,64px); position:relative; flex-direction:column; }
+.dt-studio .auth-panel-inner { max-width:500px; position:relative; }
+.studio-auth-caption { margin-bottom:22px; color:#8ca4c5; display:flex; align-items:center; justify-content:space-between; gap:14px; font-size:10px; letter-spacing:1.4px; text-transform:uppercase; }
+.studio-auth-caption span:last-child { font-family:var(--font-mono); font-size:9px; color:#7091bc; }
+.dt-studio .auth-view.active { opacity:1; transform:none; }
+.dt-studio .portal-access-card { background:linear-gradient(155deg,#18263b,#111d30) !important; border:1px solid #40547266; border-radius:26px; padding:34px; box-shadow:0 28px 70px #0003,inset 0 1px 0 #ffffff09; }
+.dt-studio .portal-access-card .view-title { font-size:28px; letter-spacing:-1px; font-weight:750; }
+.dt-studio .portal-access-card .view-subtitle { color:#a2b3cc; font-size:13px; line-height:1.6; }
+.dt-studio .portal-selectable-card { background:#1c2c44 !important; border-radius:18px; border-color:#45608466; padding:22px; transition:transform .25s,border-color .25s,box-shadow .25s; }
+.dt-studio .portal-selectable-card:hover { transform:translateY(-3px); border-color:#76a9fa; box-shadow:0 12px 24px #0002; }
+.dt-studio .portal-icon-container { background:#326af31c; color:#a5caff; border:1px solid #609fff30; border-radius:14px; }
+.dt-studio .portal-footer-security { color:#92a6c4; }
+.studio-auth-footnote { text-align:center; margin:20px 0 0; font-size:11px; color:#8096b7; line-height:1.6; }
+/* Dashboard: the same identity, with restrained motion and dense readable data. */
+.dt-studio[data-page="dashboard"] { --sidebar-width:246px; --topbar-height:72px; }
+.dt-studio[data-page="dashboard"] .sidebar { background:linear-gradient(180deg,#101f35,#091222) !important; border-right:1px solid #2b416133; }
+.dt-studio .sidebar-header { min-height:88px; }
+.dt-studio .brand-icon { border-radius:12px; background:linear-gradient(135deg,#d8edff,#89b7ff); color:#18346a; box-shadow:0 6px 20px #609fff18; }
+.dt-studio .brand-title { font-size:20px; letter-spacing:-.8px; }
+.dt-studio .brand-title span { color:#b3d6ff !important; }
+.dt-studio .brand-context { letter-spacing:1.4px; font-size:8px; color:#829cbc; }
+.dt-studio .sidebar-nav { padding:10px 12px; }
+.dt-studio .nav-section-label { letter-spacing:1.3px; color:#718aaa; font-size:9px; padding-left:14px; }
+.dt-studio .nav-item { border-radius:12px; margin:3px 0; min-height:42px; font-size:11px; color:#a7b8d1; transition:background .2s, color .2s,transform .2s; }
+.dt-studio .nav-item:hover { background:#233a594f; transform:translateX(2px); }
+.dt-studio .nav-item.active { background:linear-gradient(100deg,#28467a,#1c335b); color:#e4f1ff !important; box-shadow:inset 0 1px 0 #ffffff0c; }
+.dt-studio .nav-item.active::before { display:none; }
+.dt-studio .sidebar.collapsed .nav-item:hover { transform:none; }
+.dt-studio .topbar { background:#101e32eb !important; border-bottom:1px solid #334e7055; backdrop-filter:blur(16px); }
+.dt-studio .topbar-search { border-radius:13px; background:#15253b; border-color:#334e7055; }
+.dt-studio .user-chip { border-radius:14px; background:#1c2b40; border-color:#36506f6b; }
+.dt-studio .content-area { background:radial-gradient(ellipse at 50% -15%,#254b8230,transparent 55%),#091222; padding:28px 30px 36px; }
+.dt-studio .view-section > .view-header { padding:3px 0 16px; margin-bottom:20px; }
+.dt-studio .view-greeting { font-size:27px; letter-spacing:-1px; font-weight:750; }
+.dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header { position:relative; isolation:isolate; padding:30px 32px; min-height:158px; overflow:hidden; border-radius:24px; background:radial-gradient(ellipse at 85% -50%,#f5fbff,transparent 70%),linear-gradient(115deg,#d3e9ff,#a9cdff); border:1px solid #e2f2ff; box-shadow:0 16px 40px #0002; }
+.dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header::after { content:""; pointer-events:none; position:absolute; z-index:-1; right:0; top:-40px; width:285px; height:230px; opacity:.4; background:url('../assets/trust-sculpture.svg') center/contain no-repeat; }
+.dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header > div:first-child { max-width:68%; }
+.dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header :is(.view-greeting,h1) { color:#112c56; font-size:30px; line-height:1.2; }
+.dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header .view-subtitle { color:#365681; line-height:1.6; font-size:12px; }
+.dt-studio .studio-overline { color:#375983; letter-spacing:1.6px; text-transform:uppercase; font-size:9px; font-weight:700; margin-bottom:10px; }
+.dt-studio .card,.dt-studio .kpi-card { background:linear-gradient(150deg,#17263b,#111e32) !important; border:1px solid #38537555; box-shadow:0 8px 26px #00000012,inset 0 1px 0 #ffffff05; border-radius:18px; }
+.dt-studio .kpi-card { padding:20px; transition:transform .25s, border-color .25s,box-shadow .25s; }
+.dt-studio .kpi-card:hover { transform:translateY(-3px); border-color:#70a8fb88; box-shadow:0 12px 30px #0002; }
+.dt-studio .kpi-value { font-size:34px; letter-spacing:-1.5px; font-variant-numeric:tabular-nums; }
+.dt-studio .kpi-title { color:#a2b7d5; font-size:11px; }
+.dt-studio .kpi-icon { border-radius:11px; }
+.dt-studio .card-title { font-size:15px; letter-spacing:-.25px; }
+.dt-studio .data-table th { color:#96afd1; background:#122138; font-size:9px; letter-spacing:.65px; padding-top:14px; padding-bottom:14px; }
+.dt-studio .data-table td { padding-top:14px; padding-bottom:14px; border-bottom-color:#334d6c35; }
+.dt-studio .data-table tbody tr { transition:background .18s; }
+.dt-studio .data-table tbody tr:hover { background:#223b5b44; }
+.dt-studio .modal-content { border-radius:22px; border-color:#5478a666; box-shadow:0 30px 100px #0007; }
+.dt-studio .filter-btn { border-radius:10px; }
+.dt-studio .studio-ripple { position:absolute; width:18px; height:18px; border-radius:50%; pointer-events:none; background:currentColor; opacity:0; animation:studio-ripple .45s ease-out; }
+.dt-studio .studio-ripple-host { position:relative; overflow:hidden; }
+.dt-studio :is(.auth-view.active,.view-section.active) { animation:none; }
+.studio-paused :is(.studio-sculpture,.studio-scene-tag),body:has(.auth-panel input:focus) :is(.studio-sculpture,.studio-scene-tag) { animation-play-state:paused; }
+@keyframes studio-float { 0%,100% { transform:translateY(0) rotate(-1deg); } 50% { transform:translateY(-10px) rotate(1deg); } }
+@keyframes studio-ripple { from { transform:translate(-50%,-50%) scale(0); opacity:.18; } to { transform:translate(-50%,-50%) scale(16); opacity:0; } }
+@media(min-width:1500px) { .dt-studio .brand-panel { padding-top:46px; } .dt-studio .brand-header { margin-bottom:58px; } .dt-studio .studio-scene { height:355px; } }
+@media(max-width:1100px) { .dt-studio .brand-panel { width:48%; padding:28px; } .dt-studio .brand-hero-title { font-size:46px; } .studio-edition { display:none; } .dt-studio .studio-scene { height:260px; } .dt-studio .portal-access-card { padding:26px; } .dt-studio .content-area { padding:22px; } .dt-studio .topbar-search { max-width:260px; } }
+@media(max-width:850px) { .dt-studio:not([data-page="dashboard"]) .app-shell { flex-direction:column; } .dt-studio .brand-panel { width:100%; min-height:auto; padding:24px; } .dt-studio .brand-header { margin-bottom:20px; } .dt-studio .brand-hero-title { font-size:44px; } .dt-studio .studio-scene { position:absolute; width:200px; height:190px; right:12px; top:80px; opacity:.65; z-index:-1; } .studio-scene-tag { display:none; } .dt-studio .brand-hero-desc { max-width:72%; } .dt-studio .pipeline-container,.dt-studio .brand-footer { display:none; } .dt-studio .auth-panel { min-height:auto; padding:30px 22px 44px; } .dt-studio .auth-panel-inner { max-width:530px; } .studio-auth-caption { margin-bottom:14px; } .dt-studio .content-area { padding:18px 14px; } .dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header { padding:22px; min-height:145px; } }
+@media(max-width:520px) { .dt-studio .brand-hero-title { font-size:38px; } .dt-studio .brand-hero-desc { max-width:85%; font-size:12px; } .dt-studio .studio-scene { right:-35px; opacity:.3; } .dt-studio .portal-access-card { padding:23px 20px; border-radius:20px; } .dt-studio .portal-access-card .view-title { font-size:25px; } .studio-auth-caption span:last-child { display:none; } .dt-studio .kpi-value { font-size:28px; } .dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header > div:first-child { max-width:100%; } .dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header::after { opacity:.16; } .dt-studio :is(#view-admin-overview,#view-org-overview) > .view-header { flex-wrap:wrap; gap:14px; } .dt-studio .brand-header-text h1 { font-size:20px; } }
+@media(prefers-reduced-motion:reduce) { .dt-studio *, .dt-studio *::before, .dt-studio *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } .dt-studio .kpi-card:hover,.dt-studio .portal-selectable-card:hover,.dt-studio .nav-item:hover,.dt-studio .btn-primary:hover:not(:disabled) { transform:none; } }

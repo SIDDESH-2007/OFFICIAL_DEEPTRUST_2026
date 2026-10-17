@@ -1,0 +1,19 @@
+# Direct dependencies pinned to the local validation environment. Linux build still requires validation.
+fastapi==0.135.2
+uvicorn==0.42.0
+numpy==2.4.3
+opencv-python-headless==4.13.0.92
+pyotp==2.10.0
+PyJWT==2.12.1
+bcrypt==3.2.2
+qrcode==8.2
+pymongo==4.16.0
+python-dotenv==1.2.2
+reportlab==5.0.0
+torch==2.14.0
+openai-whisper==20250625
+imageio-ffmpeg==0.6.0
+pydantic==2.12.5
+scipy==1.17.1
+requests==2.32.5
+Pillow==12.1.1

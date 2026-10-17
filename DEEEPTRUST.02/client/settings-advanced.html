@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepTrust Platform - Advanced Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/platform.css">
+</head>
+<body data-page="settings-advanced" data-risk="63">
+<div class="platform-shell">
+    <aside class="sidebar">
+        <div class="brand"><h1>DeepTrust Platform</h1><p>Enterprise Security Console</p></div>
+        <nav class="nav-list">
+            <a class="nav-link" data-page="dashboard" href="dashboard.html">📊 Dashboard</a>
+            <a class="nav-link" data-page="profile" href="profile.html">👤 Profile</a>
+            <a class="nav-link" data-page="settings" href="settings.html">⚙ Settings</a>
+            <a class="nav-link" data-page="settings-advanced" href="settings-advanced.html">🧠 Advanced Settings</a>
+            <a class="nav-link" data-page="security-lab" href="security-lab.html">🛡 Security Lab</a>
+            <a class="nav-link" data-page="voice-security" href="voice-security.html">🎙 Voice Security</a>
+            <a class="nav-link" data-page="audit-logs" href="audit-logs.html">📜 Audit Logs</a>
+            <a class="nav-link" data-page="api-keys" href="api-keys.html">🔑 API Keys</a>
+            <a class="nav-link" data-page="organization-settings" href="organization-settings.html">🏢 Organization</a>
+        </nav>
+    </aside>
+
+    <section class="main-area">
+        <header class="topbar">
+            <input class="search" id="globalSearch" type="text" placeholder="Search advanced controls...">
+            <span class="risk-pill" id="globalRiskBadge">Global Risk</span>
+            <button class="icon-btn" id="notifyBtn">🔔 Alerts</button>
+            <div class="theme-wrap"><button class="icon-btn" id="themeToggle">🌗 Theme</button><span class="theme-ripple" id="themeRipple"></span></div>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+            <div class="notify-panel" id="notifyPanel"><div class="notify-item">Behavior baseline retraining queued.</div></div>
+        </header>
+
+        <main class="content">
+            <div>
+                <h2 class="page-title">Advanced Security Settings</h2>
+                <p class="page-subtitle" id="pageStatus">High-level controls for risk engine, AI behavior model, and biometrics.</p>
+            </div>
+
+            <section class="grid-3">
+                <article class="card">
+                    <h3>Risk Engine Configuration</h3>
+                    <div class="row"><span>Low Threshold</span><strong>0–30</strong></div>
+                    <div class="row"><span>Medium Threshold</span><strong>30–60</strong></div>
+                    <div class="row"><span>High Threshold</span><strong>60+</strong></div>
+                    <label class="label">Behavior Anomaly Sensitivity</label>
+                    <input class="input" value="0.72">
+                    <label class="label">Geo-risk Weight</label>
+                    <input class="input" value="0.48">
+                    <label class="label">Device Trust Expiration</label>
+                    <select class="select"><option>60 days</option><option>30 days</option><option>90 days</option></select>
+                </article>
+
+                <article class="card">
+                    <h3>AI Behavior Model Controls</h3>
+                    <div class="row"><span>Re-train User Baseline</span><button class="primary-btn">Run</button></div>
+                    <div class="row"><span>Reset Anomaly Profile</span><button class="primary-btn">Reset</button></div>
+                    <div class="row"><span>Behavior Deviation</span><strong>9.8%</strong></div>
+                </article>
+
+                <article class="card">
+                    <h3>Biometric Controls</h3>
+                    <div class="row"><span>Re-register Face</span><button class="primary-btn">Capture</button></div>
+                    <div class="row"><span>Disable Biometric Login</span><button class="toggle" data-toggle></button></div>
+                    <label class="label">Liveness Strictness</label>
+                    <select class="select"><option>High</option><option>Medium</option><option>Very High</option></select>
+                </article>
+            </section>
+        </main>
+    </section>
+</div>
+<script type="module" src="js/dashboardGuard.js"></script>
+<script type="module" src="js/platform.js"></script>
+</body>
+</html>

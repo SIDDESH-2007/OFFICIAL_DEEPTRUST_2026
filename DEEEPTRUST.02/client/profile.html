@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepTrust Platform - Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/platform.css">
+</head>
+<body data-page="profile" data-risk="42">
+<div class="platform-shell">
+    <aside class="sidebar">
+        <div class="brand"><h1>DeepTrust Platform</h1><p>Enterprise Security Console</p></div>
+        <nav class="nav-list">
+            <a class="nav-link" data-page="dashboard" href="dashboard.html">📊 Dashboard</a>
+            <a class="nav-link" data-page="profile" href="profile.html">👤 Profile</a>
+            <a class="nav-link" data-page="settings" href="settings.html">⚙ Settings</a>
+            <a class="nav-link" data-page="settings-advanced" href="settings-advanced.html">🧠 Advanced Settings</a>
+            <a class="nav-link" data-page="security-lab" href="security-lab.html">🛡 Security Lab</a>
+            <a class="nav-link" data-page="voice-security" href="voice-security.html">🎙 Voice Security</a>
+            <a class="nav-link" data-page="audit-logs" href="audit-logs.html">📜 Audit Logs</a>
+            <a class="nav-link" data-page="api-keys" href="api-keys.html">🔑 API Keys</a>
+            <a class="nav-link" data-page="organization-settings" href="organization-settings.html">🏢 Organization</a>
+        </nav>
+    </aside>
+
+    <section class="main-area">
+        <header class="topbar">
+            <input class="search" id="globalSearch" type="text" placeholder="Search profile controls...">
+            <span class="risk-pill" id="globalRiskBadge">Global Risk</span>
+            <button class="icon-btn" id="notifyBtn">🔔 Alerts</button>
+            <div class="theme-wrap"><button class="icon-btn" id="themeToggle">🌗 Theme</button><span class="theme-ripple" id="themeRipple"></span></div>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+            <div class="notify-panel" id="notifyPanel"><div class="notify-item">Profile baseline re-training pending approval.</div></div>
+        </header>
+
+        <main class="content">
+            <div>
+                <h2 class="page-title">Login Profile</h2>
+                <p class="page-subtitle" id="pageStatus">Identity and trust posture for current enterprise admin.</p>
+            </div>
+
+            <section class="grid-2">
+                <article class="card">
+                    <h3>Identity Panel</h3>
+                    <div class="row"><span>Name</span><strong>Alex Morgan</strong></div>
+                    <div class="row"><span>Role</span><strong>Security Analyst</strong></div>
+                    <div class="row"><span>Organization</span><strong>DeepTrust Labs</strong></div>
+                    <div class="row"><span>Last Login</span><strong>2026-03-01 09:12 UTC</strong></div>
+                    <div class="row"><span>Active Sessions</span><strong>2</strong></div>
+                    <div class="row"><span>Account Status</span><span class="badge secure">Secure</span></div>
+                </article>
+
+                <article class="card">
+                    <h3>Security Status Card</h3>
+                    <div class="row"><span>Trusted Devices</span><strong>3</strong></div>
+                    <div class="row"><span>Face Auth Enabled</span><strong>✔</strong></div>
+                    <div class="row"><span>Behavioral AI Active</span><strong>✔</strong></div>
+                    <div class="row"><span>2FA Status</span><strong>Enabled</strong></div>
+                    <div class="row"><span>Risk Level Trend</span><strong>Stable</strong></div>
+                    <div class="mini-chart" id="riskTrendChart"></div>
+                </article>
+            </section>
+        </main>
+    </section>
+</div>
+<script type="module" src="js/dashboardGuard.js"></script>
+<script type="module" src="js/platform.js"></script>
+</body>
+</html>

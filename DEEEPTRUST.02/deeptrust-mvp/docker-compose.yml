@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  backend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: sh -c "npm install ; npm run dev"
+    env_file:
+      - ./backend/.env.example
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+      - ai-service
+
+  frontend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install ; npm run dev -- --host"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  ai-service:
+    image: python:3.11
+    working_dir: /app
+    volumes:
+      - ./ai-service:/app
+    command: sh -c "pip install -r requirements.txt ; python app.py"
+    ports:
+      - "7000:7000"
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - deeptrust_mongo_data:/data/db
+
+volumes:
+  deeptrust_mongo_data:

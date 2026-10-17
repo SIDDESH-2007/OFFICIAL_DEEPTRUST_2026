@@ -1,0 +1,484 @@
+/* ============================================================
+   DEEPTRUST UI/UX POLISH & REFINEMENT
+   Comprehensive overrides for Global Design Consistency
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. GLOBAL TYPOGRAPHY NORMALIZATION
+   ------------------------------------------------------------ */
+h1, .page-title, .view-greeting, .view-title { 
+  font-size: 24px !important; 
+  line-height: 1.25 !important; 
+  font-weight: 800 !important; 
+  letter-spacing: -0.02em !important;
+}
+
+h2, .section-heading, .card-heading { 
+  font-size: 16px !important; 
+  font-weight: 700 !important; 
+  letter-spacing: -0.01em !important;
+}
+
+h3, .card-title, .portal-card-title { 
+  font-size: 14px !important; 
+  font-weight: 700 !important; 
+}
+
+body, p, .text-body, .text-secondary { 
+  font-size: 13px !important; 
+  line-height: 1.5 !important;
+}
+
+table th { 
+  font-size: 11px !important; 
+  font-weight: 700 !important; 
+  text-transform: uppercase !important; 
+  letter-spacing: 0.06em !important; 
+  color: #94a3b8 !important;
+  padding: 12px 16px !important; 
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14) !important; 
+  text-align: left !important;
+}
+
+table td { 
+  font-size: 12.5px !important; 
+  color: #f1f5f9 !important;
+  padding: 12px 16px !important; 
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08) !important; 
+}
+
+/* ------------------------------------------------------------
+   2. HORIZONTAL OVERFLOW PREVENTION
+   ------------------------------------------------------------ */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+.app-shell, .main-wrapper {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+/* ------------------------------------------------------------
+   3. BUTTON SYSTEM & MICRO-INTERACTIONS
+   ------------------------------------------------------------ */
+button, .btn, .btn-primary, .filter-btn, .portal-selectable-card {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              background-color 0.2s ease, 
+              border-color 0.2s ease !important;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-1px) !important;
+}
+
+button:active, .btn:active {
+  transform: translateY(0) !important;
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #60A5FA 0%, #2563EB 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  box-shadow: none;
+}
+
+/* Fix raw buttons */
+button:not([class]) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+}
+button:not([class]):hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.btn-secondary, .btn-ghost {
+  background: rgba(148, 163, 184, 0.1) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(148, 163, 184, 0.25) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+.btn-secondary:hover, .btn-ghost:hover {
+  background: rgba(148, 163, 184, 0.2) !important;
+}
+
+.btn-sm {
+  padding: 4px 10px !important;
+  font-size: 11.5px !important;
+}
+
+/* ------------------------------------------------------------
+   4. FORM CONTROLS & FILTERS
+   ------------------------------------------------------------ */
+input, select, textarea, .form-input {
+  background-color: #262626 !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+  font-size: 13px !important;
+  outline: none !important;
+}
+
+input:focus, select:focus, textarea:focus, .form-input:focus {
+  border-color: #60A5FA !important;
+  box-shadow: none;
+}
+
+/* Dropdown native UI fix */
+select option {
+  background-color: #0b1220 !important;
+  color: #f8fafc !important;
+  padding: 8px !important;
+}
+
+/* Filter Chips (Threat Investigation, Reports) */
+.filter-btn-group {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  background-color: #0B1220 !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 999px !important;
+  padding: 4px !important;
+}
+
+.filter-btn {
+  height: 28px !important;
+  padding: 0 16px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #94a3b8 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.filter-btn:hover {
+  color: #f8fafc !important;
+  background-color: rgba(148, 163, 184, 0.1) !important;
+}
+
+.filter-btn.active {
+  color: #ffffff !important;
+  background-color: #60A5FA !important;
+  box-shadow: none;
+}
+
+/* ------------------------------------------------------------
+   5. CARDS & ELEVATION
+   ------------------------------------------------------------ */
+.card, .dashboard-card, .metric-card, .portal-selectable-card, .voice-visualizer-card {
+  background: #262626 !important;
+  border: 1px solid rgba(148, 163, 184, 0.14) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.metric-card:hover, .portal-selectable-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: none;
+  border-color: rgba(96, 165, 250, 0.5) !important;
+}
+
+.metric-value {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #f8fafc !important;
+}
+
+/* ------------------------------------------------------------
+   6. BADGES
+   ------------------------------------------------------------ */
+.badge, .status-badge, .nav-badge, .check-card-status {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.badge.success, .status-badge.verified, .check-card-status.verified, .status-operational {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #10b981 !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+}
+
+.badge.warning, .status-badge.pending, .check-card-status.processing {
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #f59e0b !important;
+  border: 1px solid rgba(245, 158, 11, 0.25) !important;
+}
+
+.badge.danger, .status-badge.failed, .check-card-status.failed {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+}
+
+/* ------------------------------------------------------------
+   7. ANIMATIONS & TRANSITIONS (Page, Modal, Dropdown)
+   ------------------------------------------------------------ */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.view-section.active, .auth-view.active, .dashboard-view.active {
+  animation: pageFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+@keyframes dropdownEntrance {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.profile-dropdown.open, .dropdown-menu.show {
+  animation: dropdownEntrance 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  background-color: #262626 !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: none;
+  z-index: 9999 !important;
+}
+
+/* Modal polish */
+.modal-content {
+  background-color: #262626 !important;
+  border: 1px solid rgba(148, 163, 184, 0.15) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7) !important;
+}
+
+/* ------------------------------------------------------------
+   8. SIDEBAR & TOPBAR POLISH
+   ------------------------------------------------------------ */
+.sidebar {
+  width: 230px !important;
+  background-color: #0B1220 !important;
+  border-right: 1px solid rgba(148, 163, 184, 0.1) !important;
+}
+
+.sidebar-nav .nav-item {
+  height: 38px !important;
+  border-radius: 8px !important;
+  margin: 2px 12px !important;
+  padding: 0 12px !important;
+}
+
+.sidebar-nav .nav-item:hover {
+  background-color: rgba(30, 41, 69, 0.6) !important;
+}
+
+.sidebar-nav .nav-item.active {
+  background-color: rgba(96, 165, 250, 0.12) !important;
+  color: #fff !important;
+  border-left: 3px solid #60A5FA !important;
+  font-weight: 600 !important;
+}
+.sidebar-nav .nav-item.active::before { display: none !important; }
+
+.topbar {
+  height: 60px !important;
+  background-color: rgba(6, 11, 22, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1) !important;
+}
+
+/* ------------------------------------------------------------
+   9. AUTHENTICATION / LOGIN SPECIFIC
+   ------------------------------------------------------------ */
+@keyframes loginCardEntrance {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.portal-access-card, .auth-card {
+  padding: 40px !important;
+  border-radius: 20px !important;
+  background: #262626 !important;
+  box-shadow: none;
+  animation: loginCardEntrance 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+}
+
+/* ------------------------------------------------------------
+   10. SECURE ACCESS RIGHT PANEL REFINEMENT
+   ------------------------------------------------------------ */
+.auth-panel-inner:has(#view-portal-select.active) {
+  max-width: clamp(460px, 78%, 620px) !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+#view-portal-select .portal-access-card {
+  padding: 48px 52px !important;
+}
+
+#view-portal-select .portal-selectable-card {
+  width: 100% !important;
+  padding: 28px !important;
+}
+
+#view-portal-select .portal-card-desc {
+  max-width: 100% !important;
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  margin-top: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+#view-portal-select .portal-card-footer {
+  margin-top: auto !important;
+  padding-top: 16px !important;
+}
+
+.portal-footer-security {
+  margin-top: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  color: var(--text-muted) !important;
+  font-size: 13px !important;
+}
+
+/* ------------------------------------------------------------
+   11. CAMERA & BIOMETRICS
+   ------------------------------------------------------------ */
+  border-radius: 12px !important;
+  border: 1px solid rgba(148, 163, 184, 0.15) !important;
+  overflow: hidden !important;
+}
+
+.liveness-challenge-box {
+  background: rgba(96, 165, 250, 0.08) !important;
+  border: 1px solid rgba(96, 165, 250, 0.25) !important;
+  border-radius: 12px !important;
+  padding: 14px 18px !important;
+}
+
+.stepper-nav {
+  gap: 8px !important;
+}
+
+.stepper-step {
+  transition: all 0.3s ease !important;
+}
+
+/* ------------------------------------------------------------
+   10. TABLES
+   ------------------------------------------------------------ */
+.table-responsive {
+  overflow-x: auto !important;
+  border-radius: 8px !important;
+}
+
+tr:hover td {
+  background-color: rgba(30, 41, 69, 0.3) !important;
+}
+
+/* ------------------------------------------------------------
+   12. AI SECURITY AGENT & COPILOT UI
+   ------------------------------------------------------------ */
+.copilot-chip {
+  background: rgba(96, 165, 250, 0.1) !important;
+  border: 1px solid rgba(96, 165, 250, 0.3) !important;
+  color: #f8fafc !important;
+  padding: 6px 14px !important;
+  border-radius: 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.copilot-chip:hover {
+  background: rgba(96, 165, 250, 0.2) !important;
+  border-color: rgba(96, 165, 250, 0.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+.copilot-message {
+  background: #262626 !important;
+  border: 1px solid rgba(148, 163, 184, 0.14) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  margin-bottom: 12px !important;
+  animation: cardStagger 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+.copilot-message.user {
+  background: rgba(96, 165, 250, 0.05) !important;
+  border-color: rgba(96, 165, 250, 0.2) !important;
+  margin-left: 24px !important;
+}
+
+.copilot-message.agent {
+  background: #262626 !important;
+  border-color: rgba(96, 165, 250, 0.3) !important;
+  margin-right: 24px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+}
+
+.copilot-message-title {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #60A5FA !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.copilot-message-title::before {
+  content: '✨';
+}
+
+/* ------------------------------------------------------------
+   13. SCROLLBARS
+   ------------------------------------------------------------ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

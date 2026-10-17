@@ -1,0 +1,30 @@
+/* Login-only interaction layer. Authentication owns every verification state. */
+.dt-studio .auth-panel .portal-access-card { position:relative; transition:border-color .25s,box-shadow .25s; }
+.dt-studio .auth-panel .portal-access-card:focus-within { border-color:#739ff08c; box-shadow:0 28px 70px #0003,0 0 0 1px #477ce91a,inset 0 1px 0 #ffffff12; }
+.dt-studio .auth-panel :is(.voice-stepper-row,.stepper-nav) { padding:12px 0 20px; }
+.dt-studio .auth-panel :is(.vstep-circle,.step-circle) { transition:background .3s,border-color .3s,box-shadow .3s; }
+.dt-studio .auth-panel :is(.vstep-circle.active,.stepper-step.active .step-circle) { background:#254678; border-color:#78abff; color:#deedff; box-shadow:0 0 0 5px #558efa13,0 0 22px #326af329; animation:login-stage-breathe 3s ease-in-out infinite; }
+.dt-studio .auth-panel :is(.vstep-line.done,.stepper-step.completed .step-circle) { box-shadow:0 0 14px #34d39912; }
+.dt-studio .auth-panel .vstep-label { font-size:10px; letter-spacing:.2px; }
+.dt-studio .auth-panel .btn-primary { min-height:44px; border:1px solid #91b8ff32; box-shadow:0 5px 18px #2563eb23,inset 0 1px 0 #ffffff20; transition:transform .18s,box-shadow .2s,filter .2s; }
+.dt-studio .auth-panel .btn-primary:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 8px 25px #2563eb38; filter:brightness(1.07); }
+.dt-studio .auth-panel .btn-primary:active:not(:disabled) { transform:translateY(0) scale(.99); }
+.dt-studio .auth-panel :is(button,a,input,.portal-selectable-card):focus-visible { outline:2px solid #9ec5ff; outline-offset:4px; }
+.dt-studio .auth-panel :is(.input-wrapper,.otp-box) { transition:border-color .2s,box-shadow .2s,background .2s; }
+.dt-studio .auth-panel .input-wrapper:focus-within { border-color:#7caaff; box-shadow:0 0 0 3px #4e87ed18; }
+.dt-studio .auth-panel .otp-box:focus { background:#213655; border-color:#8bb5ff; box-shadow:0 0 0 3px #4e87ed20; }
+.dt-studio .auth-panel .auth-pending::after { content:""; width:14px; height:14px; border:2px solid #ffffff50; border-top-color:#fff; border-radius:50%; animation:login-button-spin .75s linear infinite; flex-shrink:0; }
+.dt-studio .auth-panel .auth-success { box-shadow:0 0 0 3px #34d39915,0 6px 20px #34d39918; }
+.dt-studio .auth-panel :is(.camera-status-badge,.voice-status-pill) { max-width:calc(100% - 20px); white-space:normal; overflow-wrap:anywhere; line-height:1.5; }
+.dt-studio .auth-panel .liveness-challenge-box { border-radius:14px; border:1px solid #658dd345; background:linear-gradient(120deg,#28467540,#20334b50); }
+.dt-studio .auth-panel .verification-check-card { border-radius:12px; transition:border-color .25s,background .25s; }
+.dt-studio .auth-panel .verification-check-card:has(.verified) { border-color:#34d39955; background:#34d39908; }
+.dt-studio .auth-panel .stage-caption { color:#b3ceef; letter-spacing:.8px; }
+.dt-studio .auth-panel .login-stage-count { font-variant-numeric:tabular-nums; }
+.dt-studio .auth-panel .view-subtitle { text-wrap:pretty; }
+.dt-studio .auth-panel .voice-orb-wrap { filter:drop-shadow(0 0 14px #326af322); }
+.studio-paused .auth-panel * { animation-play-state:paused; }
+@keyframes login-stage-breathe { 50% { box-shadow:0 0 0 7px #558efa09,0 0 25px #326af33d; } }
+@keyframes login-button-spin { to { transform:rotate(360deg); } }
+@media(max-width:520px) { .dt-studio .auth-panel :is(.voice-stepper-row,.stepper-nav) { gap:4px; } .dt-studio .auth-panel .vstep-label { font-size:9px; } }
+@media(prefers-reduced-motion:reduce) { .dt-studio .auth-panel *, .dt-studio .auth-panel *::after { animation:none!important; transition:none!important; } .dt-studio .auth-panel .btn-primary:hover:not(:disabled),.dt-studio .auth-panel .btn-primary:active:not(:disabled) { transform:none; } }

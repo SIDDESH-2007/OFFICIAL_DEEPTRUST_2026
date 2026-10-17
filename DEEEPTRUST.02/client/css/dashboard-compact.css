@@ -1,0 +1,38 @@
+/* Desktop density matches the previous 90% browser view at normal zoom. */
+@media (min-width: 1024px) {
+  body.dt-editorial[data-page="dashboard"] {
+    --dashboard-density: .9;
+    zoom: var(--dashboard-density);
+    width: 100%;
+    height: calc(100dvh / var(--dashboard-density));
+    min-height: 0 !important;
+  }
+  .dt-editorial[data-page="dashboard"] :is(.app-shell,.sidebar,.main-wrapper) {
+    height: calc(100dvh / var(--dashboard-density)) !important;
+    min-height: 0 !important;
+  }
+  .dt-editorial[data-page="dashboard"] :is(.modal-backdrop,.modal-overlay,.drawer-backdrop) {
+    width: calc(100vw / var(--dashboard-density)) !important;
+    height: calc(100dvh / var(--dashboard-density)) !important;
+  }
+  .dt-editorial[data-page="dashboard"] :is(.investigation-drawer,.notification-drawer) {
+    height: calc(100dvh / var(--dashboard-density)) !important;
+  }
+}
+
+/* Only navigation scrolls; its header and status footer stay in place. */
+.dt-editorial[data-page="dashboard"] .sidebar-nav {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.dt-editorial[data-page="dashboard"] .sidebar-nav > * { flex-shrink: 0; }
+.dt-editorial[data-page="dashboard"] .sidebar-nav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

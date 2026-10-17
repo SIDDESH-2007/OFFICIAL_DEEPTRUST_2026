@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepTrust — Healthcare Identity & Access Security Platform</title>
+    <meta name="description" content="DeepTrust Zero-Trust Identity Security and Healthcare Access Control Platform.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tokens.css?v=20261006-corporate-blue1">
+    <link rel="stylesheet" href="css/dashboard.css?v=20261006-corporate-blue1">
+    <!-- Auth State Guard -->
+    <script>
+        const token = sessionStorage.getItem('dt_admin_token') || localStorage.getItem('dt_admin_token');
+        if (!token) {
+            window.location.replace('login.html');
+        } else {
+            // Hide the body until dashboardGuard.js and app_rework.js finishes auth
+            document.documentElement.style.visibility = 'hidden';
+            document.documentElement.style.opacity = '0';
+        }
+    </script>
+    <link rel="stylesheet" href="css/professional-motion.css?v=20261006-login-visible1">
+    <link rel="stylesheet" href="css/enterprise-palette.css?v=20261006-corporate-blue1">
+    <link rel="stylesheet" href="css/studio-experience.css?v=20261007-studio1">
+    <script defer src="js/studio-experience.js?v=20261007-studio1"></script>
+    <link rel="stylesheet" href="css/fixed-workspace.css?v=20261007-1">
+    <link rel="stylesheet" href="css/obsidian-reference.css?v=20261007-1">
+    <link rel="stylesheet" href="css/deeptrust-editorial-2026.css?v=2">
+    <link rel="stylesheet" href="css/deeptrust-stage-motion.css?v=1">
+    <link rel="stylesheet" href="css/dashboard-compact.css?v=20261010-1">
+    <script defer src="js/deeptrust-stage-motion.js?v=1"></script>
+    <script defer src="js/obsidian-navigation.js?v=20261007-1"></script>
+    <link rel="stylesheet" href="css/dashboard-motion.css?v=20261010-toast1">
+    <script defer src="js/dashboard-motion.js?v=20261010-perf2"></script>
+</head>
+
+<body data-page="dashboard" class="dt-studio dt-obsidian dt-editorial">
+    <div class="app-shell">
+        <!-- ============================================================
+             1. COMPACT LEFT SIDEBAR (ROLE-DRIVEN)
+             ============================================================ -->
+        <aside class="sidebar" id="appSidebar">
+            <div class="sidebar-header">
+                <a href="#" class="sidebar-brand">
+                    <div class="brand-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="brand-info">
+                        <span class="brand-title">Deep<span style="color: var(--primary-indigo);">Trust</span></span>
+                        <span class="brand-context" id="portalContextLabel">SECURITY CONSOLE</span>
+                    </div>
+                </a>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar" title="Collapse sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- NovaCare Medical Center Sidebar Nav -->
+            <nav class="sidebar-nav" id="orgNav" style="display: none;">
+                <div class="nav-section-label">Access Governance</div>
+                <a class="nav-item active" data-view="org-overview" title="Overview">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Overview</span>
+                </a>
+                <a class="nav-item" data-view="org-identities" title="Staff & Identities">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Staff & Identities</span>
+                </a>
+                <a class="nav-item" data-view="org-auth-activity" title="Authentication Activity">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    <span>Authentication Activity</span>
+                </a>
+                <a class="nav-item" data-view="org-alerts" title="Security Alerts">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span>Security Alerts</span>
+                    <span class="nav-badge" id="orgSidebarAlertBadge" style="display: none;">0</span>
+                </a>
+                <a class="nav-item" data-view="org-access-requests" title="Access Requests">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    <span>Access Requests</span>
+                </a>
+
+                <div class="nav-section-label">Compliance & Audit</div>
+                <a class="nav-item" data-view="org-reports" title="Reports">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    <span>Reports</span>
+                </a>
+                <a class="nav-item" data-view="org-audit" title="Audit Trail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    <span>Audit Trail</span>
+                </a>
+                <a class="nav-item" data-view="org-settings" title="Settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <!-- DeepTrust Admin Console Sidebar Nav -->
+            <nav class="sidebar-nav" id="deeptrustAdminNav">
+                <div class="nav-section-label">Platform Control</div>
+                <a class="nav-item active" data-view="admin-overview" title="Overview">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Overview</span>
+                </a>
+                <a class="nav-item" data-view="admin-accounts" title="Account Management">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                    <span>Account Management</span>
+                </a>
+                <a class="nav-item" data-view="admin-organizations" title="Organizations">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>Organizations</span>
+                </a>
+                <a class="nav-item" data-view="admin-identity-sec" title="Identity Security">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span>Identity Security</span>
+                </a>
+                <a class="nav-item" data-view="admin-session-control" title="Session Control">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <span>Session Control</span>
+                    <span class="nav-badge" id="adminActiveSessionsBadge" style="display: none;">0</span>
+                </a>
+                <a class="nav-item" data-view="admin-threat-investigation" title="Threat Investigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>Threat Investigation</span>
+                    <span class="nav-badge" id="adminSidebarAlertBadge" style="display: none;">0</span>
+                </a>
+                <a class="nav-item" data-view="admin-risk-engine" title="Risk Engine">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span>Risk Engine</span>
+                </a>
+                <a class="nav-item" data-view="admin-copilot" title="AI Security Agent">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span>AI Security Agent</span>
+                </a>
+
+                <div class="nav-section-label">Infrastructure & Audit</div>
+                <a class="nav-item" data-view="admin-reports" title="Monthly Reports">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    <span>Monthly Reports</span>
+                </a>
+                <a class="nav-item" data-view="admin-system-health" title="System Health">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    <span>System Health</span>
+                </a>
+                <a class="nav-item" data-view="admin-audit-logs" title="Audit Logs">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    <span>Audit Logs</span>
+                </a>
+                <a class="nav-item" data-view="admin-integrations" title="Integrations">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                    <span>Integrations</span>
+                </a>
+                <a class="nav-item" data-view="admin-settings" title="Settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status-indicator">
+                    <span class="status-dot pulsing" id="sidebarStatusDot"></span>
+                    <span id="sidebarStatusText">System Operational</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ============================================================
+             2. MAIN WRAPPER & TOP NAVBAR
+             ============================================================ -->
+        <div class="main-wrapper">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div class="page-breadcrumb">
+                        <span id="breadcrumbOrg">NovaCare Medical Center</span>
+                        <span style="color: var(--text-muted); opacity: 0.6;">/</span>
+                        <span class="current-crumb" id="breadcrumbSection">Overview</span>
+                    </div>
+                </div>
+
+                <div class="topbar-search">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="globalSearchInput" placeholder="Search identities, events, alerts...">
+                </div>
+
+                <div class="topbar-right">
+                    <div class="health-badge" id="topbarHealthBadge">
+                        <span class="status-dot"></span>
+                        <span id="topbarHealthText">System Operational</span>
+                    </div>
+
+                    <button class="notify-trigger" id="notifyDrawerBtn" aria-label="Notifications" title="Security Notifications">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="notify-count-badge" id="unreadNotifCount" style="display: none;">0</span>
+                    </button>
+
+                    <div class="user-profile-menu-wrap">
+                        <div class="user-chip" id="userChipBtn" title="Account Menu">
+                            <div class="user-avatar" id="userAvatarText">RV</div>
+                            <div class="user-meta">
+                                <span class="user-meta-name" id="topbarUserName">Dr. Rachel Vance</span>
+                                <span class="user-meta-role" id="topbarUserRole">Hospital Security Admin</span>
+                            </div>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <button class="profile-dropdown-item" id="dropdownProfileBtn">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <span>Security Profile</span>
+                            </button>
+                            <button class="profile-dropdown-item" id="dropdownSettingsBtn">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                <span>Security Settings</span>
+                            </button>
+                            <button class="profile-dropdown-item danger" id="dropdownLogoutBtn">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                <span>Sign Out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ============================================================
+                 3. MAIN CONTENT CONTAINER (VIEWS)
+                 ============================================================ -->
+            <main class="content-area" id="mainContentArea">
+
+                <!-- ════════════════════════════════════════════════════════
+                     NOVACARE MEDICAL CENTER VIEWS
+                     ════════════════════════════════════════════════════════ -->
+
+                <!-- ── VIEW: HEALTHCARE OVERVIEW ───────────────────────── -->
+                <section class="view-section" id="view-org-overview">
+                    <div class="view-header">
+                        <div>
+                            <div class="studio-overline">DeepTrust / Security workspace</div>
+                            <h1 class="view-greeting" id="orgGreeting">Good Afternoon, Dr. Rachel</h1>
+                            <p class="view-subtitle">Here's what's happening across NovaCare Medical Center security.</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="btn btn-secondary" id="refreshOverviewBtn">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                <span>Sync Telemetry</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Real MongoDB Metrics KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Authentication Attempts</span>
+                                <div class="kpi-icon indigo">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpiTotalAuth">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext positive">● Live MongoDB count</span>
+                                <span>Zero-Trust</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Verified Access</span>
+                                <div class="kpi-icon emerald">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpiVerifiedAccess">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext positive">Active sessions</span>
+                                <span>MFA + Bio</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Blocked Attempts</span>
+                                <div class="kpi-icon red">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpiBlockedAttempts">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext danger">Automatic risk block</span>
+                                <span>Policy enforced</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Open Security Alerts</span>
+                                <div class="kpi-icon amber">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpiOpenAlerts">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext warning">Requires review</span>
+                                <span>Triage drawer</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">High-Risk Sessions</span>
+                                <div class="kpi-icon cyan">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpiHighRiskSessions">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext" id="kpiRiskPill">Composite Risk: Nominal</span>
+                                <span>Adaptive engine</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- ── NOVACARE PROTECTED RESOURCES (PRIVACY-SAFE AGGREGATES - NON-DRILL-DOWN) ── -->
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title" style="display: flex; align-items: center; gap: 8px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                    <span>Protected NovaCare Resources (Aggregate Counts Only)</span>
+                                </h2>
+                                <p style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 2px;">
+                                    Non-drill-down aggregate metrics provided by NovaCare Medical Center. DeepTrust does not store or browse individual clinical records.
+                                </p>
+                            </div>
+                            <span class="status-pill verified">Privacy Preserved</span>
+                        </div>
+                        <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 8px;">
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Patients</span>
+                                <div class="kpi-value" id="countPatients">--</div>
+                                <div class="kpi-footer"><span>No Clinical Access</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Appointments Today</span>
+                                <div class="kpi-value" id="countAppointments">--</div>
+                                <div class="kpi-footer"><span>Schedule Count</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Prescriptions</span>
+                                <div class="kpi-value" id="countPrescriptions">--</div>
+                                <div class="kpi-footer"><span>No Medication Data</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Lab Records</span>
+                                <div class="kpi-value" id="countLabRecords">--</div>
+                                <div class="kpi-footer"><span>No Diagnostic Data</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Insurance Records</span>
+                                <div class="kpi-value" id="countInsurance">--</div>
+                                <div class="kpi-footer"><span>No Document Access</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Billing Transactions</span>
+                                <div class="kpi-value" id="countBilling">--</div>
+                                <div class="kpi-footer"><span>No Payment Data</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Available Beds</span>
+                                <div class="kpi-value" id="countAvailBeds" style="color: var(--success-emerald);">--</div>
+                                <div class="kpi-footer"><span>Facility Status</span></div>
+                            </div>
+                            <div class="kpi-card" style="cursor: default;" title="Aggregate Count Only - Non-drill-down">
+                                <span class="kpi-title">Occupied Beds</span>
+                                <div class="kpi-value" id="countOccupiedBeds">--</div>
+                                <div class="kpi-footer"><span>Facility Status</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── NOVACARE SECURITY ACTIVITY (LIVE AUTHORIZATION TELEMETRY) ── -->
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">NovaCare Security Activity</h2>
+                                <p style="font-size: 0.76rem; color: var(--text-secondary); margin-top: 2px;">
+                                    Live security operations evaluated by DeepTrust (Role, Action, Resource Category, Decision, Risk).
+                                </p>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" id="btnRefreshActivity">Refresh Activity</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="novaCareActivityTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+                                        <th>Resource Category</th>
+                                        <th>Resource Ref</th>
+                                        <th>Risk Score / Level</th>
+                                        <th>Decision</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">
+                                            No NovaCare activity recorded yet.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+<!-- Split Row: Authentication Trend Chart & Access Risk Breakdown -->
+                    <div class="dash-row-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                    <span>Authentication Activity</span>
+                                </h2>
+                                <div class="filter-btn-group" id="trendTimeFilter">
+                                    <button class="filter-btn active" data-range="24h">24 Hours</button>
+                                    <button class="filter-btn" data-range="7d">7 Days</button>
+                                    <button class="filter-btn" data-range="30d">30 Days</button>
+                                </div>
+                            </div>
+
+                            <div class="chart-container" id="authTrendContainer">
+                                <div class="trend-bars-wrapper" id="trendBarsArea"></div>
+                            </div>
+
+                            <div class="chart-legend">
+                                <div class="legend-item"><span class="legend-dot verified"></span> Verified</div>
+                                <div class="legend-item"><span class="legend-dot failed"></span> Failed</div>
+                                <div class="legend-item"><span class="legend-dot blocked"></span> Blocked</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                    <span>Access Risk Overview</span>
+                                </h2>
+                            </div>
+
+                            <div class="risk-meter-wrap">
+                                <div class="risk-level-bar" id="riskBarSegments">
+                                    <div class="risk-level-segment low" style="width: 70%;"></div>
+                                    <div class="risk-level-segment medium" style="width: 15%;"></div>
+                                    <div class="risk-level-segment high" style="width: 10%;"></div>
+                                    <div class="risk-level-segment critical" style="width: 5%;"></div>
+                                </div>
+
+                                <div class="risk-metric-list">
+                                    <div class="risk-metric-pill">
+                                        <span class="risk-metric-label">Low</span>
+                                        <span class="risk-metric-count" id="riskCountLow">0</span>
+                                    </div>
+                                    <div class="risk-metric-pill">
+                                        <span class="risk-metric-label">Medium</span>
+                                        <span class="risk-metric-count" id="riskCountMed">0</span>
+                                    </div>
+                                    <div class="risk-metric-pill">
+                                        <span class="risk-metric-label">High</span>
+                                        <span class="risk-metric-count" id="riskCountHigh">0</span>
+                                    </div>
+                                    <div class="risk-metric-pill">
+                                        <span class="risk-metric-label">Critical</span>
+                                        <span class="risk-metric-count" id="riskCountCrit">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Authentication Activity Table -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>Recent Authentication Activity</span>
+                            </h2>
+                            <button class="btn btn-secondary" id="viewAllActivityBtn">View Full Log</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="recentActivityTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Identity</th>
+                                        <th>Role</th>
+                                        <th>Security Factors</th>
+                                        <th>Risk</th>
+                                        <th>Decision</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Identity Verification Layers Health -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                <span>Identity Verification Layers</span>
+                            </h2>
+                        </div>
+                        <div class="factor-health-grid" id="factorHealthGrid"></div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: STAFF & IDENTITIES ──────────────────────── -->
+                <section class="view-section" id="view-org-identities">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Staff & Identities</h1>
+                            <p class="view-subtitle">Authorized clinical workforce identities and biometric security profiles.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="topbar-search" style="width: 260px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                <input type="text" id="identitySearchInput" placeholder="Filter staff by name or dept...">
+                            </div>
+                            <div class="filter-btn-group" id="identityRoleFilter">
+                                <button class="filter-btn active" data-role="ALL">All Roles</button>
+                                <button class="filter-btn" data-role="Doctor">Doctor</button>
+                                <button class="filter-btn" data-role="Nurse">Nurse</button>
+                                <button class="filter-btn" data-role="Pharmacist">Pharmacist</button>
+                                <button class="filter-btn" data-role="Lab Staff">Lab Staff</button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table" id="identitiesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Department</th>
+                                        <th>Face Enrollment</th>
+                                        <th>Voice Enrollment</th>
+                                        <th>MFA</th>
+                                        <th>Account Status</th>
+                                        <th>Last Authentication</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: AUTHENTICATION ACTIVITY ─────────────────── -->
+                <section class="view-section" id="view-org-auth-activity">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Authentication Activity</h1>
+                            <p class="view-subtitle">Detailed searchable authentication log grouped by verification session.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="fullAuthActivityTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Session ID</th>
+                                        <th>Identity</th>
+                                        <th>Role</th>
+                                        <th>Security Factors</th>
+                                        <th>Risk</th>
+                                        <th>Decision</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: SECURITY ALERTS ─────────────────────────── -->
+                <section class="view-section" id="view-org-alerts">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Security Alerts</h1>
+                            <p class="view-subtitle">Meaningful security events and biometric verification anomalies.</p>
+                        </div>
+                        <div class="filter-btn-group" id="alertsFilterGroup">
+                            <button class="filter-btn active" data-filter="ALL">All</button>
+                            <button class="filter-btn" data-filter="OPEN">Open</button>
+                            <button class="filter-btn" data-filter="ACKNOWLEDGED">Acknowledged</button>
+                            <button class="filter-btn" data-filter="RESOLVED">Resolved</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="securityEventsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Event ID</th>
+                                        <th>Time</th>
+                                        <th>Severity</th>
+                                        <th>Event Type</th>
+                                        <th>Identity</th>
+                                        <th>Description</th>
+                                        <th>Risk</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: ACCESS REQUESTS ─────────────────────────── -->
+                <section class="view-section" id="view-org-access-requests">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Access Requests</h1>
+                            <p class="view-subtitle">Staff account requests for privileged hospital application access.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="accessRequestsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Requester</th>
+                                        <th>Department</th>
+                                        <th>Resource</th>
+                                        <th>Permission</th>
+                                        <th>Reason</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: REPORTS ─────────────────────────────────── -->
+                <section class="view-section" id="view-org-reports">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Reports</h1>
+                            <p class="view-subtitle">Healthcare access security reporting and audit summaries.</p>
+                        </div>
+                        <div class="filter-btn-group" id="reportsTimeFilter">
+                            <button class="filter-btn active" data-range="today">Today</button>
+                            <button class="filter-btn" data-range="7d">7 Days</button>
+                            <button class="filter-btn" data-range="30d">30 Days</button>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid" id="reportMetricsGrid"></div>
+
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="card-header">
+                            <h2 class="card-title">HIPAA Zero-Trust Verification Summary</h2>
+                            <span class="status-pill verified">100% Policy Enforced</span>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
+                            DeepTrust enforces mandatory multi-factor biometric authentication across all NovaCare Medical Center clinical workstations.
+                            All credentials, neural face encodings, temporal liveness challenges, acoustic voiceprints, and time-based OTP codes are cryptographically bound to immutable session records.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: AUDIT TRAIL ─────────────────────────────── -->
+                <section class="view-section" id="view-org-audit">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Audit Trail</h1>
+                            <p class="view-subtitle">Security-relevant administrative actions and access decisions.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="auditTrailTable">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Actor</th>
+                                        <th>Action</th>
+                                        <th>Target</th>
+                                        <th>Result</th>
+                                        <th>Risk</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: HEALTHCARE SETTINGS ───────────────────────── -->
+                <section class="view-section" id="view-org-settings">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Settings</h1>
+                            <p class="view-subtitle">Authentication policy, notification preferences, and session security.</p>
+                        </div>
+                    </div>
+
+                    <div class="dash-row-equal">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Authentication Policy</h2>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 14px;">
+                                <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>Require Biometric Verification (Face/Voice)</span>
+                                    <input type="checkbox" checked disabled>
+                                </label>
+                                <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>Require Authenticator MFA (RFC 6238 TOTP)</span>
+                                    <input type="checkbox" checked disabled>
+                                </label>
+                                <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>Active Liveness Strictness</span>
+                                    <select style="background: var(--bg-primary); color: #fff; border: 1px solid var(--surface-border); padding: 5px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                        <option>Standard (Temporal Shift)</option>
+                                        <option>High (Strict Anti-Spoof)</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Session Security</h2>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 14px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>Clinical Session Lifetime</span>
+                                    <span style="font-weight: 600; color: var(--accent-cyan);">8 Hours</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>Pre-Auth Verification Window</span>
+                                    <span style="font-weight: 600; color: var(--accent-cyan);">15 Minutes</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>Risk Engine Auto-Block</span>
+                                    <span style="font-weight: 600; color: var(--danger-red);">&gt; 85 Score</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- ════════════════════════════════════════════════════════
+                     DEEPTRUST SECURITY CONSOLE VIEWS (ADMIN ONLY)
+                     ════════════════════════════════════════════════════════ -->
+
+                <!-- ── ADMIN VIEW 1: OVERVIEW ────────────────────────── -->
+                <section class="view-section active" id="view-admin-overview">
+                    <div class="view-header">
+                        <div>
+                            <div class="studio-overline">DeepTrust / Security workspace</div>
+                            <h1 class="view-greeting" id="adminGreeting">Security Overview</h1>
+                            <p class="view-subtitle">Real-time identity and access security across the DeepTrust platform.</p>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Organizations</span>
+                                <div class="kpi-icon indigo">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="adminKpiOrgs">1</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext positive">NovaCare Medical Center</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Active Identities</span>
+                                <div class="kpi-icon emerald">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="adminKpiIdentities">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext positive">Enrolled workforce</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Authentication Events Today</span>
+                                <div class="kpi-icon cyan">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="adminKpiTodayAuth">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext positive">Live MongoDB count</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Open Security Alerts</span>
+                                <div class="kpi-icon amber">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="adminKpiAlerts">--</div>
+                            <div class="kpi-footer">
+                                <span class="kpi-subtext warning">Requires investigation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Platform Recent Activity & Verification Engine Status -->
+                    <div class="dash-row-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Recent Security Events</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="adminRecentEventsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Identity</th>
+                                            <th>Event</th>
+                                            <th>Risk</th>
+                                            <th>Decision</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Verification Engine Status</h2>
+                            </div>
+                            <div class="factor-health-grid" id="adminOverviewHealthGrid"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 2: ORGANIZATIONS ────────────────────── -->
+                <section class="view-section" id="view-admin-organizations">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Organizations</h1>
+                            <p class="view-subtitle">Manage organizations protected by DeepTrust.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminOrgsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Domain / Node</th>
+                                        <th>Industry</th>
+                                        <th>Status</th>
+                                        <th>Identities</th>
+                                        <th>Open Alerts</th>
+                                        <th>Last Activity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 3: IDENTITY SECURITY ────────────────── -->
+                <section class="view-section" id="view-admin-identity-sec">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Identity Security</h1>
+                            <p class="view-subtitle">Total enrolled identities, biometric health, and account statuses.</p>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <span class="kpi-title">Total Identities</span>
+                            <div class="kpi-value" id="adminTotalIdentities">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Face Enrolled</span>
+                            <div class="kpi-value" style="color: var(--success-emerald);" id="adminFaceEnrolled">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Voice Enrolled</span>
+                            <div class="kpi-value" style="color: var(--accent-cyan);" id="adminVoiceEnrolled">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">MFA Enabled</span>
+                            <div class="kpi-value" style="color: var(--primary-indigo);" id="adminMfaEnabled">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Accounts Requiring Setup</span>
+                            <div class="kpi-value" style="color: var(--warning-amber);" id="adminRequiringSetup">--</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminIdentitySecurityTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Organization</th>
+                                        <th>Role</th>
+                                        <th>Face</th>
+                                        <th>Voice</th>
+                                        <th>MFA</th>
+                                        <th>Status</th>
+                                        <th>Last Authentication</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW: SESSION CONTROL ─────────────────────── -->
+                <section class="view-section" id="view-admin-session-control"><div class="session-live-strip"><span class="session-live-dot" aria-hidden="true"></span><span id="scMonitorStatus">Connecting to session monitoring</span><span id="scMonitorUpdated"></span><span id="scInteractionAlerts">Interaction alerts: 0</span></div>
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Session Control</h1>
+                            <p class="view-subtitle">Real-time enterprise active session security context, device posture, and revocation control.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="text" id="scSearchInput" class="filter-search-input" placeholder="Filter by email or IP..." style="width: 220px; padding: 7px 12px; font-size: 0.82rem; background: var(--bg-surface); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); color: #fff;">
+                            <button class="btn btn-secondary" id="scRefreshBtn" style="padding: 7px 14px; font-size: 0.82rem;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: middle;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <span class="kpi-title">Active Sessions</span>
+                            <div class="kpi-value" style="color: var(--accent-cyan);" id="scKpiActive">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">High Risk</span>
+                            <div class="kpi-value" style="color: var(--danger-red);" id="scKpiHighRisk">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Step-Up Required</span>
+                            <div class="kpi-value" style="color: var(--warning-amber);" id="scKpiStepUp">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Blocked</span>
+                            <div class="kpi-value" style="color: #94a3b8;" id="scKpiBlocked">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Trusted Devices</span>
+                            <div class="kpi-value" style="color: var(--success-emerald);" id="scKpiTrustedDev">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Untrusted Devices</span>
+                            <div class="kpi-value" style="color: var(--warning-amber);" id="scKpiUntrustedDev">0</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminSessionControlTable">
+                                <thead>
+                                    <tr>
+                                        <th>Identity / Email</th>
+                                        <th>Role</th>
+                                        <th>Organization</th>
+                                        <th>Application</th>
+                                        <th>Login Time</th>
+                                        <th>Duration</th>
+                                        <th>IP Address</th>
+                                        <th>Network Status</th>
+                                        <th>Device</th>
+                                        <th>Device Trust</th>
+                                        <th>Risk</th>
+                                        <th>Status</th>
+                                        <th style="text-align: right;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="13" style="text-align: center; color: var(--text-muted); padding: 32px;">Loading active session security context...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 4: THREAT INVESTIGATION ─────────────── -->
+                <section class="view-section" id="view-admin-threat-investigation">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Threat Investigation</h1>
+                            <p class="view-subtitle">Investigate security events and access anomalies across protected organizations.</p>
+                        </div>
+                        <div class="filter-btn-group" id="adminThreatSeverityFilter">
+                            <button class="filter-btn active" data-filter="ALL">All</button>
+                            <button class="filter-btn" data-filter="CRITICAL">Critical</button>
+                            <button class="filter-btn" data-filter="HIGH">High</button>
+                            <button class="filter-btn" data-filter="MEDIUM">Medium</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminThreatsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Identity</th>
+                                        <th>Event Type</th>
+                                        <th>Factor</th>
+                                        <th>Risk Score</th>
+                                        <th>Severity</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 5: RISK ENGINE ──────────────────────── -->
+                <section class="view-section" id="view-admin-risk-engine">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Risk Engine</h1>
+                            <p class="view-subtitle">Explainable Zero-Trust multi-signal evaluations and deterministic policy decisions.</p>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <span class="kpi-title">Allowed</span>
+                            <div class="kpi-value" style="color: var(--success-emerald);" id="riskAllowedCount">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Step-Up</span>
+                            <div class="kpi-value" style="color: var(--warning-amber);" id="riskStepUpCount">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Blocked</span>
+                            <div class="kpi-value" style="color: var(--danger-red);" id="riskBlockedCount">--</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminRiskTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Identity</th>
+                                        <th>Risk Score</th>
+                                        <th>Risk Level</th>
+                                        <th>Decision</th>
+                                        <th>Reason Codes</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 6: AI SECURITY AGENT ────────────────── -->
+                <section class="view-section" id="view-admin-copilot">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">AI Security Agent</h1>
+                            <p class="view-subtitle">DeepTrust Security Copilot — AI-assisted telemetry analysis (Advisory & Read-Only).</p>
+                        </div>
+                    </div>
+
+                    <div class="copilot-container">
+                        <div class="copilot-chat-pane">
+                            <div class="copilot-header">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary-indigo);"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                <strong style="font-size: 0.88rem;">DeepTrust Security Copilot</strong>
+                                <span class="copilot-badge">Advisory Engine</span>
+                            </div>
+
+                            <div class="copilot-conversation" id="copilotChatBox">
+                                <div class="copilot-message agent">
+                                    <div class="copilot-message-title">DeepTrust Security Copilot</div>
+                                    <p>I am connected directly to your MongoDB security telemetry, verification sessions, and risk evaluations. Ask me to summarize activity, explain blocked authentications, or inspect subsystem health.</p>
+                                </div>
+                            </div>
+
+                            <div class="copilot-suggestions">
+                                <button class="copilot-chip" data-query="Summarize authentication activity from today">Summarize Today's Activity</button>
+                                <button class="copilot-chip" data-query="Why was this authentication blocked?">Explain Blocked Security Events</button>
+                                <button class="copilot-chip" data-query="Which verification services are currently unavailable?">Check Engine Health</button>
+                                <button class="copilot-chip" data-query="Are these face, voice and MFA failures part of the same verification session?">Correlate Multi-Factor Sessions</button>
+                            </div>
+
+                            <form class="copilot-input-bar" id="copilotForm">
+                                <input type="text" id="copilotInput" placeholder="Ask Security Copilot to analyze telemetry..." required>
+                                <button type="submit" class="btn btn-primary" id="copilotSubmitBtn">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                    <span>Analyze</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="copilot-evidence-pane">
+                            <h3 style="font-size: 0.88rem; font-weight: 700; color: #fff;">Evidence & Recommendations</h3>
+                            
+                            <div class="detail-section-title">Telemetry Evidence Items</div>
+                            <div class="evidence-list" id="copilotEvidenceList">
+                                <div class="evidence-item">Awaiting investigation query...</div>
+                            </div>
+
+                            <div class="detail-section-title" style="margin-top: 10px;">Advisory Next Steps</div>
+                            <div class="recommendations-list" id="copilotRecList">
+                                <div class="recommendation-item">
+                                    <span>Select a prompt or ask a security question to receive correlated recommendations.</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: auto; padding: 8px; background-color: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: var(--radius-xs); font-size: 0.7rem; color: var(--warning-amber);">
+                                <strong>Read-Only Guard:</strong> Copilot provides advisory intelligence. Administrative modifications require manual authorization.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 7: SYSTEM HEALTH ────────────────────── -->
+                <section class="view-section" id="view-admin-system-health">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">System Health</h1>
+                            <p class="view-subtitle">Live infrastructure, database, and biometric verification engine health.</p>
+                        </div>
+                    </div>
+
+                    <div class="factor-health-grid" id="adminSystemHealthGrid"></div>
+                </section>
+
+                <!-- ── ADMIN VIEW 8: AUDIT LOGS ───────────────────────── -->
+                <section class="view-section" id="view-admin-audit-logs">
+                    <div class="card" data-audit-integrity-panel style="padding:16px;margin-bottom:16px;">
+                        <strong>Audit Integrity</strong>
+                        <p data-audit-integrity-status role="status">Open Audit Logs to check signed records.</p>
+                        <button type="button" class="btn btn-secondary" data-check-audit-integrity>Check integrity</button>
+                    </div>
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Audit Logs</h1>
+                            <p class="view-subtitle">Per-identity authentication and activity history with signed audit integrity checks.</p>
+                        </div>
+                    </div>
+
+                    <!-- LEVEL 1: IDENTITIES LIST -->
+                    <div id="auditLevelIdentities">
+                        <div style="display: flex; gap: 12px; margin-bottom: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+                            <div style="display: flex; gap: 10px; align-items: center; flex: 1; min-width: 280px; max-width: 500px;">
+                                <input type="text" id="auditIdentitySearchInput" class="filter-search-input" placeholder="Search by email, name, or identity ID..." style="width: 100%; padding: 8px 14px; font-size: 0.84rem; background: var(--bg-surface); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); color: #fff;">
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-secondary" id="auditIdentitiesRefreshBtn" style="padding: 8px 14px; font-size: 0.82rem;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: middle;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                    Refresh
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="auditIdentitiesList" style="display: flex; flex-direction: column; gap: 14px;">
+                            <div class="card" style="text-align: center; color: var(--text-muted); padding: 40px;">
+                                Loading enrolled identity audit directories...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LEVEL 2: IDENTITY SESSION HISTORY -->
+                    <div id="auditLevelIdentityDetail" style="display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                            <button class="btn btn-secondary" id="auditBackToIdentitiesBtn" style="padding: 7px 12px; font-size: 0.82rem;">
+                                ← Back to All Identities
+                            </button>
+                            <div id="auditIdentityDetailBadge" style="display: flex; gap: 8px; align-items: center;"></div>
+                        </div>
+
+                        <div class="card" id="auditIdentitySummaryCard" style="margin-bottom: 16px;">
+                            <!-- Populated dynamically: Identity Info & Stat counters -->
+                        </div>
+
+                        <div class="card" style="margin-bottom: 16px;">
+                            <div class="card-header" style="margin-bottom: 12px;">
+                                <h3 style="font-size: 0.92rem; font-weight: 600; color: #fff;">Recent Connection Context Baseline</h3>
+                            </div>
+                            <div id="auditIdentityRecentContext" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;"></div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                                <h3 style="font-size: 0.92rem; font-weight: 600; color: #fff;">Login Session History</h3>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <select id="auditSessionStatusFilter" style="padding: 5px 10px; font-size: 0.78rem; background: var(--bg-surface); border: 1px solid var(--surface-border); border-radius: var(--radius-sm); color: #fff;">
+                                        <option value="ALL">All Statuses</option>
+                                        <option value="ACTIVE">Active</option>
+                                        <option value="LOGGED_OUT">Logged Out</option>
+                                        <option value="REVOKED">Revoked</option>
+                                        <option value="BLOCKED">Blocked</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="auditIdentitySessionsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Session ID</th>
+                                            <th>Login Time</th>
+                                            <th>Duration</th>
+                                            <th>Device Context</th>
+                                            <th>IP Address</th>
+                                            <th>Network Status</th>
+                                            <th>Device Trust</th>
+                                            <th>Risk</th>
+                                            <th>Status</th>
+                                            <th style="text-align: right;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LEVEL 3: SESSION TIMELINE -->
+                    <div id="auditLevelSessionTimeline" style="display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                            <button class="btn btn-secondary" id="auditBackToSessionsBtn" style="padding: 7px 12px; font-size: 0.82rem;">
+                                ← Back to Session History
+                            </button>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <button class="btn btn-primary" id="auditViewActiveSessionLink" style="display: none; padding: 7px 12px; font-size: 0.82rem;">
+                                    View in Session Control →
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card" id="auditSessionHeaderCard" style="margin-bottom: 16px;">
+                            <!-- Populated dynamically with Connection & Security details -->
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px;">
+                            <!-- Authentication Timeline -->
+                            <div class="card">
+                                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                    <div>
+                                        <h3 style="font-size: 0.92rem; font-weight: 600; color: var(--accent-cyan);">Authentication Timeline</h3>
+                                        <p style="font-size: 0.76rem; color: var(--text-muted); margin: 2px 0 0 0;">Zero-Trust verification pipeline progression (Oldest → Newest)</p>
+                                    </div>
+                                    <span class="status-pill low" id="auditAuthAssuranceBadge">VERIFIED</span>
+                                </div>
+                                <div class="timeline-list" id="auditAuthTimelineList"></div>
+                            </div>
+
+                            <!-- Activity & Security Timeline -->
+                            <div class="card">
+                                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                                    <div>
+                                        <h3 style="font-size: 0.92rem; font-weight: 600; color: #fff;">Session Activity & Audit Stream</h3>
+                                        <p style="font-size: 0.76rem; color: var(--text-muted); margin: 2px 0 0 0;">Security actions and navigation events</p>
+                                    </div>
+                                    <span style="font-size: 0.78rem; color: var(--text-secondary);" id="auditActivityEventCount">0 Events</span>
+                                </div>
+                                <div class="timeline-list" id="auditActivityTimelineList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 9: INTEGRATIONS ─────────────────────── -->
+                <section class="view-section" id="view-admin-integrations">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Integrations</h1>
+                            <p class="view-subtitle">Active data pipelines and external healthcare directory connectors.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminIntegrationsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Integration Name</th>
+                                        <th>Type</th>
+                                        <th>Endpoint</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 10: SETTINGS ────────────────────────── -->
+                <section class="view-section" id="view-admin-settings">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Settings</h1>
+                            <p class="view-subtitle">Platform profile, organization policies, risk rules, and notification preferences.</p>
+                        </div>
+                    </div>
+
+                    <div class="dash-row-equal">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Platform Profile & Cluster</h2>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Deployment Node</span>
+                                    <span style="font-weight: 600; color: var(--accent-cyan);">US-East Security Cluster</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Core Engine Version</span>
+                                    <span style="font-weight: 600; color: #fff;">DeepTrust Zero-Trust 3.0.0</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Biometric Neural Space</span>
+                                    <span style="font-weight: 600; color: var(--success-emerald);">SFace 128-d Cosine Metric</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Risk & Governance Policies</h2>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Auto-Block Threshold</span>
+                                    <span style="font-weight: 600; color: var(--danger-red);">&gt; 85 Risk Score</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>Step-Up Challenge Threshold</span>
+                                    <span style="font-weight: 600; color: var(--warning-amber);">&gt; 40 Risk Score</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>MFA Enforcement</span>
+                                    <span style="font-weight: 600; color: var(--success-emerald);">Mandatory (RFC 6238)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 11: ACCOUNT MANAGEMENT ──────────────── -->
+                <section class="view-section" id="view-admin-accounts">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Account Management</h1>
+                            <p class="view-subtitle">Manage DeepTrust and Healthcare administrator identities, MFA enrollment, and access statuses.</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="btn btn-primary" id="btnOpenCreateAccountModal">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                <span>Create New Account</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <span class="kpi-title">Total Administrators</span>
+                            <div class="kpi-value" id="kpiTotalAccounts">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">DeepTrust Admins</span>
+                            <div class="kpi-value" style="color: var(--primary-indigo);" id="kpiDeeptrustAdmins">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Healthcare Admins</span>
+                            <div class="kpi-value" style="color: var(--accent-cyan);" id="kpiHealthcareAdmins">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Active Accounts</span>
+                            <div class="kpi-value" style="color: var(--success-emerald);" id="kpiActiveAccounts">--</div>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-title">Disabled / Pending</span>
+                            <div class="kpi-value" style="color: var(--warning-amber);" id="kpiDisabledAccounts">--</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 16px;">
+                        <div class="card-header">
+                            <h2 class="card-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                                <span>Administrative Accounts (MongoDB)</span>
+                            </h2>
+                            <button class="btn btn-secondary" id="btnRefreshAccounts" style="padding: 4px 10px; font-size: 0.74rem;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                <span>Refresh</span>
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table" id="adminAccountsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Account Type</th>
+                                        <th>Organization</th>
+                                        <th>Role</th>
+                                        <th>MFA</th>
+                                        <th>Status</th>
+                                        <th>Last Login</th>
+                                        <th>Created At</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 12: MY PROFILE ──────────────────────── -->
+                <section class="view-section" id="view-admin-profile">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">My Profile</h1>
+                            <p class="view-subtitle">Manage personal administrative profile and identity records.</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-card-grid">
+                        <div class="profile-avatar-card">
+                            <div class="profile-large-avatar" id="profileLargeAvatar">AD</div>
+                            <h2 style="font-size: 1.1rem; font-weight: 700; color: #fff;" id="profileCardName">Administrator</h2>
+                            <span class="status-pill verified" id="profileCardRole">DEEPTRUST_ADMIN</span>
+                            <div style="font-size: 0.78rem; color: var(--text-secondary);" id="profileCardEmail">admin@deeptrust.com</div>
+                            <div style="margin-top: 10px; padding: 8px 12px; background: var(--bg-primary); border-radius: var(--radius-xs); border: 1px solid var(--surface-border); width: 100%; font-size: 0.72rem; color: var(--text-muted);">
+                                Organization: <strong style="color: #fff;" id="profileCardOrg">DeepTrust</strong>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Profile Information</h2>
+                            </div>
+                            <form id="formAdminProfile" style="display: flex; flex-direction: column; gap: 14px; padding-top: 6px;">
+                                <div class="form-group-modal">
+                                    <label for="profileInputName">Full Name *</label>
+                                    <input type="text" id="profileInputName" required placeholder="Enter full name">
+                                </div>
+                                <div class="form-group-modal">
+                                    <label for="profileInputEmail">Email Address (Read-Only)</label>
+                                    <input type="email" id="profileInputEmail" readonly disabled style="opacity: 0.7; cursor: not-allowed;">
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">Email is tied to cryptographic identity keys and cannot be altered directly.</span>
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group-modal">
+                                        <label>Account Role</label>
+                                        <input type="text" id="profileInputRole" readonly disabled style="opacity: 0.7; cursor: not-allowed;">
+                                    </div>
+                                    <div class="form-group-modal">
+                                        <label>Organization</label>
+                                        <input type="text" id="profileInputOrg" readonly disabled style="opacity: 0.7; cursor: not-allowed;">
+                                    </div>
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group-modal">
+                                        <label>Account Created</label>
+                                        <input type="text" id="profileInputCreated" readonly disabled style="opacity: 0.7; cursor: not-allowed;">
+                                    </div>
+                                    <div class="form-group-modal">
+                                        <label>Last Login</label>
+                                        <input type="text" id="profileInputLastLogin" readonly disabled style="opacity: 0.7; cursor: not-allowed;">
+                                    </div>
+                                </div>
+
+                                <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                                    <button type="submit" class="btn btn-primary" id="btnSaveProfile">
+                                        <span>Save Profile Changes</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 13: SECURITY SETTINGS ───────────────── -->
+                <section class="view-section" id="view-admin-security">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Security Settings</h1>
+                            <p class="view-subtitle">Manage multi-factor authentication, password policies, and active sessions.</p>
+                        </div>
+                    </div>
+
+                    <div class="security-settings-grid">
+                        <!-- 1. Password Section -->
+                        <div class="security-item-card">
+                            <div class="security-item-header">
+                                <div>
+                                    <div class="security-item-title">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                        <span>Password Security</span>
+                                    </div>
+                                    <div class="security-item-desc">Change administrative password credentials with Argon2id / bcrypt hashing.</div>
+                                </div>
+                            </div>
+                            <form id="formChangePassword" style="display: flex; flex-direction: column; gap: 12px; max-width: 480px;">
+                                <div class="form-group-modal">
+                                    <label for="pwdCurrent">Current Password *</label>
+                                    <input type="password" id="pwdCurrent" required placeholder="Enter current password">
+                                </div>
+                                <div class="form-group-modal">
+                                    <label for="pwdNew">New Password *</label>
+                                    <input type="password" id="pwdNew" required placeholder="Enter new strong password">
+                                    <div class="pass-strength-wrap">
+                                        <div class="pass-strength-bar">
+                                            <div class="pass-strength-fill" id="pwdStrengthFill"></div>
+                                        </div>
+                                        <span style="font-size: 0.7rem; color: var(--text-muted);" id="pwdStrengthText">Strength: None</span>
+                                    </div>
+                                    <div class="pass-requirements-list" id="pwdReqList">
+                                        <span class="pass-req-item" id="req-len">• 8+ characters</span>
+                                        <span class="pass-req-item" id="req-upper">• Uppercase letter</span>
+                                        <span class="pass-req-item" id="req-lower">• Lowercase letter</span>
+                                        <span class="pass-req-item" id="req-num">• Number</span>
+                                        <span class="pass-req-item" id="req-sym">• Special character</span>
+                                    </div>
+                                </div>
+                                <div class="form-group-modal">
+                                    <label for="pwdConfirm">Confirm New Password *</label>
+                                    <input type="password" id="pwdConfirm" required placeholder="Confirm new password">
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary" id="btnSubmitChangePassword">
+                                        <span>Update Password</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 2. MFA Google Authenticator Section -->
+                        <div class="security-item-card">
+                            <div class="security-item-header">
+                                <div>
+                                    <div class="security-item-title">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                        <span>Google Authenticator (RFC 6238 TOTP)</span>
+                                    </div>
+                                    <div class="security-item-desc">Hardware or app-based time-based one-time passwords for zero-trust 2FA.</div>
+                                </div>
+                                <span class="status-pill verified" id="mfaStatusBadge">Active & Enforced</span>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; background: var(--bg-primary); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                                    Unique cryptographically isolated TOTP secret enrolled in MongoDB.
+                                </div>
+                                <button class="btn btn-secondary" id="btnResetMyMfa">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                    <span>Reset Authenticator</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Active Sessions Section -->
+                        <div class="security-item-card">
+                            <div class="security-item-header">
+                                <div>
+                                    <div class="security-item-title">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                        <span>Active Sessions</span>
+                                    </div>
+                                    <div class="security-item-desc">Authenticated sessions currently active in MongoDB.</div>
+                                </div>
+                                <button class="btn btn-danger" id="btnSignOutOtherSessions">
+                                    <span>Sign Out Other Sessions</span>
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="activeSessionsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Session ID</th>
+                                            <th>IP Address</th>
+                                            <th>User Agent / Device</th>
+                                            <th>Created</th>
+                                            <th>Last Active</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── ADMIN VIEW 14: MONTHLY SECURITY REPORTS ────────── -->
+                <section class="view-section" id="view-admin-reports">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-greeting">Monthly Security Report</h1>
+                            <p class="view-subtitle">Monthly counts from stored security events. Explicit demo records are excluded; historical test activity may remain.</p>
+                        </div>
+                    </div>
+
+                    <div class="report-controls-bar">
+                        <div class="report-controls-left">
+                            <div class="form-group-modal" style="min-width: 130px;">
+                                <label for="reportMonthSelect">Month</label>
+                                <select id="reportMonthSelect">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9" selected>September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="form-group-modal" style="min-width: 100px;">
+                                <label for="reportYearSelect">Year</label>
+                                <select id="reportYearSelect">
+                                    <option value="2025">2025</option>
+                                    <option value="2026" selected>2026</option>
+                                    <option value="2027">2027</option>
+                                </select>
+                            </div>
+                            <div style="align-self: flex-end;">
+                                <button class="btn btn-secondary" id="btnGenerateReport">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                                    <span>Aggregate MongoDB</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" id="btnDownloadMonthlyPdf">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="report-preview-sheet" id="reportPreviewArea">
+                        <div class="report-sheet-header">
+                            <div>
+                                <h2 style="font-size: 1.1rem; font-weight: 800; color: #fff;">DeepTrust Security Report</h2>
+                                <p style="font-size: 0.78rem; color: var(--text-secondary);" id="reportPeriodTitle">Reporting Period: September 2026 • Scope: All Organizations</p>
+                            </div>
+                            <div style="text-align: right; font-size: 0.72rem; color: var(--text-muted);" id="reportGeneratedMeta">
+                                Live Aggregation
+                            </div>
+                        </div>
+
+                        <!-- Real Aggregated KPI Metrics Grid -->
+                        <div class="kpi-grid">
+                            <div class="kpi-card">
+                                <span class="kpi-title">Login Attempts</span>
+                                <div class="kpi-value" id="repTotalLogins">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">Successful</span>
+                                <div class="kpi-value" style="color: var(--success-emerald);" id="repSuccessLogins">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">Blocked Security Events</span>
+                                <div class="kpi-value" style="color: var(--danger-red);" id="repBlockedLogins">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">High-Risk Events</span>
+                                <div class="kpi-value" style="color: var(--warning-amber);" id="repHighRisk">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">Face Failures</span>
+                                <div class="kpi-value" style="color: var(--danger-red);" id="repFaceFailures">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">Liveness Failures</span>
+                                <div class="kpi-value" style="color: var(--danger-red);" id="repLivenessFailures">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">Voice Failures</span>
+                                <div class="kpi-value" style="color: var(--danger-red);" id="repVoiceFailures">--</div>
+                            </div>
+                            <div class="kpi-card">
+                                <span class="kpi-title">MFA Verified</span>
+                                <div class="kpi-value" style="color: var(--primary-indigo);" id="repMfaSuccess">--</div>
+                            </div>
+                        </div>
+
+                        <!-- Organization Summary Table -->
+                        <div class="card" style="margin-top: 10px;">
+                            <div class="card-header">
+                                <h3 class="card-title">Organization Breakdown</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="reportOrgSummaryTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Organization</th>
+                                            <th>Total Authentications</th>
+                                            <th>Successful</th>
+                                            <th>Blocked</th>
+                                            <th>Security Events</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── VIEW: ADMIN SESSION CONTROL ───────────────────────── -->
+                
+
+                <!-- ── VIEW: ADMIN AUDIT LOGS ───────────────────────── -->
+                
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         4. RIGHT INVESTIGATION DRAWER
+         ============================================================ -->
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+    <aside class="investigation-drawer" id="investigationDrawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title" id="drawerEventTitle">Security Event Investigation</h2>
+            <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Investigation">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <div class="drawer-body" id="drawerEventBody">
+            <div class="detail-grid">
+                <div class="detail-box">
+                    <span class="detail-box-label">Event ID</span>
+                    <span class="detail-box-value" id="drawerEventId">--</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Severity</span>
+                    <span class="detail-box-value" id="drawerEventSeverity">--</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Identity</span>
+                    <span class="detail-box-value" id="drawerEventIdentity">--</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Decision</span>
+                    <span class="detail-box-value" id="drawerEventDecision">--</span>
+                </div>
+            </div>
+
+            <div>
+                <div class="detail-section-title">Incident Description</div>
+                <p style="font-size: 0.82rem; line-height: 1.45; color: var(--text-secondary);" id="drawerEventDesc">--</p>
+            </div>
+
+            <div>
+                <div class="detail-section-title">Reason Codes</div>
+                <div class="reason-tag-list" id="drawerReasonTags"></div>
+            </div>
+
+            <div>
+                <div class="detail-section-title">Correlated Audit Timeline</div>
+                <div class="timeline-list" id="drawerAuditTimeline"></div>
+            </div>
+        </div>
+
+        <div class="drawer-footer" id="drawerActionsFooter">
+            <button class="btn btn-secondary" id="drawerAcknowledgeBtn">Acknowledge</button>
+            <button class="btn btn-success" id="drawerResolveBtn">Resolve Alert</button>
+        </div>
+    </aside>
+
+    <!-- ============================================================
+         5. RIGHT NOTIFICATIONS DRAWER
+         ============================================================ -->
+    <aside class="notification-drawer" id="notificationDrawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title">Notifications</h2>
+            <button class="drawer-close-btn" id="notifCloseBtn" aria-label="Close Notifications">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="drawer-body" id="notifListBody"></div>
+        <div class="drawer-footer">
+            <button class="btn btn-secondary" id="markAllNotifsReadBtn">Mark All Read</button>
+        </div>
+    </aside>
+
+    <!-- ============================================================
+         6. RIGHT ORGANIZATION DETAILS DRAWER
+         ============================================================ -->
+    <aside class="investigation-drawer" id="orgDetailsDrawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title" id="orgDrawerTitle">Organization Details</h2>
+            <button class="drawer-close-btn" id="orgDrawerCloseBtn" aria-label="Close Details">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="drawer-body" id="orgDrawerBody">
+            <div class="detail-grid">
+                <div class="detail-box">
+                    <span class="detail-box-label">Organization</span>
+                    <span class="detail-box-value" id="orgDetailName">NovaCare Medical Center</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Industry</span>
+                    <span class="detail-box-value" id="orgDetailIndustry">Healthcare Infrastructure</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Security Tier</span>
+                    <span class="detail-box-value" style="color: var(--success-emerald);">Zero-Trust Enforced</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Status</span>
+                    <span class="detail-box-value" style="color: var(--accent-cyan);">Active & Protected</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Verification Policy Configuration</div>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-primary); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Face Recognition</span>
+                        <span style="color: var(--success-emerald); font-weight: 600;">YuNet + SFace (ONNX)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Active Liveness Strictness</span>
+                        <span style="color: #fff; font-weight: 600;">Temporal Landmark Shift</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Voice Acoustic Matching</span>
+                        <span style="color: var(--success-emerald); font-weight: 600;">Dynamic Spectral Energy</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>MFA Method</span>
+                        <span style="color: var(--primary-indigo); font-weight: 600;">RFC 6238 TOTP (Mandatory)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Risk Engine Auto-Block</span>
+                        <span style="color: var(--danger-red); font-weight: 600;">Score &gt; 85</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Connected Healthcare Nodes</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-primary); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                    <div>• <strong>Campus Emergency Workstation Node:</strong> 127.0.0.1:27017</div>
+                    <div style="margin-top: 4px;">• <strong>Clinical Ward Access Portal:</strong> Protected under DeepTrust Gateway</div>
+                    <div style="margin-top: 4px;">• <strong>Telemetry Persistence:</strong> MongoDB <code>deeptrust</code> Database</div>
+                </div>
+            </div>
+        </div>
+        <div class="drawer-footer">
+            <button class="btn btn-secondary" id="orgDrawerCloseFooterBtn">Close</button>
+        </div>
+    </aside>
+
+    <!-- ============================================================
+         6b. RIGHT SESSION SECURITY DETAILS DRAWER
+         ============================================================ -->
+    <aside class="investigation-drawer" id="sessionDetailsDrawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title" id="sessionDrawerTitle">Session Security Details</h2>
+            <button class="drawer-close-btn" id="sessionDrawerCloseBtn" aria-label="Close Details">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="drawer-body" id="sessionDrawerBody">
+            <div class="detail-grid">
+                <div class="detail-box">
+                    <span class="detail-box-label">Identity</span>
+                    <span class="detail-box-value" id="sdIdentityEmail" style="word-break: break-all;">--</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Role</span>
+                    <span class="detail-box-value" id="sdIdentityRole">--</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Organization</span>
+                    <span class="detail-box-value" id="sdOrgName">--</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-box-label">Application</span>
+                    <span class="detail-box-value" id="sdAppName">NovaCare Staff Portal</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Session Lifecycle</div>
+                <div class="detail-grid">
+                    <div class="detail-box">
+                        <span class="detail-box-label">Session ID</span>
+                        <span class="detail-box-value" id="sdSessionId" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Status</span>
+                        <span class="detail-box-value" id="sdSessionStatus">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Login Time</span>
+                        <span class="detail-box-value" id="sdLoginTime">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Last Activity</span>
+                        <span class="detail-box-value" id="sdLastActivity">--</span>
+                    </div>
+                    <div class="detail-box"><span class="detail-box-label">Duration</span><span class="detail-box-value" id="sdDuration">00:00:00</span></div>
+                    <div class="detail-box"><span class="detail-box-label">Logout Time</span><span class="detail-box-value" id="sdLogoutTime">Not recorded</span></div>
+                    <div class="detail-box"><span class="detail-box-label">Current Section</span><span class="detail-box-value" id="sdCurrentView">Not recorded</span></div>
+
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Network Context</div>
+                <div class="detail-grid">
+                    <div class="detail-box">
+                        <span class="detail-box-label">IP Address</span>
+                        <span class="detail-box-value" id="sdIpAddress" style="font-family: var(--font-mono);">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Network Status</span>
+                        <span class="detail-box-value" id="sdNetworkStatus">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">First Seen</span>
+                        <span class="detail-box-value" id="sdFirstSeen">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Network Changed</span>
+                        <span class="detail-box-value" id="sdNetworkChanged">NO</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Device Context</div>
+                <div class="detail-grid">
+                    <div class="detail-box">
+                        <span class="detail-box-label">Browser</span>
+                        <span class="detail-box-value" id="sdBrowser">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Operating System</span>
+                        <span class="detail-box-value" id="sdOs">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Device Category</span>
+                        <span class="detail-box-value" id="sdDeviceCategory">DESKTOP</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Device Trust</span>
+                        <span class="detail-box-value" id="sdDeviceTrust">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Authentication Assurance</div>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-primary); padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Credentials</span>
+                        <span id="sdAssuranceCreds" style="color: var(--success-emerald); font-weight: 600;">VERIFIED</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Face Recognition</span>
+                        <span id="sdAssuranceFace" style="color: var(--success-emerald); font-weight: 600;">VERIFIED</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Liveness Verification</span>
+                        <span id="sdAssuranceLiveness" style="color: var(--success-emerald); font-weight: 600;">VERIFIED</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Voice Acoustic Matching</span>
+                        <span id="sdAssuranceVoice" style="color: var(--success-emerald); font-weight: 600;">VERIFIED</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Authenticator MFA</span>
+                        <span id="sdAssuranceMfa" style="color: var(--primary-indigo); font-weight: 600;">VERIFIED</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--surface-border); padding-top: 6px; margin-top: 2px;">
+                        <span style="font-weight: 600; color: #fff;">Final Access</span>
+                        <span id="sdAssuranceFinal" style="color: var(--success-emerald); font-weight: 700;">GRANTED</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <div class="detail-section-title">Security & Risk Evaluation</div>
+                <div class="detail-grid">
+                    <div class="detail-box">
+                        <span class="detail-box-label">Risk Score</span>
+                        <span class="detail-box-value" id="sdRiskScore" style="font-weight: 700;">--</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-box-label">Risk Level</span>
+                        <span class="detail-box-value" id="sdRiskLevel">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="session-behavior-panel"><div class="detail-section-title">Mouse, Scroll &amp; Swipe Monitoring</div><div id="sdBehavior">Waiting for interaction signals</div></div>
+        <div class="drawer-footer" style="display: flex; justify-content: space-between; gap: 10px;">
+            <button class="btn btn-secondary" id="sessionDrawerViewAuditBtn" style="flex: 1;">View Audit</button>
+            <button class="btn btn-danger" id="sessionDrawerRevokeBtn" style="flex: 1; background: rgba(239, 68, 68, 0.15); color: var(--danger-red); border: 1px solid rgba(239, 68, 68, 0.3);">Revoke Session</button>
+        </div>
+    </aside>
+
+    <!-- ============================================================
+         7. ADMIN MODALS (CREATE ACCOUNT, QR ENROLLMENT, REMOVE)
+         ============================================================ -->
+
+    <!-- Modal 1: Create New Account -->
+    <div class="modal-backdrop" id="createAccountModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                    <span>Create New Account</span>
+                </h3>
+                <button class="modal-close-btn" id="btnCloseCreateModal" aria-label="Close modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <form id="formCreateAccount">
+                <div class="modal-body">
+                    <div class="form-group-modal">
+                        <label for="modalAccFullName">Full Name *</label>
+                        <input type="text" id="modalAccFullName" required placeholder="e.g. Dr. Alex Morgan">
+                    </div>
+
+                    <div class="form-group-modal">
+                        <label for="modalAccEmail">Real Email Address *</label>
+                        <input type="email" id="modalAccEmail" required placeholder="name@company.com or name@hospital.org">
+                        <span style="font-size: 0.68rem; color: var(--text-muted);">Standard email formats permitted. Indexed uniquely in MongoDB.</span>
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group-modal">
+                            <label for="modalAccType">Account Type *</label>
+                            <select id="modalAccType" required>
+                                <option value="DEEPTRUST_ADMIN">DeepTrust Admin</option>
+                                <option value="HEALTHCARE_ADMIN" selected>Healthcare Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group-modal">
+                            <label for="modalAccOrg">Organization *</label>
+                            <select id="modalAccOrg" required>
+                                <option value="NovaCare Medical Center">NovaCare Medical Center</option>
+                                <option value="DeepTrust" style="display: none;">DeepTrust</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group-modal">
+                        <label for="modalAccRole">Role *</label>
+                        <select id="modalAccRole" required>
+                            <option value="HOSPITAL_ADMIN">Hospital Administrator</option>
+                            <option value="SECURITY_ANALYST">Security Analyst</option>
+                            <option value="ADMIN">System Administrator</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group-modal">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label for="modalAccPassword">Password *</label>
+                            <button type="button" class="btn-text-link" id="btnToggleCreatePass" style="background: none; border: none; color: var(--accent-cyan); font-size: 0.72rem; cursor: pointer;">Show Password</button>
+                        </div>
+                        <input type="password" id="modalAccPassword" required placeholder="Enter strong password">
+                        <div class="pass-strength-wrap">
+                            <div class="pass-strength-bar">
+                                <div class="pass-strength-fill" id="modalPassStrengthFill"></div>
+                            </div>
+                            <span style="font-size: 0.7rem; color: var(--text-muted);" id="modalPassStrengthText">Strength: None</span>
+                        </div>
+                        <div class="pass-requirements-list" id="modalPassReqs">
+                            <span class="pass-req-item" id="mreq-len">• 8+ characters</span>
+                            <span class="pass-req-item" id="mreq-upper">• Uppercase letter</span>
+                            <span class="pass-req-item" id="mreq-lower">• Lowercase letter</span>
+                            <span class="pass-req-item" id="mreq-num">• Number</span>
+                            <span class="pass-req-item" id="mreq-sym">• Special character</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group-modal">
+                        <label for="modalAccConfirmPassword">Confirm Password *</label>
+                        <input type="password" id="modalAccConfirmPassword" required placeholder="Confirm password">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnCancelCreateModal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btnSubmitCreateAccount">
+                        <span>Create & Proceed to 2FA Setup</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 2: Google Authenticator Enrollment (RFC 6238 TOTP) -->
+    <div class="modal-backdrop" id="qrEnrollmentModal">
+        <div class="modal-card" style="max-width: 480px;">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>Secure Your Account</span>
+                </h3>
+                <button class="modal-close-btn" id="btnCloseQrModal" aria-label="Close modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="font-size: 0.84rem; color: var(--text-primary); line-height: 1.4;">
+                    <strong>Step 1:</strong> Open <strong>Google Authenticator</strong> (or any RFC 6238 TOTP app) on your device.
+                </div>
+
+                <div style="font-size: 0.84rem; color: var(--text-primary); line-height: 1.4;">
+                    <strong>Step 2:</strong> Scan this QR code to register your DeepTrust account.
+                </div>
+
+                <div class="qr-enrollment-box">
+                    <img id="qrCodeImg" class="qr-code-img" src="" alt="Google Authenticator QR Code">
+                    <div style="font-size: 0.72rem; color: var(--text-muted);">
+                        Or enter this secret key manually:
+                    </div>
+                    <div class="totp-secret-text" id="qrSecretKeyDisplay">XXXX-XXXX-XXXX-XXXX</div>
+                </div>
+
+                <div style="font-size: 0.84rem; color: var(--text-primary); line-height: 1.4;">
+                    <strong>Step 3:</strong> Enter the 6-digit code currently shown in your Authenticator app.
+                </div>
+
+                <form id="formConfirmTotp">
+                    <div class="totp-input-row" id="enrollmentOtpContainer">
+                        <input type="text" class="totp-input-digit" maxlength="1" pattern="\d" required autocomplete="off">
+                        <input type="text" class="totp-input-digit" maxlength="1" pattern="\d" required autocomplete="off">
+                        <input type="text" class="totp-input-digit" maxlength="1" pattern="\d" required autocomplete="off">
+                        <input type="text" class="totp-input-digit" maxlength="1" pattern="\d" required autocomplete="off">
+                        <input type="text" class="totp-input-digit" maxlength="1" pattern="\d" required autocomplete="off">
+                        <input type="text" class="totp-input-digit" maxlength="1" pattern="\d" required autocomplete="off">
+                    </div>
+
+                    <div style="margin-top: 16px;">
+                        <button type="submit" class="btn btn-primary" id="btnVerifyAndEnableMfa" style="width: 100%; height: 40px;">
+                            <span>Verify & Enable 2FA</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Remove Account Confirmation -->
+    <div class="modal-backdrop" id="removeAccountModal">
+        <div class="modal-card" style="max-width: 440px;">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--danger-red);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span>Remove Account?</span>
+                </h3>
+                <button class="modal-close-btn" id="btnCloseRemoveModal" aria-label="Close modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.85rem; color: var(--text-primary);">
+                    Are you sure you want to remove account: <strong id="removeAccountEmailTarget" style="color: var(--danger-red);">user@hospital.com</strong>?
+                </p>
+                <div style="padding: 10px 12px; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: var(--radius-xs); font-size: 0.76rem; color: #fca5a5;">
+                    This account will immediately lose access to DeepTrust-protected resources and all active sessions will be revoked.
+                </div>
+
+                <div class="form-group-modal" style="margin-top: 6px;">
+                    <label for="removeConfirmInput">Type <strong style="color: #fff;">REMOVE</strong> to confirm:</label>
+                    <input type="text" id="removeConfirmInput" placeholder="REMOVE" autocomplete="off">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnCancelRemoveModal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="btnExecuteRemoveAccount" disabled>
+                    <span>Remove Account</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Session Security Context Detail -->
+    <div class="modal-backdrop" id="securityContextModal">
+        <div class="modal-card" style="max-width: 580px;">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <span>Session Security Context</span>
+                </h3>
+                <button class="modal-close-btn" id="btnCloseSecurityContextModal" aria-label="Close modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body" id="securityContextModalBody">
+                <p style="text-align: center; color: var(--text-muted); padding: 20px;">Loading security context details...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnDismissSecurityContextModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Controller -->
+    <script type="module" src="js/dashboard.js?v=20261010-toast1"></script>
+</body>
+
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepTrust — Identity Security Platform</title>
+    <meta name="description" content="DeepTrust Zero-Trust Identity Security Platform — Multi-factor biometric authentication for enterprise environments.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- DeepTrust Dark Theme Design System -->
+    <link rel="stylesheet" href="css/dt_dark.css?v=20261006-corporate-blue1">
+    <link rel="stylesheet" href="css/professional-motion.css?v=20261006-login-visible1">
+    <link rel="stylesheet" href="css/enterprise-palette.css?v=20261006-corporate-blue1">
+    <link rel="stylesheet" href="css/studio-experience.css?v=20261007-studio1">
+    <script defer src="js/studio-experience.js?v=20261007-studio1"></script>
+    <link rel="stylesheet" href="css/login-stage-polish.css?v=20261007-1">
+    <script src="js/login-stage-polish.js?v=20261007-1" defer></script>
+    <link rel="stylesheet" href="css/fixed-workspace.css?v=20261007-1">
+    <link rel="stylesheet" href="css/obsidian-reference.css?v=20261007-voice4">
+    <link rel="stylesheet" href="css/deeptrust-editorial-2026.css?v=20261008-reference3">
+    <link rel="stylesheet" href="css/deeptrust-stage-motion.css?v=1">
+    <script defer src="js/deeptrust-stage-motion.js?v=1"></script>
+    <script defer src="js/deeptrust-editorial-2026.js?v=1"></script>
+    <link rel="stylesheet" href="css/startup-editorial.css?v=20261009-1">
+</head>
+<body class="dt-studio dt-obsidian dt-editorial">
+
+    <!-- ============================================================
+         STARTUP INTRO — 1% → 100% PREMIUM BOOT SEQUENCE
+         ============================================================ -->
+    <div id="dt-startup-intro">
+        <div class="dt-intro-inner">
+            <!-- Shield Logo -->
+            <div class="dt-intro-shield-wrap">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
+
+            <!-- Brand -->
+            <div class="dt-intro-brand">DeepTrust</div>
+            <div class="dt-intro-platform">Identity Security Platform</div>
+
+            <!-- Taglines -->
+            <div class="dt-intro-taglines">
+                <div class="dt-intro-tag1">Trust Every Identity.</div>
+                <div class="dt-intro-tag2">Secure Every Access.</div>
+            </div>
+
+            <div class="dt-intro-init-label">Initializing Secure Identity Environment</div>
+
+            <!-- Security Stage Indicators -->
+            <div class="dt-intro-stages">
+                <div class="dt-intro-stage" id="intro-stage-1">
+                    <div class="dt-intro-stage-dot">01</div>
+                    <span class="dt-intro-stage-name">Credentials</span>
+                </div>
+                <div class="dt-intro-stage" id="intro-stage-2">
+                    <div class="dt-intro-stage-dot">02</div>
+                    <span class="dt-intro-stage-name">Face</span>
+                </div>
+                <div class="dt-intro-stage" id="intro-stage-3">
+                    <div class="dt-intro-stage-dot">03</div>
+                    <span class="dt-intro-stage-name">Liveness</span>
+                </div>
+                <div class="dt-intro-stage" id="intro-stage-4">
+                    <div class="dt-intro-stage-dot">04</div>
+                    <span class="dt-intro-stage-name">Voice</span>
+                </div>
+                <div class="dt-intro-stage" id="intro-stage-5">
+                    <div class="dt-intro-stage-dot">05</div>
+                    <span class="dt-intro-stage-name">Authenticator</span>
+                </div>
+                <div class="dt-intro-stage" id="intro-stage-6">
+                    <div class="dt-intro-stage-dot">06</div>
+                    <span class="dt-intro-stage-name">Risk</span>
+                </div>
+                <div class="dt-intro-stage" id="intro-stage-7">
+                    <div class="dt-intro-stage-dot">07</div>
+                    <span class="dt-intro-stage-name">Access</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="dt-intro-progress-wrap">
+                <div class="dt-intro-progress-status">
+                    <span class="dt-intro-progress-label">Securing Environment</span>
+                    <span class="dt-intro-progress-pct" id="dt-intro-percent">1%</span>
+                </div>
+                <div class="dt-intro-progress-track">
+                    <div class="dt-intro-progress-fill" id="dt-intro-bar" style="width:1%"></div>
+                </div>
+            </div>
+
+            <!-- Ready message -->
+            <div class="dt-intro-ready" id="dt-intro-ready">
+                ✓ DeepTrust Ready — Secure Environment Initialized
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================================
+         MAIN SPLIT-SCREEN APPLICATION SHELL
+         ============================================================ -->
+    <div class="app-shell" id="app-shell">
+
+        <!-- ── LEFT: BRAND + CAPABILITIES ── -->
+        <aside class="brand-panel">
+            <div>
+                <!-- Brand Header -->
+                <div class="brand-header">
+                    <div class="brand-logo-badge">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="brand-header-text">
+                        <h1>DeepTrust</h1>
+                        <span>Identity Security Platform</span>
+                    </div>
+                </div>
+
+                <span class="studio-edition">DEEPTRUST / PLATFORM</span>
+                <!-- Hero Section -->
+                <div class="brand-hero">
+                    <div class="studio-eyebrow">Enterprise identity security</div>
+                    <h2 class="brand-hero-title">Trust, without<br><span class="text-gradient">compromise.</span></h2>
+                    <p class="brand-hero-desc">One secure workspace. Every identity verified.<br>Built for the teams that protect what matters.</p><div class="studio-scene" aria-hidden="true">
+  <img class="studio-sculpture" src="assets/trust-sculpture.svg" alt="" width="640" height="460" fetchpriority="high">
+  <div class="studio-scene-tag face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3H3v4m14-4h4v4M3 17v4h4m14-4v4h-4"/><circle cx="12" cy="12" r="4"/></svg>Face identity</div>
+  <div class="studio-scene-tag voice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10v4m4-7v10m4-13v16m4-13v10m4-7v4"/></svg>Voice identity</div>
+  <div class="studio-scene-tag mfa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Authenticator MFA</div>
+</div>
+                </div>
+
+                <!-- 4 Capability Cards -->
+                <div class="capability-grid">
+                    <div class="capability-card">
+                        <div class="capability-icon-wrap">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+                                <path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+                                <circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/>
+                                <path d="M10 15c.8.6 1.8.8 2 .8s1.2-.2 2-.8"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="capability-title">Face Identity</div>
+                            <div class="capability-desc">Real-time face detection and enrolled identity matching.</div>
+                        </div>
+                    </div>
+
+                    <div class="capability-card">
+                        <div class="capability-icon-wrap">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="capability-title">Voice Identity</div>
+                            <div class="capability-desc">Speaker verification using enrolled voice profiles.</div>
+                        </div>
+                    </div>
+
+                    <div class="capability-card">
+                        <div class="capability-icon-wrap">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="capability-title">Active Liveness</div>
+                            <div class="capability-desc">Live presence checks during authentication.</div>
+                        </div>
+                    </div>
+
+                    <div class="capability-card">
+                        <div class="capability-icon-wrap">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="capability-title">Authenticator MFA</div>
+                            <div class="capability-desc">Time-based one-time-password verification.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verification Pipeline -->
+                <div class="pipeline-container">
+                    <div class="pipeline-label">Verification Pipeline</div>
+                    <div class="pipeline-nodes">
+                        <span class="pipeline-node active" id="pipe-credentials">Credentials</span>
+                        <span class="pipeline-arrow">→</span>
+                        <span class="pipeline-node" id="pipe-face">Face</span>
+                        <span class="pipeline-arrow">→</span>
+                        <span class="pipeline-node" id="pipe-liveness">Liveness</span>
+                        <span class="pipeline-arrow">→</span>
+                        <span class="pipeline-node" id="pipe-voice">Voice</span>
+                        <span class="pipeline-arrow">→</span>
+                        <span class="pipeline-node" id="pipe-mfa">Authenticator</span>
+                        <span class="pipeline-arrow">→</span>
+                        <span class="pipeline-node" id="pipe-risk">Risk</span>
+                        <span class="pipeline-arrow">→</span>
+                        <span class="pipeline-node" id="pipe-access">Access</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Status -->
+            <footer class="brand-footer">
+                <span>Protected by DeepTrust</span>
+                <div class="status-indicator-group" id="system-status-indicators">
+                    <span class="status-badge">
+                        <span class="status-dot" id="dot-api"></span>
+                        <span id="text-api">API Online</span>
+                    </span>
+                    <span class="status-badge">
+                        <span class="status-dot" id="dot-db"></span>
+                        <span id="text-db">Database Online</span>
+                    </span>
+                </div>
+            </footer>
+        </aside>
+
+
+        <!-- ── RIGHT: AUTHENTICATION PANEL ── -->
+        <main class="auth-panel">
+            <div class="auth-panel-inner">
+                <div class="studio-auth-caption"><span>Welcome to your secure workspace</span><span>IDENTITY / ACCESS</span></div>
+
+                <!-- VIEW 1: PORTAL SELECTION -->
+                <section class="auth-view active" id="view-portal-select">
+                    <div class="portal-access-card">
+                        <header class="view-header">
+                            <h2 class="view-title">Secure Access</h2>
+                            <p class="view-subtitle">Choose the workspace you are authorized to access.</p>
+                        </header>
+
+                        <div class="portal-cards-list">
+                            <!-- Healthcare Organization option removed per requirements -->
+                            <!-- DeepTrust Security Console -->
+                            <div class="portal-selectable-card" id="portal-card-admin" data-portal="DEEPTRUST_OWNER">
+                                <div class="portal-icon-container">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                        <path d="m9 12 2 2 4-4"/>
+                                    </svg>
+                                </div>
+                                <div class="portal-card-body">
+                                    <div class="portal-card-title-row">
+                                        <h3 class="portal-card-title">DeepTrust Security Console</h3>
+                                    </div>
+                                    <div class="portal-card-subtitle">Platform Administration</div>
+                                    <p class="portal-card-desc">Manage security services, system health and access policies.</p>
+                                    <div class="portal-card-footer">
+                                        <span class="portal-domain-tag">deeptrust.demo</span>
+                                        <span class="portal-action-link" id="action-text-admin">
+                                            <span>Continue</span>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portal-footer-security">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <span>Secure authentication session</span>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 2: LOGIN -->
+                <section class="auth-view" id="view-login">
+                    <div class="portal-access-card">
+                        <div class="portal-context-bar" id="login-portal-bar">
+                            <span class="portal-context-pill" id="login-portal-name">DeepTrust Security Console</span>
+                            <button type="button" class="btn-text-link" id="btn-change-portal">Change Portal</button>
+                        </div>
+
+                        <header class="view-header">
+                            <h2 class="view-title" id="login-title">Sign in to DeepTrust</h2>
+                            <p class="view-subtitle">Use your work email and password to start secure verification.</p>
+                        </header>
+
+                        <form id="form-login" autocomplete="off">
+                            <div class="form-group">
+                                <label class="form-label" for="input-email">Institutional Email</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    </span>
+                                    <input type="email" id="input-email" class="form-input" placeholder="admin@organization.demo" required autocomplete="username">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="label-row">
+                                    <label class="form-label" for="input-password">Password</label>
+                                    <button type="button" class="btn-text-link" data-switch-view="forgot-password">Forgot Password?</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    </span>
+                                    <input type="password" id="input-password" class="form-input" placeholder="Enter your security password" required autocomplete="current-password">
+                                    <button type="button" class="btn-toggle-password" id="btn-toggle-password" title="Toggle password visibility">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-options-row">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="checkbox-remember" checked>
+                                    <span>Remember this workstation</span>
+                                </label>
+                            </div>
+
+                            <div id="login-error-msg" style="display:none; color:#f87171; font-size:13px; margin-bottom:14px; background:rgba(239,68,68,0.1); padding:10px 14px; border-radius:8px; border:1px solid rgba(239,68,68,0.2);"></div>
+
+                            <button type="submit" class="btn-primary" id="btn-submit-login">
+                                <span id="login-btn-text">Authenticate Credentials</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </button>
+
+                            <!-- DeepTrust Admin account creation (only shown for admin portal) -->
+                            <div id="deeptrust-register-option" style="display:none; text-align:center; margin-top:18px; font-size:13px; color:var(--text-secondary); border-top:1px solid var(--surface-border); padding-top:14px;">
+                                <span>Don't have an admin account?</span><br>
+                                <button type="button" class="btn-text-link" id="btn-goto-register" style="margin-top:6px; font-weight:700; font-size:13px; color:var(--accent-cyan);">Create New Account</button>
+                            </div>
+                        </form>
+                        <!-- Demo credentials intentionally omitted -->
+                    </div>
+                </section>
+
+
+                <!-- VIEW 2B: CREATE ADMIN ACCOUNT -->
+                <section class="auth-view" id="view-admin-register">
+                    <div class="portal-access-card">
+                        <header class="view-header">
+                            <h2 class="view-title">Create Admin Account</h2>
+                            <p class="view-subtitle">Register a new official DeepTrust Platform Administrator account.</p>
+                        </header>
+
+                        <form id="form-admin-register" autocomplete="off">
+                            <div class="form-group">
+                                <label class="form-label" for="input-reg-fullname">Full Name *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                                    <input type="text" id="input-reg-fullname" class="form-input" placeholder="e.g. Alex Johnson" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-reg-email">Official Email Address *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+                                    <input type="email" id="input-reg-email" class="form-input" placeholder="admin@deeptrust.com" required>
+                                </div>
+                                <span class="input-hint">Enter your real, official email address</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-reg-password">Password *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                                    <input type="password" id="input-reg-password" class="form-input" placeholder="Minimum 8 characters" required minlength="8">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-reg-confirm-password">Confirm Password *</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                                    <input type="password" id="input-reg-confirm-password" class="form-input" placeholder="Re-enter password" required minlength="8">
+                                </div>
+                            </div>
+                            <div id="register-error-msg" style="display:none; color:#f87171; font-size:13px; margin-bottom:12px; background:rgba(239,68,68,0.1); padding:10px 14px; border-radius:8px; border:1px solid rgba(239,68,68,0.2);"></div>
+                            <button type="submit" class="btn-primary" id="btn-submit-register">
+                                <span id="register-btn-text">Create Account</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </button>
+                            <div style="text-align:center; margin-top:16px;">
+                                <button type="button" class="btn-text-link" id="btn-back-to-login">← Back to Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 2C: EMAIL VERIFICATION -->
+                <section class="auth-view" id="view-email-verify">
+                    <div class="portal-access-card">
+                        <header class="view-header" style="text-align:center;">
+                            <div style="width:48px;height:48px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:var(--accent-cyan);">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            </div>
+                            <h2 class="view-title">VERIFY YOUR EMAIL</h2>
+                            <p id="email-delivery-heading" class="view-subtitle" style="margin-top:6px;">Verify this email address:</p>
+                            <div id="email-masked-display" style="font-weight:700;color:var(--accent-cyan);font-size:15px;margin-top:6px;font-family:'JetBrains Mono',monospace;">s*****@example.com</div>
+                        </header>
+
+                        <form id="form-email-verify" autocomplete="off" style="margin-top:20px;">
+                            <div class="otp-container" id="email-otp-container">
+                                <input type="text" class="otp-box email-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box email-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box email-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box email-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box email-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box email-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                            </div>
+
+                            <div id="email-verify-error-msg" style="display:none;color:#f87171;font-size:13px;margin-top:14px;text-align:center;background:rgba(239,68,68,0.1);padding:10px 14px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);"></div>
+                            <div id="email-verify-status-msg" style="display:none;color:var(--accent-cyan);font-size:13px;margin-top:14px;text-align:center;background:rgba(56,189,248,0.1);padding:10px 14px;border-radius:8px;border:1px solid rgba(56,189,248,0.2);"></div>
+
+                            <button type="submit" class="btn-primary" id="btn-submit-verify-email" style="margin-top:18px;">
+                                <span id="verify-email-btn-text">Verify Email</span>
+                            </button>
+
+                            <button type="button" class="btn-primary" id="btn-proceed-mfa-direct" style="margin-top:12px;background:linear-gradient(135deg,#6366f1 0%,#4f46e5 100%);display:none;">
+                                <span>Proceed to Google Authenticator Setup →</span>
+                            </button>
+
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;">
+                                <button type="button" class="btn-text-link" id="btn-resend-email-code">Resend Code</button>
+                                <button type="button" class="btn-text-link" id="btn-email-verify-back">← Back to Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 2D: MFA SETUP -->
+                <section class="auth-view" id="view-mfa-setup">
+                    <div class="portal-access-card">
+                        <header class="view-header" style="text-align:center;">
+                            <div style="width:48px;height:48px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:#818cf8;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            </div>
+                            <h2 class="view-title">Protect Your Account</h2>
+                            <p class="view-subtitle" style="margin-top:4px;">Set up Google Authenticator MFA</p>
+                        </header>
+
+                        <div style="background:rgba(15,23,42,0.7);border:1px solid var(--surface-border);border-radius:8px;padding:16px;margin-top:14px;">
+                            <ol style="margin:0;padding-left:20px;font-size:13px;color:var(--text-secondary);line-height:1.7;">
+                                <li>Open <strong>Google Authenticator</strong></li>
+                                <li>Scan this QR code</li>
+                                <li>Enter the 6-digit code shown in the app</li>
+                            </ol>
+                            <div style="text-align:center;margin:16px 0 10px 0;">
+                                <img id="mfa-qr-code-img" src="" alt="Google Authenticator QR Code" style="width:170px;height:170px;border-radius:8px;border:2px solid var(--accent-cyan);padding:6px;background:white;box-shadow:0 0 15px rgba(56,189,248,0.2);">
+                            </div>
+                        </div>
+
+                        <form id="form-mfa-setup-confirm" autocomplete="off" style="margin-top:16px;">
+                            <div class="otp-container" id="totp-setup-otp-container">
+                                <input type="text" class="otp-box totp-setup-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box totp-setup-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box totp-setup-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box totp-setup-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box totp-setup-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box totp-setup-otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                            </div>
+                            <div id="mfa-setup-error-msg" style="display:none;color:#f87171;font-size:13px;margin-top:14px;text-align:center;background:rgba(239,68,68,0.1);padding:10px 14px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);"></div>
+                            <button type="submit" class="btn-primary" id="btn-submit-mfa-setup" style="margin-top:18px;">
+                                <span id="mfa-setup-btn-text">Verify & Enable Authenticator</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 3: FORGOT PASSWORD -->
+                <section class="auth-view" id="view-forgot-password">
+                    <div class="portal-access-card">
+                        <header class="view-header">
+                            <h2 class="view-title">Password Recovery</h2>
+                            <p class="view-subtitle">Enter your registered institutional email to receive recovery instructions.</p>
+                        </header>
+                        <form id="form-forgot-password">
+                            <div class="form-group">
+                                <label class="form-label" for="input-forgot-email">Account Email</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+                                    <input type="email" id="input-forgot-email" class="form-input" placeholder="admin@organization.demo" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">
+                                <span>Send Reset Link</span>
+                            </button>
+                            <div style="text-align:center;margin-top:16px;">
+                                <a href="#" class="btn-text-link" data-switch-view="login">← Back to Sign In</a>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 4: FACE + LIVENESS -->
+                <section class="auth-view" id="view-verify">
+                    <div class="portal-access-card voice-card-wide">
+                        <!-- ONE-ROW STEPPER -->
+                        <div class="voice-stepper-row">
+                            <div class="vstep vstep-done">
+                                <div class="vstep-circle done">✓</div>
+                                <span class="vstep-label">Account</span>
+                            </div>
+                            <div class="vstep-line done"></div>
+                            <div class="vstep vstep-active">
+                                <div class="vstep-circle active">2</div>
+                                <span class="vstep-label active">Face</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">3</div>
+                                <span class="vstep-label">Voice</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">4</div>
+                                <span class="vstep-label">MFA</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">5</div>
+                                <span class="vstep-label">Complete</span>
+                            </div>
+                        </div>
+
+                        <header class="view-header" style="text-align:center;margin-bottom:14px;">
+                            <h2 class="view-title" style="font-size:18px;">Verify your face</h2>
+                            <p class="view-subtitle" style="font-size:12px;">Look straight at the camera. Keep your face visible in good lighting.</p>
+                        </header>
+
+                        <!-- Live Camera -->
+                        <div class="camera-container">
+                            <video id="webcam-feed" class="camera-feed" autoplay muted playsinline></video>
+                            <div class="camera-overlay-layer">
+                                <div id="face-bounding-box" class="face-bounding-box" style="display: none !important;"></div>
+                                <canvas id="faceCanvas" class="camera-feed" style="position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; background: transparent;"></canvas>
+                            </div>
+                            <div class="camera-permission-box" id="camera-permission-box">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan);">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                                <div style="font-size:13px;font-weight:700;color:#fff;">Camera Access Required</div>
+                                <p>Allow camera access so we can check your face and live presence.</p>
+                                <button type="button" class="btn-primary" id="btn-enable-camera" style="width:auto;padding:0 20px;height:36px;font-size:12px;">Enable Camera</button>
+                            </div>
+                            <div class="camera-status-badge" id="camera-status-badge">Camera Ready — Waiting for Face</div>
+                        </div>
+
+                        <!-- Liveness Challenge -->
+                        <div class="liveness-challenge-box" id="liveness-challenge-box">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-indigo);">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
+                            <div>
+                                <div style="font-size:9px;text-transform:uppercase;color:#818cf8;font-weight:700;">Live presence check</div>
+                                <div id="liveness-challenge-text" style="font-size:12px;font-weight:600;color:#fff;">Look straight at the camera and hold still.</div>
+                            </div>
+                        </div>
+
+                        <!-- Verification Checks -->
+                        <div class="verification-checks-grid">
+                            <div class="verification-check-card" id="check-face-presence">
+                                <span class="check-card-label">Face Presence</span>
+                                <span class="check-card-status waiting">Waiting</span>
+                            </div>
+                            <div class="verification-check-card" id="check-identity-match">
+                                <span class="check-card-label">Identity Match</span>
+                                <span class="check-card-status waiting">Waiting</span>
+                            </div>
+                            <div class="verification-check-card" id="check-liveness">
+                                <span class="check-card-label">Liveness</span>
+                                <span class="check-card-status waiting">Waiting</span>
+                            </div>
+                        </div>
+
+                        <form id="form-biometric-setup" style="display:none;margin:12px 0;">
+                            <p class="view-subtitle">One-time face and voice setup. Verify your NovaCare Google Authenticator to start. Existing profiles stay preserved until setup completes.</p>
+                            <label class="form-label" for="input-biometric-setup-code">Google Authenticator code</label>
+                            <input id="input-biometric-setup-code" class="form-input" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit Authenticator code" required>
+                            <p id="biometric-setup-message" role="status" class="view-subtitle"></p>
+                            <button id="btn-biometric-setup" type="submit" class="btn-primary">Set Up My Face and Voice</button>
+                        </form>
+
+                        <button type="button" class="btn-primary" id="btn-enroll-face" style="display:none;background:linear-gradient(135deg,#10b981,#059669);margin-bottom:10px;">
+                            <span>Set up face verification</span>
+                        </button>
+                        <button type="button" class="btn-primary" id="btn-continue-voice" style="display:none;">
+                            <span>Face Verified ✓ Continue to Voice</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 5: VOICE BIOMETRICS -->
+                <section class="auth-view" id="view-voice">
+                    <div class="portal-access-card voice-card-wide">
+
+                        <!-- ONE-ROW STEPPER — nowrap enforced -->
+                        <div class="voice-stepper-row">
+                            <div class="vstep vstep-done">
+                                <div class="vstep-circle done">✓</div>
+                                <span class="vstep-label">Account</span>
+                            </div>
+                            <div class="vstep-line done"></div>
+                            <div class="vstep vstep-done">
+                                <div class="vstep-circle done">✓</div>
+                                <span class="vstep-label">Face</span>
+                            </div>
+                            <div class="vstep-line done"></div>
+                            <div class="vstep vstep-active">
+                                <div class="vstep-circle active">3</div>
+                                <span class="vstep-label active">Voice</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">4</div>
+                                <span class="vstep-label">MFA</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">5</div>
+                                <span class="vstep-label">Complete</span>
+                            </div>
+                        </div>
+
+                        <!-- Title -->
+                        <div class="voice-title-area">
+                            <h2 class="voice-view-title">Verify your voice</h2>
+                            <p class="voice-view-subtitle">Tap record, pause for a second, then read the phrase below.</p>
+                        </div>
+
+                        <!-- Voice Panel -->
+                        <div class="voice-panel" id="voice-mic-orb">
+
+                            <!-- Mic orb with animation rings -->
+                            <div class="voice-orb-wrap">
+                                <div class="voice-orb-ring voice-orb-ring-2"></div>
+                                <div class="voice-orb-ring voice-orb-ring-1"></div>
+                                <div class="voice-orb-center">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Verification Phrase -->
+                            <div class="voice-phrase-container">
+                                <div class="voice-phrase-label">Verification Phrase</div>
+                                <div class="voice-phrase-text" id="voice-phrase-text">Loading challenge phrase...</div>
+                            </div>
+
+                            <!-- Live Waveform -->
+                            <canvas id="voice-waveform-canvas" class="voice-waveform-canvas" width="480" height="44"></canvas>
+
+                            <!-- Status Pill -->
+                            <div class="voice-status-pill" id="voice-status-badge">
+                                <span class="voice-status-dot"></span>
+                                <span class="voice-status-text">Microphone Ready</span>
+                            </div>
+                        </div>
+
+                        <button type="button" id="btn-open-voice-recovery" style="display:block;width:100%;padding:9px 6px;margin:0 0 8px;background:transparent;border:0;color:var(--text-secondary);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;">Voice not working? Use account recovery</button>
+
+                        <!-- Primary CTA -->
+                        <button type="button" class="btn-primary voice-btn-speak" id="btn-start-voice">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>
+                            </svg>
+                            <span id="btn-start-voice-text">Start Voice Verification</span>
+                        </button>
+
+                        <!-- Continue button (shown only after backend confirms voice verified) -->
+                        <button type="button" class="btn-primary" id="btn-continue-mfa" style="display:none;margin-top:10px;">
+                            <span>Voice Verified ✓ Continue to Authenticator</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 5.5: VOICE RECOVERY -->
+                <section class="auth-view" id="view-voice-recovery">
+                    <div class="portal-access-card voice-card-wide">
+                        
+                        <!-- ONE-ROW STEPPER -->
+                        <div class="voice-stepper-row">
+                            <div class="vstep vstep-done">
+                                <div class="vstep-circle done">✓</div>
+                                <span class="vstep-label">Account</span>
+                            </div>
+                            <div class="vstep-line done"></div>
+                            <div class="vstep vstep-done">
+                                <div class="vstep-circle done">✓</div>
+                                <span class="vstep-label">Face</span>
+                            </div>
+                            <div class="vstep-line done"></div>
+                            <div class="vstep vstep-active" style="color:#ef4444;">
+                                <div class="vstep-circle active" style="background:rgba(239,68,68,0.2);color:#ef4444;border-color:#ef4444;">⚠</div>
+                                <span class="vstep-label active" style="color:#ef4444;">Recovery</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">4</div>
+                                <span class="vstep-label">MFA</span>
+                            </div>
+                            <div class="vstep-line"></div>
+                            <div class="vstep">
+                                <div class="vstep-circle">5</div>
+                                <span class="vstep-label">Complete</span>
+                            </div>
+                        </div>
+
+                        <header class="voice-title-area" style="margin-bottom:14px;">
+                            <h2 class="voice-view-title" style="color:#ef4444;">Additional Verification Required</h2>
+                            <p class="voice-view-subtitle">Use a recovery code or your Google Authenticator after a voice attempt.</p>
+                        </header>
+
+                        <div class="voice-panel" style="padding: 24px;">
+                            <form id="form-voice-recovery" onsubmit="return false;">
+                                <div class="form-group" style="margin-bottom:16px;">
+                                    <label class="form-label" for="input-voice-recovery-code">Recovery Code</label>
+                                    <div class="input-wrapper">
+                                        <span class="input-prefix-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                                        <input type="text" id="input-voice-recovery-code" class="form-input" placeholder="e.g. RECOVERY-CODE-123456" autocomplete="off" required style="font-family:monospace;letter-spacing:0.5px;text-transform:uppercase;box-sizing:border-box;max-width:100%;overflow:hidden;text-overflow:ellipsis;">
+                                    </div>
+                                </div>
+                                <div id="voice-recovery-alert" style="display:none;color:#f87171;font-size:13px;margin-bottom:14px;background:rgba(239,68,68,0.1);padding:10px 14px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);"></div>
+                                <button type="submit" class="btn-primary" id="btn-submit-voice-recovery" style="margin-bottom:10px;">
+                                    <span>Verify Recovery Code</span>
+                                </button>
+                                <button type="button" id="btn-voice-recovery-alternate" class="btn-secondary" style="width:100%;margin-top:8px;">Forgot recovery code? Use Google Authenticator</button>
+                                <div id="voice-recovery-alternate" hidden style="margin-top:18px;">
+                                    <p class="voice-view-subtitle">Enter the current six-digit code from Google Authenticator for your DeepTrust account.</p>
+                                    <label class="form-label" for="input-voice-recovery-totp">Google Authenticator code</label>
+                                    <input id="input-voice-recovery-totp" class="form-input" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="6-digit Authenticator code" style="width:100%;margin:6px 0 12px;">
+                                    <button type="button" id="btn-voice-recovery-alternate-submit" class="btn-primary" style="width:100%;">Verify Google Authenticator</button>
+                                    <div id="voice-recovery-alternate-alert" role="status" aria-live="polite" style="margin-top:10px;"></div>
+                                </div>
+                                <div style="text-align:center;margin-top:10px;">
+                                    <a href="#" data-switch-view="login" style="font-size:12px;color:var(--text-muted);text-decoration:none;">Cancel / Return to Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 6: MFA / TOTP -->
+                <section class="auth-view" id="view-mfa">
+                    <div class="portal-access-card">
+                        <div class="stepper-nav">
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Account</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Face</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Voice</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step active"><div class="step-circle">4</div><span>MFA</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step"><div class="step-circle">5</div><span>Complete</span></div>
+                        </div>
+
+                        <header class="view-header">
+                            <h2 class="view-title">Verify your authenticator code</h2>
+                            <p class="view-subtitle" id="mfa-email-display">Enter the 6-digit verification code shown in Google Authenticator.</p>
+                        </header>
+
+                        <form id="form-mfa" autocomplete="off">
+                            <div class="otp-container" id="otp-container">
+                                <input type="text" class="otp-box otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                                <input type="text" class="otp-box otp-box" maxlength="1" pattern="\d" required autocomplete="off">
+                            </div>
+                            <div id="mfa-error-msg" style="display:none;color:#f87171;font-size:13px;margin-top:14px;text-align:center;background:rgba(239,68,68,0.1);padding:10px 14px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);"></div>
+                            <button type="submit" class="btn-primary" style="margin-top:18px;">
+                                <span>Verify code and continue</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+
+                <!-- VIEW 7: ACCESS GRANTED -->
+                <section class="auth-view" id="view-complete">
+                    <div class="portal-access-card">
+                        <div class="stepper-nav">
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Account</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Face</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Voice</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>MFA</span></div>
+                            <div class="stepper-divider"></div>
+                            <div class="stepper-step completed"><div class="step-circle">✓</div><span>Complete</span></div>
+                        </div>
+
+                        <div class="completion-card" style="text-align:center;padding:10px 0;">
+                            <div class="completion-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <h2 style="font-size:18px;font-weight:700;color:#fff;">You’re ready to go</h2>
+                            <p style="font-size:12px;color:var(--text-secondary);margin-top:6px;">Your identity checks are complete. Continue to your workspace.</p>
+
+                            <div class="verif-list">
+                                <div class="verif-item"><span>Credentials</span><span class="verif-badge">Verified ✓</span></div>
+                                <div class="verif-item"><span>Face identity</span><span class="verif-badge">Verified ✓</span></div>
+                                <div class="verif-item"><span>Active Liveness</span><span class="verif-badge">Verified ✓</span></div>
+                                <div class="verif-item"><span>Voice identity</span><span class="verif-badge">Verified ✓</span></div>
+                                <div class="verif-item"><span>Authenticator code</span><span class="verif-badge">Verified ✓</span></div>
+                                <div class="verif-item"><span>Access policy check</span><span class="verif-badge" style="color:var(--accent-cyan);" id="risk-badge-text">ALLOW ✓</span></div>
+                            </div>
+
+                            <button type="button" class="btn-primary" id="btn-finalize-dashboard">
+                                <span id="btn-finalize-text">Open dashboard</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        <p class="studio-auth-footnote">Protected access. Clear oversight. One DeepTrust.</p>
+        </main>
+    </div>
+
+
+    <!-- ============================================================
+         SCRIPTS
+         ============================================================ -->
+    <script>
+    /* ── STARTUP INTRO — 1% → 100% ── */
+    (function() {
+        const intro = document.getElementById('dt-startup-intro');
+        if (!intro) return;
+
+        // Skip if already completed in this session
+        if (sessionStorage.getItem('dt_intro_done') === '1') {
+            intro.style.display = 'none';
+            return;
+        }
+
+        const pctEl  = document.getElementById('dt-intro-percent');
+        const barEl  = document.getElementById('dt-intro-bar');
+        const ready  = document.getElementById('dt-intro-ready');
+        const stages = [
+            document.getElementById('intro-stage-1'),
+            document.getElementById('intro-stage-2'),
+            document.getElementById('intro-stage-3'),
+            document.getElementById('intro-stage-4'),
+            document.getElementById('intro-stage-5'),
+            document.getElementById('intro-stage-6'),
+            document.getElementById('intro-stage-7'),
+        ];
+
+        // Stage lighting thresholds
+        const thresholds = [14, 28, 42, 56, 70, 85, 100];
+
+        let current = 1;
+        const totalMs = 3000;
+        const intervalMs = 30;
+        const stepSize = 99 / (totalMs / intervalMs); // smooth 1→100
+
+        const timer = setInterval(() => {
+            current = Math.min(100, current + stepSize);
+            const pct = Math.floor(current);
+
+            if (pctEl) pctEl.textContent = pct + '%';
+            if (barEl) barEl.style.width = pct + '%';
+
+            // Light up stages sequentially
+            stages.forEach((s, i) => {
+                if (s && pct >= thresholds[i]) s.classList.add('lit');
+            });
+
+            if (pct >= 100) {
+                clearInterval(timer);
+                current = 100;
+                if (pctEl) pctEl.textContent = '100%';
+                if (barEl) barEl.style.width = '100%';
+                stages.forEach(s => s && s.classList.add('lit'));
+
+                // Show "Ready" text
+                if (ready) ready.classList.add('visible');
+
+                // Fade out after brief pause
+                setTimeout(() => {
+                    intro.classList.add('fade-out');
+                    sessionStorage.setItem('dt_intro_done', '1');
+                    setTimeout(() => { intro.style.display = 'none'; }, 550);
+                }, 500);
+            }
+        }, intervalMs);
+    })();
+
+    /* ── PIPELINE SYNC (called by app_rework.js) ── */
+    function syncPipelineStep(stepNumber) {
+        const nodes = [
+            document.getElementById('pipe-credentials'),
+            document.getElementById('pipe-face'),
+            document.getElementById('pipe-liveness'),
+            document.getElementById('pipe-voice'),
+            document.getElementById('pipe-mfa'),
+            document.getElementById('pipe-risk'),
+            document.getElementById('pipe-access'),
+        ];
+        nodes.forEach((n, i) => {
+            if (!n) return;
+            if (i < stepNumber) {
+                n.classList.add('active');
+            } else {
+                n.classList.remove('active');
+            }
+        });
+    }
+    </script>
+
+    <script src="session.js?v=20261008-session"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="js/app_rework.js?v=20261010-sso-monitor1"></script>
+</body>
+</html>

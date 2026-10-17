@@ -1,0 +1,26 @@
+/* Shared motion layer. Keep page layout, camera frames and verification unchanged. */
+:root { --dt-ui-ease:cubic-bezier(.2,.8,.2,1); }
+.auth-view.active,.view-section.active,.portal-access-card { animation:none !important; }
+.btn,button,.portal-option,.nav-item { transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease,box-shadow 180ms ease,transform 180ms var(--dt-ui-ease) !important; }
+.btn:not(:disabled):hover,button:not(:disabled):hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,0,0,.14); }
+.btn:not(:disabled):active,button:not(:disabled):active { transform:translateY(0) scale(.98) !important; }
+.btn:focus-visible,button:focus-visible,.nav-item:focus-visible { outline:2px solid #60A5FA; outline-offset:3px; }
+.nav-item:hover { transform:translateX(2px); }
+.nav-item.active { box-shadow:inset 3px 0 0 #60A5FA; }
+.kpi-card,.portal-option { transition:transform 200ms var(--dt-ui-ease),border-color 200ms ease,box-shadow 200ms ease !important; }
+.kpi-card:hover,.portal-option:hover { transform:translateY(-2px); border-color:rgba(96, 165, 250,.45); box-shadow:0 8px 22px rgba(0,0,0,.12); }
+.data-table tbody tr { transition:background-color 160ms ease; }
+.investigation-drawer,.notification-drawer { transition:transform 300ms var(--dt-ui-ease) !important; }
+.drawer-backdrop { transition:opacity 220ms ease !important; }
+.vstep-circle,.vstep-line,.vstep-label,.pipeline-node { transition:background-color 220ms ease,border-color 220ms ease,color 220ms ease,box-shadow 220ms ease; }
+.vstep-circle.active { box-shadow:0 0 0 4px rgba(96, 165, 250,.08); }
+input,select,textarea { transition:border-color 180ms ease,box-shadow 180ms ease,background-color 180ms ease !important; }
+input:focus-visible,select:focus-visible,textarea:focus-visible { box-shadow:0 0 0 3px rgba(96, 165, 250,.10); }
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    .btn,button,.nav-item,.kpi-card,.portal-option { transform:none !important; }
+}
+
+/* Active forms remain visible before JS loads and after entrance animations finish.
+   Motion enhances the visible state; it must never gate access to the form. */
+.auth-view.active { opacity:1; transform:translateY(0); }

@@ -1,0 +1,117 @@
+/* Presentation-only stage motion; never gates or changes authentication state. */
+body.dt-editorial .btn-primary.dt-tap-feedback {
+  animation:dt-motion-tap .48s cubic-bezier(.2,.75,.2,1) both!important;
+}
+body.dt-editorial .btn-primary.dt-tap-feedback::before {
+  opacity:1; background:linear-gradient(105deg,transparent 26%,#ffffff44 50%,transparent 74%);
+  animation:dt-motion-glint .7s ease-out both;
+}
+body.dt-editorial #btn-submit-login.auth-pending::before,
+body.dt-editorial #btn-finalize-dashboard.auth-pending::before {
+  opacity:1; background:linear-gradient(105deg,transparent 28%,#ffffff3b 50%,transparent 72%);
+  animation:dt-motion-glint 1.15s linear infinite;
+}
+body.dt-editorial #btn-submit-login.auth-success,
+body.dt-editorial #btn-finalize-dashboard.auth-success {
+  animation:dt-motion-confirm .65s ease-out both!important;
+}
+
+/* A frame reveal marks the face stage; the scanning line appears only while video plays. */
+body.dt-editorial #view-verify.active .camera-container {
+  animation:dt-motion-frame-in .62s cubic-bezier(.2,.75,.2,1) both!important;
+}
+body.dt-editorial #view-verify .camera-container.dt-camera-live::after {
+  content:""; position:absolute; z-index:3; left:5%; right:5%; top:18%; height:1px;
+  pointer-events:none; opacity:0;
+  background:linear-gradient(90deg,transparent,#dda87795 25%,#f8eadc 50%,#dda87795 75%,transparent);
+  box-shadow:0 0 13px #e8b48680;
+  animation:dt-motion-face-scan 1.65s ease-in-out 1 both;
+}
+body.dt-editorial #view-verify .camera-container.dt-camera-arming {
+  animation:dt-motion-frame-pulse .85s ease-out 1!important;
+}
+
+/* Microphone feedback follows the real recording class set by the app. */
+body.dt-editorial #view-voice.active .voice-panel {
+  animation:dt-motion-frame-in .6s cubic-bezier(.2,.75,.2,1) both!important;
+}
+body.dt-editorial #voice-mic-orb.dt-voice-arming .voice-orb-center {
+  animation:dt-motion-mic-ready .95s ease-out 1!important;
+}
+body.dt-editorial #voice-mic-orb.recording {
+  border-color:#ca927069!important; box-shadow:inset 0 1px #ffffff12,0 0 0 3px #b27d5730!important;
+}
+body.dt-editorial #voice-mic-orb.recording .voice-orb-ring-1,
+body.dt-editorial #voice-mic-orb.recording .voice-orb-ring-2 {
+  border-color:#dba57867!important;
+}
+
+/* The final screen confirms access before the app's own redirect runs. */
+body.dt-editorial #view-complete .completion-card:has(#btn-finalize-dashboard.auth-success) {
+  animation:dt-motion-access-confirm .72s ease-out both!important;
+}
+body.dt-editorial[data-page="dashboard"].dt-dashboard-arrival .topbar {
+  animation:dt-motion-dashboard-top .48s cubic-bezier(.2,.75,.2,1) both!important;
+}
+body.dt-editorial[data-page="dashboard"].dt-dashboard-arrival .content-area {
+  animation:dt-motion-dashboard-content .55s cubic-bezier(.2,.75,.2,1) both!important;
+}
+
+@keyframes dt-motion-tap {
+  0% { transform:scale(1); }
+  42% { transform:scale(.985); }
+  100% { transform:scale(1); }
+}
+@keyframes dt-motion-glint {
+  from { transform:translateX(-125%); }
+  to { transform:translateX(125%); }
+}
+@keyframes dt-motion-confirm {
+  0% { box-shadow:0 0 0 0 #b68c5d45; }
+  55% { box-shadow:0 0 0 9px #b68c5d24; }
+  100% { box-shadow:0 0 0 16px #b68c5d00; }
+}
+@keyframes dt-motion-frame-in {
+  from { opacity:.72; transform:translateY(8px) scale(.985); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+@keyframes dt-motion-frame-pulse {
+  0% { box-shadow:0 0 0 0 #dba57855; }
+  55% { box-shadow:0 0 0 8px #dba57825; }
+  100% { box-shadow:0 0 0 14px #dba57800; }
+}
+@keyframes dt-motion-face-scan {
+  0% { opacity:0; transform:translateY(0); }
+  20%,75% { opacity:.58; }
+  100% { opacity:0; transform:translateY(135px); }
+}
+@keyframes dt-motion-mic-ready {
+  0% { box-shadow:0 0 0 0 #dba57872; transform:scale(1); }
+  55% { box-shadow:0 0 0 12px #dba57824; transform:scale(1.04); }
+  100% { box-shadow:0 0 0 18px #dba57800; transform:scale(1); }
+}
+@keyframes dt-motion-access-confirm {
+  0% { opacity:1; transform:scale(1); }
+  45% { opacity:1; transform:scale(1.015); }
+  100% { opacity:1; transform:scale(1); }
+}
+@keyframes dt-motion-dashboard-top {
+  from { opacity:.6; transform:translateY(-7px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes dt-motion-dashboard-content {
+  from { opacity:.7; transform:translateY(11px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@media(prefers-reduced-motion:reduce) {
+  body.dt-editorial :is(.btn-primary.dt-tap-feedback,#btn-submit-login.auth-pending,#btn-finalize-dashboard.auth-pending,
+    #btn-submit-login.auth-success,#btn-finalize-dashboard.auth-success,
+    #view-verify.active .camera-container,#view-verify .camera-container.dt-camera-arming,
+    #view-voice.active .voice-panel,#voice-mic-orb.dt-voice-arming .voice-orb-center,
+    #view-complete .completion-card:has(#btn-finalize-dashboard.auth-success)) { animation:none!important; }
+  body.dt-editorial .btn-primary.dt-tap-feedback::before,
+  body.dt-editorial #btn-submit-login.auth-pending::before,
+  body.dt-editorial #btn-finalize-dashboard.auth-pending::before,
+  body.dt-editorial #view-verify .camera-container.dt-camera-live::after { animation:none!important; opacity:0!important; }
+  body.dt-editorial[data-page="dashboard"].dt-dashboard-arrival :is(.topbar,.content-area) { animation:none!important; }
+}

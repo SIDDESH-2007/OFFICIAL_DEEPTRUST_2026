@@ -1,0 +1,9 @@
+{
+    "name":  "DeepTrust",
+    "version":  "1.0.0",
+    "release":  "2026.10",
+    "description":  "DeepTrust Enterprise Biometric Security Platform",
+    "build":  "20261004141418",
+    "build_date":  "2026-10-04T14:14:18.1574331+05:30",
+    "canonical_url":  "http://localhost:5000"
+}

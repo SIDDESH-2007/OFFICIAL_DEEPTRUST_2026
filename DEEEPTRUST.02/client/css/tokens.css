@@ -1,0 +1,146 @@
+/* ============================================================
+   DEEPTRUST ENTERPRISE DESIGN TOKENS
+   APPROVED LIGHT THEME SPECIFICATION
+   ============================================================ */
+
+:root {
+  --dt-bg-primary: #171717;
+  --dt-bg-secondary: #262626;
+  --dt-surface: #262626;
+  --dt-sidebar: #121212;
+  --dt-topbar: #171717;
+  --dt-accent: #60A5FA;
+  --dt-accent-secondary: #2563EB;
+  --dt-text-primary: #F5F5F5;
+  --dt-text-secondary: #A3A3A3;
+  --dt-text-muted: #737373;
+  --dt-border: #404040;
+  --dt-hover: #333333;
+  --dt-selected: #132A27;
+  --dt-input: #1C1C1C;
+  --dt-focus: #60A5FA;
+  --dt-success: #10B981;
+  --dt-warning: #F59E0B;
+  --dt-danger: #EF4444;
+  --dt-critical: #B91C1C;
+
+  /* Surface & Backgrounds */
+  --dt-bg: #F4F8FC;
+  --dt-bg-canvas: #EEF4FB;
+  --dt-bg-gradient: radial-gradient(130% 100% at 50% 0%, #FFFFFF 0%, #F1F6FD 60%, #E6F0FA 100%);
+  --dt-surface: rgba(255, 255, 255, 0.88);
+  --dt-surface-solid: #FFFFFF;
+  --dt-surface-subtle: #F8FAFD;
+  --dt-surface-hover: #F0F5FC;
+  --dt-surface-active: #E4EEFA;
+  --dt-surface-glass: rgba(255, 255, 255, 0.78);
+  --dt-surface-glass-heavy: rgba(255, 255, 255, 0.92);
+
+  /* Typography Colors */
+  --dt-text: #07142F;
+  --dt-text-primary: #07142F;
+  --dt-text-secondary: #52627C;
+  --dt-muted: #8A9AB5;
+  --dt-subtle: #A3B3CC;
+  --dt-text-inverse: #FFFFFF;
+
+  /* DeepTrust Brand Colors */
+  --dt-primary: #2457F5;
+  --dt-primary-hover: #1A46D4;
+  --dt-primary-active: #1335A8;
+  --dt-primary-gradient: linear-gradient(135deg, #2457F5 0%, #1597F6 100%);
+  --dt-primary-glow: rgba(36, 87, 245, 0.22);
+  --dt-primary-subtle: rgba(36, 87, 245, 0.08);
+
+  /* Modern Accent Colors */
+  --dt-cyan: #15B8EC;
+  --dt-cyan-light: #43D9FF;
+  --dt-cyan-soft: rgba(21, 184, 236, 0.1);
+  --dt-violet: #8B7CFF;
+  --dt-violet-soft: rgba(139, 124, 255, 0.1);
+  --dt-blue-dark: #07142F;
+
+  /* Status Colors */
+  --dt-success: #10B981;
+  --dt-success-bg: rgba(16, 185, 129, 0.09);
+  --dt-success-border: rgba(16, 185, 129, 0.24);
+  --dt-warning: #F59E0B;
+  --dt-warning-bg: rgba(245, 158, 11, 0.09);
+  --dt-warning-border: rgba(245, 158, 11, 0.24);
+  --dt-danger: #EF4444;
+  --dt-danger-bg: rgba(239, 68, 68, 0.09);
+  --dt-danger-border: rgba(239, 68, 68, 0.24);
+  --dt-info: #2457F5;
+  --dt-info-bg: rgba(36, 87, 245, 0.08);
+
+  /* Borders & Dividers */
+  --dt-border: rgba(116, 145, 190, 0.18);
+  --dt-border-light: rgba(116, 145, 190, 0.12);
+  --dt-border-strong: rgba(116, 145, 190, 0.32);
+  --dt-border-focus: #2457F5;
+  --dt-border-glow: rgba(36, 87, 245, 0.28);
+
+  /* Shadows */
+  --dt-shadow-xs: 0 1px 2px rgba(7, 20, 47, 0.03);
+  --dt-shadow-sm: 0 2px 6px rgba(7, 20, 47, 0.04);
+  --dt-shadow-md: 0 8px 24px -4px rgba(7, 20, 47, 0.06), 0 2px 6px -1px rgba(7, 20, 47, 0.02);
+  --dt-shadow-lg: 0 20px 40px -8px rgba(7, 20, 47, 0.08), 0 8px 16px -4px rgba(7, 20, 47, 0.03);
+  --dt-shadow-xl: 0 28px 64px -12px rgba(7, 20, 47, 0.12), 0 12px 24px -6px rgba(7, 20, 47, 0.04);
+  --dt-shadow-glass: 0 20px 50px rgba(36, 87, 245, 0.07), 0 1px 3px rgba(7, 20, 47, 0.03);
+
+  /* Radii */
+  --dt-radius-xs: 6px;
+  --dt-radius-sm: 10px;
+  --dt-radius-md: 14px;
+  --dt-radius-lg: 20px;
+  --dt-radius-xl: 28px;
+  --dt-radius-pill: 9999px;
+
+  /* Typography */
+  --dt-font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --dt-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Motion & Transitions */
+  --dt-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dt-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dt-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dt-time-fast: 140ms;
+  --dt-time-standard: 220ms;
+  --dt-time-panel: 320ms;
+  --dt-time-hero: 500ms;
+
+  /* Backdrop Blur */
+  --dt-blur-sm: blur(8px);
+  --dt-blur-md: blur(16px);
+  --dt-blur-lg: blur(28px);
+}
+
+/* Dark Mode Overrides (Controlled via data-theme="dark" on <html> or <body>) */
+[data-theme="dark"] {
+  --dt-bg: #090E1A;
+  --dt-bg-canvas: #060A14;
+  --dt-bg-gradient: radial-gradient(130% 100% at 50% 0%, #10172A 0%, #0B1122 60%, #060A14 100%);
+  --dt-surface: rgba(16, 23, 42, 0.88);
+  --dt-surface-solid: #0F172A;
+  --dt-surface-subtle: #141E34;
+  --dt-surface-hover: #1A2642;
+  --dt-surface-active: #203052;
+  --dt-surface-glass: rgba(16, 23, 42, 0.8);
+  --dt-surface-glass-heavy: rgba(16, 23, 42, 0.94);
+
+  --dt-text: #F8FAFD;
+  --dt-text-primary: #F8FAFD;
+  --dt-text-secondary: #94A3B8;
+  --dt-muted: #64748B;
+  --dt-subtle: #475569;
+  --dt-text-inverse: #07142F;
+
+  --dt-border: rgba(148, 163, 184, 0.16);
+  --dt-border-light: rgba(148, 163, 184, 0.1);
+  --dt-border-strong: rgba(148, 163, 184, 0.28);
+
+  --dt-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --dt-shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.45);
+  --dt-shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.55);
+  --dt-shadow-glass: 0 20px 50px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DeepTrust Admin Mobile Security Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #151c2c;
+            --bg-card-hover: #1e293b;
+            --border-color: #26334d;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #6366f1;
+            --accent-hover: #4f46e5;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 20px;
+        }
+
+        .mobile-header {
+            background-color: #0f172a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--accent-primary), #a855f7);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-badge {
+            background-color: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            padding: 16px;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: #0b0f19;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 13px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-danger {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .alert-box {
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .alert-info {
+            background-color: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+        }
+
+        .alert-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+        }
+
+        .alert-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+        }
+
+        /* Status & Pulse */
+        .live-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            font-size: 12px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .metric-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Security Feed List */
+        .feed-header {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .event-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .event-card:active {
+            background-color: var(--bg-card-hover);
+            transform: scale(0.99);
+        }
+
+        .event-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .event-time {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-allowed {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-blocked {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-high {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
+
+        .event-identity {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .event-org {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .event-desc {
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        /* Timeline Modal / View */
+        .timeline-box {
+            background-color: #0b0f19;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 14px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-pass {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .status-fail {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .status-skip {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="mobile-header">
+        <div class="brand-title">
+            <div class="brand-logo">DT</div>
+            <div>
+                <span class="brand-name">DeepTrust</span>
+                <span class="brand-badge">Admin Monitor</span>
+            </div>
+        </div>
+        <button id="btnLogout" class="btn-danger hidden">End Session</button>
+    </header>
+
+    <div class="container">
+
+        <!-- VIEW 1: PAIRING & CREDENTIALS VERIFICATION -->
+        <div id="viewPairingVerify" class="card">
+            <h2 class="card-title">Device Pairing Request</h2>
+            <p class="card-subtitle">DeepTrust Secure Admin Access step-up authorization.</p>
+
+            <div id="pairingAlert" class="alert-box alert-info">
+                <span>Secure pairing link verified. Please authenticate as DeepTrust Admin.</span>
+            </div>
+
+            <form id="formCredentials" onsubmit="handleCredentialsSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" for="inputEmail">DeepTrust Admin Email</label>
+                    <input type="email" id="inputEmail" class="form-input" placeholder="admin@deeptrust.demo" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inputPassword">Password</label>
+                    <input type="password" id="inputPassword" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button type="submit" id="btnCredentials" class="btn-primary">
+                    <span>Continue to MFA</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- VIEW 2: GOOGLE AUTHENTICATOR VERIFICATION -->
+        <div id="viewMfaVerify" class="card hidden">
+            <h2 class="card-title">Administrator Verification</h2>
+            <p class="card-subtitle">Enter the current 6-digit code from Google Authenticator.</p>
+
+            <div id="mfaAlert" class="alert-box alert-info">
+                <span>Verification code required from enrolled admin TOTP.</span>
+            </div>
+
+            <form id="formTotp" onsubmit="handleTotpSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label" for="inputTotp">6-Digit Authenticator Code</label>
+                    <input type="text" id="inputTotp" class="form-input" placeholder="123456" maxlength="6" inputmode="numeric" required style="font-size: 20px; letter-spacing: 4px; text-align: center;">
+                </div>
+                <button type="submit" id="btnTotp" class="btn-primary">
+                    <span>Verify Administrator</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- VIEW 3: MAIN MOBILE MONITOR DASHBOARD -->
+        <div id="viewMonitor" class="hidden">
+            <!-- Live status bar -->
+            <div class="live-status-bar">
+                <div class="live-indicator">
+                    <span class="pulse-dot"></span>
+                    <span id="liveStatusText">LIVE SECURITY FEED</span>
+                </div>
+                <div>
+                    <span style="color: var(--text-secondary);" id="lastUpdatedText">Updated: --:--:--</span>
+                    <button onclick="fetchMobileData()" style="background:none; border:none; color: var(--accent-primary); font-weight:600; margin-left:8px; cursor:pointer;">Refresh</button>
+                </div>
+            </div>
+
+            <!-- Overview Metrics Grid -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Authentications</div>
+                    <div class="metric-value" id="valAuths">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Successful</div>
+                    <div class="metric-value" style="color: var(--success);" id="valSuccess">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Blocked</div>
+                    <div class="metric-value" style="color: var(--danger);" id="valBlocked">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">High Risk</div>
+                    <div class="metric-value" style="color: var(--warning);" id="valHighRisk">--</div>
+                </div>
+            </div>
+
+            <!-- Live Security Feed -->
+            <div class="feed-header">
+                <span>Live Security Feed</span>
+                <span id="feedCount">0 Events</span>
+            </div>
+            <div id="feedList">
+                <div style="text-align: center; color: var(--text-secondary); padding: 20px; font-size: 13px;">Loading live events...</div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: EVENT DETAIL VIEW -->
+        <div id="viewEventDetail" class="card hidden">
+            <button onclick="closeEventDetail()" style="background:none; border:none; color: var(--accent-primary); font-weight:600; font-size: 13px; margin-bottom: 12px; cursor:pointer;">← Back to Feed</button>
+
+            <h2 class="card-title" id="detailTitle">Security Event Detail</h2>
+            <p class="card-subtitle" id="detailSub">Event ID & Timestamp</p>
+
+            <div class="form-group">
+                <div style="font-size: 12px; color: var(--text-secondary);">IDENTITY</div>
+                <div style="font-size: 14px; font-weight: 600;" id="detailIdentity">--</div>
+                <div style="font-size: 11px; color: var(--text-secondary);" id="detailEmail">--</div>
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 16px;">
+                <div>
+                    <div style="font-size: 11px; color: var(--text-secondary);">ORGANIZATION</div>
+                    <div style="font-size: 13px; font-weight: 500;" id="detailOrg">--</div>
+                </div>
+                <div>
+                    <div style="font-size: 11px; color: var(--text-secondary);">RISK SCORE</div>
+                    <div style="font-size: 13px; font-weight: 700;" id="detailRiskScore">--</div>
+                </div>
+                <div>
+                    <div style="font-size: 11px; color: var(--text-secondary);">DECISION</div>
+                    <div id="detailDecision">--</div>
+                </div>
+            </div>
+
+            <div style="font-size: 12px; font-weight: 600; margin-top: 14px;">Verification Timeline</div>
+            <div class="timeline-box">
+                <div class="timeline-item">
+                    <span>Credentials</span>
+                    <span id="tlCredentials" class="status-pass">✓ VERIFIED</span>
+                </div>
+                <div class="timeline-item">
+                    <span>Face Match</span>
+                    <span id="tlFace" class="status-pass">✓ VERIFIED</span>
+                </div>
+                <div class="timeline-item">
+                    <span>Liveness</span>
+                    <span id="tlLiveness" class="status-pass">✓ VERIFIED</span>
+                </div>
+                <div class="timeline-item">
+                    <span>Voice Analysis</span>
+                    <span id="tlVoice" class="status-pass">✓ VERIFIED</span>
+                </div>
+                <div class="timeline-item">
+                    <span>Google Authenticator</span>
+                    <span id="tlMfa" class="status-pass">✓ VERIFIED</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 5: INVALID / EXPIRED SESSION -->
+        <div id="viewInvalid" class="card hidden" style="text-align: center;">
+            <div style="font-size: 36px; margin-bottom: 12px;">🛡️</div>
+            <h2 class="card-title" style="justify-content: center;" id="invalidTitle">Pairing Session Expired</h2>
+            <p class="card-subtitle" id="invalidDesc">Please generate a new QR from the DeepTrust Admin system.</p>
+        </div>
+
+    </div>
+
+    <script>
+        const API_BASE = '/api/v1';
+        let rawToken = '';
+        let mobileToken = sessionStorage.getItem('dt_mobile_token') || '';
+        let pollingTimer = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            rawToken = urlParams.get('token') || '';
+
+            if (mobileToken) {
+                showMonitorView();
+            } else if (rawToken) {
+                checkPairingTokenStatus();
+            } else {
+                showInvalidView('Invalid Pairing Link', 'No single-use pairing token was provided in the URL.');
+            }
+
+            document.getElementById('btnLogout').addEventListener('click', handleLogout);
+        });
+
+        async function checkPairingTokenStatus() {
+            try {
+                const res = await fetch(`${API_BASE}/mobile/pair/${rawToken}/status`);
+                if (!res.ok) {
+                    showInvalidView('Pairing Link Invalid', 'This pairing token does not exist or has expired.');
+                    return;
+                }
+                const data = await res.json();
+                if (data.status === 'EXPIRED') {
+                    showInvalidView('Pairing Session Expired', 'Please generate a new QR from the DeepTrust Admin system.');
+                } else if (data.status === 'CONSUMED') {
+                    showInvalidView('Pairing Link Already Used', 'This single-use QR has already been consumed. Generate a new pairing session.');
+                } else {
+                    document.getElementById('viewPairingVerify').classList.remove('hidden');
+                }
+            } catch (e) {
+                showInvalidView('Connection Error', 'Unable to reach DeepTrust server on LAN.');
+            }
+        }
+
+        async function handleCredentialsSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnCredentials');
+            const alertBox = document.getElementById('pairingAlert');
+            const email = document.getElementById('inputEmail').value.trim();
+            const password = document.getElementById('inputPassword').value;
+
+            btn.disabled = true;
+            btn.textContent = 'Verifying Credentials...';
+
+            try {
+                const res = await fetch(`${API_BASE}/mobile/pair/verify-credentials`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: rawToken, email, password })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    alertBox.className = 'alert-box alert-success';
+                    alertBox.textContent = `Credentials verified for ${data.admin_name}. Please complete Google Authenticator MFA.`;
+                    setTimeout(() => {
+                        document.getElementById('viewPairingVerify').classList.add('hidden');
+                        document.getElementById('viewMfaVerify').classList.remove('hidden');
+                    }, 500);
+                } else {
+                    alertBox.className = 'alert-box alert-error';
+                    alertBox.textContent = data.detail || 'Invalid admin credentials or role unauthorized.';
+                }
+            } catch (err) {
+                alertBox.className = 'alert-box alert-error';
+                alertBox.textContent = 'Network error verifying credentials.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Continue to MFA';
+            }
+        }
+
+        async function handleTotpSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnTotp');
+            const alertBox = document.getElementById('mfaAlert');
+            const email = document.getElementById('inputEmail').value.trim();
+            const totpCode = document.getElementById('inputTotp').value.trim();
+
+            btn.disabled = true;
+            btn.textContent = 'Verifying Authenticator Code...';
+
+            try {
+                const res = await fetch(`${API_BASE}/mobile/pair/verify-totp`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: rawToken, email, totp_code: totpCode })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    mobileToken = data.mobile_token;
+                    sessionStorage.setItem('dt_mobile_token', mobileToken);
+                    document.getElementById('viewMfaVerify').classList.add('hidden');
+                    showMonitorView();
+                } else {
+                    alertBox.className = 'alert-box alert-error';
+                    alertBox.textContent = data.detail || 'Invalid Google Authenticator code.';
+                }
+            } catch (err) {
+                alertBox.className = 'alert-box alert-error';
+                alertBox.textContent = 'Network error verifying MFA.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Verify Administrator';
+            }
+        }
+
+        function showMonitorView() {
+            document.getElementById('viewPairingVerify').classList.add('hidden');
+            document.getElementById('viewMfaVerify').classList.add('hidden');
+            document.getElementById('viewMonitor').classList.remove('hidden');
+            document.getElementById('btnLogout').classList.remove('hidden');
+
+            fetchMobileData();
+            if (!pollingTimer) {
+                pollingTimer = setInterval(fetchMobileData, 5000);
+            }
+        }
+
+        async function fetchMobileData() {
+            if (!mobileToken) return;
+
+            try {
+                // Fetch Summary
+                const sumRes = await fetch(`${API_BASE}/mobile/summary`, {
+                    headers: { 'Authorization': `Bearer ${mobileToken}` }
+                });
+
+                if (sumRes.status === 401) {
+                    handleSessionExpired();
+                    return;
+                }
+
+                const sumData = await sumRes.json();
+                if (sumData.success && sumData.summary) {
+                    document.getElementById('valAuths').textContent = sumData.summary.total_authentications;
+                    document.getElementById('valSuccess').textContent = sumData.summary.successful_access;
+                    document.getElementById('valBlocked').textContent = sumData.summary.blocked_attempts;
+                    document.getElementById('valHighRisk').textContent = sumData.summary.high_risk_events;
+
+                    const now = new Date();
+                    document.getElementById('lastUpdatedText').textContent = `Updated: ${now.toTimeString().split(' ')[0]}`;
+                    document.getElementById('liveStatusText').textContent = 'LIVE SECURITY FEED';
+                    document.getElementById('liveStatusText').parentElement.style.color = 'var(--success)';
+                }
+
+                // Fetch Events
+                const evtRes = await fetch(`${API_BASE}/mobile/events`, {
+                    headers: { 'Authorization': `Bearer ${mobileToken}` }
+                });
+                const evtData = await evtRes.json();
+
+                if (evtData.success && evtData.events) {
+                    renderEvents(evtData.events);
+                }
+            } catch (e) {
+                document.getElementById('liveStatusText').textContent = 'CONNECTION LOST';
+                document.getElementById('liveStatusText').parentElement.style.color = 'var(--danger)';
+            }
+        }
+
+        function renderEvents(events) {
+            const feedList = document.getElementById('feedList');
+            document.getElementById('feedCount').textContent = `${events.length} Events`;
+
+            if (events.length === 0) {
+                feedList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">No security events recorded today.</div>';
+                return;
+            }
+
+            feedList.innerHTML = events.map(evt => `
+                <div class="event-card" onclick="openEventDetail('${evt.id}')">
+                    <div class="event-top">
+                        <span class="event-time">${evt.timestamp}</span>
+                        <span class="badge ${evt.decision === 'ALLOWED' ? 'badge-allowed' : 'badge-blocked'}">${evt.decision}</span>
+                    </div>
+                    <div class="event-identity">${evt.identity}</div>
+                    <div class="event-org">${evt.organization}</div>
+                    <div class="event-desc">${evt.event}</div>
+                </div>
+            `).join('');
+        }
+
+        async function openEventDetail(eventId) {
+            try {
+                const res = await fetch(`${API_BASE}/mobile/events/${eventId}`, {
+                    headers: { 'Authorization': `Bearer ${mobileToken}` }
+                });
+                const data = await res.json();
+
+                if (data.success && data.event) {
+                    const evt = data.event;
+                    document.getElementById('detailTitle').textContent = evt.reason_codes?.[0] || 'Security Event Detail';
+                    document.getElementById('detailSub').textContent = `ID: ${evt.id} • ${evt.timestamp}`;
+                    document.getElementById('detailIdentity').textContent = evt.identity;
+                    document.getElementById('detailEmail').textContent = evt.email;
+                    document.getElementById('detailOrg').textContent = evt.organization;
+                    document.getElementById('detailRiskScore').textContent = evt.risk_score;
+                    document.getElementById('detailDecision').innerHTML = `<span class="badge ${evt.decision === 'ALLOWED' ? 'badge-allowed' : 'badge-blocked'}">${evt.decision}</span>`;
+
+                    const tl = evt.verification_timeline || {};
+                    setTlStatus('tlCredentials', tl.credentials);
+                    setTlStatus('tlFace', tl.face);
+                    setTlStatus('tlLiveness', tl.liveness);
+                    setTlStatus('tlVoice', tl.voice);
+                    setTlStatus('tlMfa', tl.authenticator);
+
+                    document.getElementById('viewMonitor').classList.add('hidden');
+                    document.getElementById('viewEventDetail').classList.remove('hidden');
+                }
+            } catch (e) {
+                alert('Error loading event detail.');
+            }
+        }
+
+        function setTlStatus(elemId, status) {
+            const el = document.getElementById(elemId);
+            if (!el) return;
+            if (status === 'VERIFIED') {
+                el.className = 'status-pass';
+                el.textContent = '✓ VERIFIED';
+            } else if (status === 'FAILED') {
+                el.className = 'status-fail';
+                el.textContent = '✕ FAILED';
+            } else {
+                el.className = 'status-skip';
+                el.textContent = 'NOT REACHED';
+            }
+        }
+
+        function closeEventDetail() {
+            document.getElementById('viewEventDetail').classList.add('hidden');
+            document.getElementById('viewMonitor').classList.remove('hidden');
+        }
+
+        async function handleLogout() {
+            if (confirm('End Mobile Security Monitor session?')) {
+                try {
+                    await fetch(`${API_BASE}/mobile/logout`, {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${mobileToken}` }
+                    });
+                } catch(e) {}
+                handleSessionExpired('Mobile Session Ended', 'Your mobile monitor session has been logged out successfully.');
+            }
+        }
+
+        function handleSessionExpired(title = 'Session Expired', desc = 'Your mobile session has expired or was revoked. Verify again to continue.') {
+            if (pollingTimer) clearInterval(pollingTimer);
+            sessionStorage.removeItem('dt_mobile_token');
+            mobileToken = '';
+            document.getElementById('btnLogout').classList.add('hidden');
+            document.getElementById('viewMonitor').classList.add('hidden');
+            document.getElementById('viewEventDetail').classList.add('hidden');
+            showInvalidView(title, desc);
+        }
+
+        function showInvalidView(title, desc) {
+            document.getElementById('viewPairingVerify').classList.add('hidden');
+            document.getElementById('viewMfaVerify').classList.add('hidden');
+            document.getElementById('viewMonitor').classList.add('hidden');
+            document.getElementById('viewInvalid').classList.remove('hidden');
+            document.getElementById('invalidTitle').textContent = title;
+            document.getElementById('invalidDesc').textContent = desc;
+        }
+    </script>
+</body>
+</html>

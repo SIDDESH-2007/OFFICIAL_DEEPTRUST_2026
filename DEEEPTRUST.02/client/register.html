@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Trust - Register Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: linear-gradient(180deg, #0B1120, #050814);
+            color: #DCE7FF;
+        }
+
+        .card {
+            width: min(560px, 95vw);
+            border-radius: 20px;
+            border: 1px solid rgba(131, 162, 241, 0.35);
+            background: rgba(10, 18, 34, 0.92);
+            box-shadow: 0 20px 50px rgba(2, 7, 18, 0.55);
+            padding: 32px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        p {
+            margin: 0 0 20px;
+            color: #9FB2DA;
+            line-height: 1.5;
+        }
+
+        form {
+            display: grid;
+            gap: 12px;
+        }
+
+        input {
+            height: 48px;
+            border-radius: 10px;
+            border: 1px solid rgba(126, 151, 218, 0.5);
+            background: rgba(7, 14, 26, 0.88);
+            color: #E3ECFF;
+            padding: 0 12px;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 8px;
+            height: 48px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2B468C, #3A60BF);
+            color: #E8EFFF;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .row {
+            margin-top: 14px;
+            font-size: 13px;
+            color: #A7BCDF;
+        }
+
+        .row a {
+            color: #D0DEFF;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(208, 222, 255, 0.45);
+        }
+    </style>
+</head>
+<body>
+    <section class="card" aria-labelledby="register-title">
+        <h1 id="register-title">Register Admin</h1>
+        <p>Create a secure admin account and continue with Deep Trust verification.</p>
+
+        <form id="form-admin-register" autocomplete="off">
+            <input type="text" id="input-reg-fullname" placeholder="Full Name" required>
+            <input type="email" id="input-reg-email" placeholder="Work Email" required>
+            <input type="password" id="input-reg-password" placeholder="Password (min 8 chars)" required minlength="8">
+            <input type="password" id="input-reg-confirm-password" placeholder="Confirm Password" required minlength="8">
+            <div id="register-error-msg" style="display: none; color: #f87171; font-size: 13px; margin-bottom: 8px; background: rgba(239, 68, 68, 0.1); padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.2);"></div>
+            <div id="register-success-msg" style="display: none; color: #34d399; font-size: 13px; margin-bottom: 8px; background: rgba(52, 211, 153, 0.1); padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(52, 211, 153, 0.2);"></div>
+            <button type="submit" id="btn-submit-register">
+                <span id="register-btn-text">Create Account</span>
+            </button>
+        </form>
+
+        <div class="row">Already registered? <a href="login.html">Go to Secure Login</a></div>
+    </section>
+
+    <script>
+        document.getElementById('form-admin-register')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fullName = document.getElementById('input-reg-fullname').value.trim();
+            const email = document.getElementById('input-reg-email').value.trim().toLowerCase();
+            const password = document.getElementById('input-reg-password').value;
+            const confirmPassword = document.getElementById('input-reg-confirm-password').value;
+            const errorEl = document.getElementById('register-error-msg');
+            const successEl = document.getElementById('register-success-msg');
+            const submitBtn = document.getElementById('btn-submit-register');
+            const btnText = document.getElementById('register-btn-text');
+
+            errorEl.style.display = 'none';
+            successEl.style.display = 'none';
+
+            if (password !== confirmPassword) {
+                errorEl.textContent = 'Passwords do not match.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            if (password.length < 8) {
+                errorEl.textContent = 'Password must be at least 8 characters long.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            btnText.textContent = 'Creating Account...';
+
+            try {
+                const res = await fetch('/api/v1/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ full_name: fullName, email: email, password: password, confirm_password: confirmPassword })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    successEl.textContent = data.message || 'Account created successfully. Email verification is required.';
+                    successEl.style.display = 'block';
+                } else {
+                    errorEl.textContent = data.detail || data.message || 'Registration failed.';
+                    errorEl.style.display = 'block';
+                }
+            } catch (err) {
+                errorEl.textContent = 'Server connection error. Please try again.';
+                errorEl.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = 'Create Account';
+            }
+        });
+    </script>
+</body>
+</html>

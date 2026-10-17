@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Face Verification</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body class="login-cyber">
+    <div class="page-shell">
+      <div class="auth-card login-card-dark">
+        <h2>Face Verification Gateway</h2>
+        <p class="subtitle">
+          Additional verification is required due to elevated login risk.
+        </p>
+
+        {% if not has_pending %}
+        <div class="status-box status-orange">
+          No pending login challenge found. Complete secure login first to
+          continue.
+        </div>
+        {% endif %}
+
+        <div class="camera-box">
+          <video id="faceCameraPreview" autoplay muted playsinline></video>
+          <canvas id="faceCaptureCanvas" class="hidden"></canvas>
+          <div class="camera-actions">
+            <button type="button" id="startFaceCameraBtn" class="btn">
+              Start Camera
+            </button>
+            <button
+              type="button"
+              id="captureFaceFrameBtn"
+              class="btn btn-secondary"
+            >
+              Capture Frame
+            </button>
+          </div>
+          <p id="faceVerificationState" class="hint">Camera not started.</p>
+        </div>
+
+        <button id="completeFaceAuthBtn" class="btn btn-primary btn-glow">
+          Complete AI Face Verification
+        </button>
+        <div id="faceStatusBox" class="status-box hidden"></div>
+
+        <div class="top-bar" style="margin-top: 12px">
+          <a class="btn btn-secondary" href="{{ url_for('login_page') }}"
+            >Back to Login</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/face_auth.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+/* Shared enterprise palette. Colours only; layout and motion remain in their existing stylesheets. */
+:root {
+  --dt-bg-primary: #0B1020;
+  --dt-bg-secondary: #151D2E;
+  --dt-bg: #0B1020;
+  --dt-bg-canvas: #0B1020;
+  --dt-bg-gradient: linear-gradient(#0B1020, #0B1020);
+  --dt-surface: #151D2E;
+  --dt-surface-solid: #151D2E;
+  --dt-surface-subtle: #101828;
+  --dt-surface-hover: #202D44;
+  --dt-surface-active: #172B4D;
+  --dt-surface-glass: rgba(21, 29, 46, .88);
+  --dt-surface-glass-heavy: rgba(21, 29, 46, .96);
+  --dt-sidebar: #0B1020;
+  --dt-topbar: #101828;
+  --dt-accent: #60A5FA;
+  --dt-accent-secondary: #2563EB;
+  --dt-primary: #2563EB;
+  --dt-primary-hover: #1D4ED8;
+  --dt-primary-active: #1E40AF;
+  --dt-primary-gradient: linear-gradient(135deg, #2563EB, #1D4ED8);
+  --dt-primary-glow: rgba(96, 165, 250, .2);
+  --dt-primary-subtle: rgba(96, 165, 250, .12);
+  --dt-cyan: #60A5FA;
+  --dt-cyan-light: #93C5FD;
+  --dt-cyan-soft: rgba(96, 165, 250, .12);
+  --dt-text: #F1F5F9;
+  --dt-text-primary: #F1F5F9;
+  --dt-text-secondary: #94A3B8;
+  --dt-text-muted: #94A3B8;
+  --dt-muted: #94A3B8;
+  --dt-subtle: #94A3B8;
+  --dt-text-inverse: #FFFFFF;
+  --dt-border: #2B3A53;
+  --dt-border-light: rgba(148, 163, 184, .12);
+  --dt-border-strong: rgba(148, 163, 184, .32);
+  --dt-border-focus: #60A5FA;
+  --dt-border-glow: rgba(96, 165, 250, .3);
+  --dt-hover: #202D44;
+  --dt-selected: #172B4D;
+  --dt-input: #0F1726;
+  --dt-focus: #60A5FA;
+  --bg-app: #0B1020;
+  --bg-primary: #0B1020;
+  --bg-secondary: #101828;
+  --bg-panel: #151D2E;
+  --bg-surface: #151D2E;
+  --surface-card: #151D2E;
+  --surface-elevated: #1B263B;
+  --surface-glass: rgba(21, 29, 46, .88);
+  --surface-hover: #202D44;
+  --surface-border: #2B3A53;
+  --surface-border-hover: #60A5FA;
+  --primary-indigo: #2563EB;
+  --primary-blue: #2563EB;
+  --accent-cyan: #60A5FA;
+  --accent-cyan-soft: rgba(96, 165, 250, .12);
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #94A3B8;
+  --text-subtle: #94A3B8;
+}
+
+html, body { background-color: #0B1020 !important; color: #F1F5F9; }
+.card, .dashboard-card, .metric-card, .portal-selectable-card,
+.voice-visualizer-card, .portal-access-card, .auth-card,
+.copilot-message, .copilot-message.agent {
+  background-color: #151D2E !important;
+}
+.copilot-message.user { background-color: rgba(96, 165, 250, .05) !important; }
+.profile-dropdown.open, .dropdown-menu.show, .modal-content {
+  background-color: #1B263B !important;
+}
+input, select, textarea, .form-input { background-color: #0F1726 !important; color: #F1F5F9 !important; }
+select option { background-color: #0F1726 !important; }
+.sidebar { background-color: #0B1020 !important; }
+.topbar { background-color: rgba(16, 24, 40, .92) !important; }
+.btn-primary { background: #2563EB !important; color: #FFFFFF !important; }
+.btn-primary:hover { background-color: #1D4ED8 !important; }
+.btn-primary:active { background-color: #1E40AF !important; }
+.filter-btn.active { background-color: #2563EB !important; color: #FFFFFF !important; }
+
+/* Corporate security branding: readable blue accents and white button labels. */
+.sidebar-nav .nav-item.active { color: #BFDBFE !important; }
+.btn-primary:disabled { background-color: #334155 !important; color: #CBD5E1 !important; }

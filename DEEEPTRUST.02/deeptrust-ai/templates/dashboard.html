@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="dashboard-card">
+        <div class="top-bar">
+          <h2>Welcome, {{ user['name'] }}</h2>
+          <div>
+            <a class="btn" href="{{ url_for('upload_page') }}"
+              >Scan New Media</a
+            >
+            <a class="btn btn-secondary" href="{{ url_for('logout') }}"
+              >Logout</a
+            >
+          </div>
+        </div>
+
+        <div class="status-box">
+          <p>
+            <strong>Last Login:</strong> {{ last_login_at if last_login_at else
+            'N/A' }}
+          </p>
+          <p><strong>Account Risk Level:</strong> {{ account_risk_level }}</p>
+        </div>
+
+        <h3>Overview Panel</h3>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h4>Authentication Confidence</h4>
+            <p class="metric">{{ auth_confidence }}%</p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Last Login Status</h4>
+            <p class="metric">
+              {% if last_attempt %} {{ last_attempt['status'] }} {% else %}
+              no-attempts {% endif %}
+            </p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Deepfake Detection</h4>
+            <p class="metric">
+              {% if last_attempt %} {{ last_attempt['deepfake_probability'] }}%
+              {% else %} N/A {% endif %}
+            </p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Risk Score</h4>
+            <p class="metric">
+              {% if last_attempt %} {{ last_attempt['risk_score'] }} {% else %}
+              N/A {% endif %}
+            </p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Total Media Scanned</h4>
+            <p class="metric">{{ total_scanned }}</p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Authentic Media Count</h4>
+            <p class="metric">{{ authentic_count }}</p>
+          </div>
+
+          <div class="stat-box">
+            <h4>Deepfake Detected</h4>
+            <p class="metric">{{ deepfake_count }}</p>
+          </div>
+
+          <div class="stat-box">
+            <h4>High Risk Alerts</h4>
+            <p class="metric">{{ high_risk_alerts }}</p>
+          </div>
+        </div>
+
+        <div class="top-bar">
+          <h3>Detection History</h3>
+          <form
+            method="GET"
+            action="{{ url_for('dashboard') }}"
+            class="filter-form"
+          >
+            <select name="type">
+              <option
+                value="all"
+                {%
+                if
+                media_filter=""
+                ="all"
+                %}selected{%
+                endif
+                %}
+              >
+                All Types
+              </option>
+              <option
+                value="image"
+                {%
+                if
+                media_filter=""
+                ="image"
+                %}selected{%
+                endif
+                %}
+              >
+                Image
+              </option>
+              <option
+                value="video"
+                {%
+                if
+                media_filter=""
+                ="video"
+                %}selected{%
+                endif
+                %}
+              >
+                Video
+              </option>
+              <option
+                value="audio"
+                {%
+                if
+                media_filter=""
+                ="audio"
+                %}selected{%
+                endif
+                %}
+              >
+                Audio
+              </option>
+            </select>
+            <button class="btn btn-secondary" type="submit">Filter</button>
+          </form>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Type</th>
+                <th>Upload Date</th>
+                <th>Authenticity %</th>
+                <th>Risk Level</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in history %}
+              <tr>
+                <td>{{ item['file_name'] }}</td>
+                <td>{{ item['media_type'] }}</td>
+                <td>{{ item['created_at'] }}</td>
+                <td>{{ item['authenticity_score'] }}</td>
+                <td>{{ item['risk_level'] }}</td>
+                <td>{{ item['status'] }}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="6">No media scans found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Analytics Section</h3>
+        <div class="analytics-grid">
+          <div class="stat-box">
+            <h4>Deepfake Detection Trend (Monthly)</h4>
+            <div class="trend-list">
+              {% for i in range(trend_labels|length) %}
+              <div class="trend-row">
+                <span>{{ trend_labels[i] }}</span>
+                <div class="trend-bar">
+                  <span
+                    style="width: {{ (trend_values[i] * 10) if trend_values[i] <= 10 else 100 }}%"
+                  ></span>
+                </div>
+                <strong>{{ trend_values[i] }}</strong>
+              </div>
+              {% else %}
+              <p class="hint">No trend data yet.</p>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <h4>Risk Distribution</h4>
+            <p>LOW: <strong>{{ risk_distribution['LOW'] }}</strong></p>
+            <p>MEDIUM: <strong>{{ risk_distribution['MEDIUM'] }}</strong></p>
+            <p>HIGH: <strong>{{ risk_distribution['HIGH'] }}</strong></p>
+          </div>
+        </div>
+
+        {% if session.get('is_admin') %}
+        <div class="admin-link-wrap">
+          <a class="btn" href="{{ url_for('admin_dashboard') }}"
+            >Open Admin Dashboard</a
+          >
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
