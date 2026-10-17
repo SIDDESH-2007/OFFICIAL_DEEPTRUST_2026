@@ -1,0 +1,43 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "deeptrust-ai": {
+      "root": "DEEEPTRUST.02/deeptrust-ai",
+      "framework": "flask"
+    },
+    "ai-service": {
+      "root": "DEEEPTRUST.02/deeptrust-mvp/ai-service",
+      "framework": "flask"
+    },
+    "backend": {
+      "root": "DEEEPTRUST.02/deeptrust-mvp/backend",
+      "framework": "express"
+    },
+    "frontend": {
+      "root": "DEEEPTRUST.02/deeptrust-mvp/frontend",
+      "framework": "vite"
+    },
+    "deployment": {
+      "root": "DEEEPTRUST.02/deployment",
+      "framework": "fastapi"
+    },
+    "server": {
+      "root": "DEEEPTRUST.02/server",
+      "framework": "express"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "server"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
+    }
+  ]
+}
