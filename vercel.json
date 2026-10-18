@@ -17,10 +17,6 @@
       "root": "DEEEPTRUST.02/deeptrust-mvp/frontend",
       "framework": "vite"
     },
-    "deployment": {
-      "root": "DEEEPTRUST.02/deployment",
-      "framework": "fastapi"
-    },
     "server": {
       "root": "DEEEPTRUST.02/server",
       "framework": "express"
